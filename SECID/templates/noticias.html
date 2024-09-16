@@ -1,5 +1,99 @@
 {%extends 'base.html' %}
 
 {% block body%}
-noticias
+body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .feed {
+            margin: 20px 0;
+        }
+        .feed-item {
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .feed-item h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .feed-item p {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .feed-item time {
+            font-size: 0.8em;
+            color: #aaa;
+        }
+        .feed-item a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        .feed-item a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Últimas Notícias</h1>
+    </header>
+
+    <div class="container">
+        <div class="feed">
+            <!-- Primeira notícia -->
+            <div class="feed-item">
+                <h2><a href="#">Título da Notícia 1</a></h2>
+                <time>Publicado em 16 de setembro de 2024</time>
+                <p>Descrição curta da primeira notícia. Aqui você pode incluir um breve resumo sobre o conteúdo da notícia para atrair o leitor.</p>
+            </div>
+
+            <!-- Segunda notícia -->
+            <div class="feed-item">
+                <h2><a href="#">Título da Notícia 2</a></h2>
+                <time>Publicado em 15 de setembro de 2024</time>
+                <p>Descrição curta da segunda notícia. Pode ser algo interessante sobre política, esportes, tecnologia ou qualquer outro tema.</p>
+            </div>
+
+            <!-- Terceira notícia -->
+            <div class="feed-item">
+                <h2><a href="#">Título da Notícia 3</a></h2>
+                <time>Publicado em 14 de setembro de 2024</time>
+                <p>Descrição curta da terceira notícia, com informações relevantes para quem deseja saber mais sobre o assunto.</p>
+            </div>
+
+            <!-- Adicionar mais notícias conforme necessário -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Feed de Notícias</p>
+    </footer>
+</body>
 {% endblock %}
