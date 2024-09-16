@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 # Definir o diretório de trabalho no container
-SECID/app
+WORKDIR /app
 
 # Copiar o requirements.txt para instalar as dependências
 COPY requirements.txt .
