@@ -3,11 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import sqlalchemy
+import os
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:VoZfcHBKDAeIvFVPVhfvaZzMHWmSuEeh@autorack.proxy.rlwy.net:30030/railway'
+if os.getenv("DATABASE_URL"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+else:    
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SECID.db'
 
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -24,6 +28,15 @@ if not inspector.has_table("usuario"):
         database.drop_all()
         database.create_all()
 
-
+from SECID import models
+engine = sqlalchemy.create._engine(app.config['SQLALCHEMY_DATABASE_URI'])
+inspect = sqlachemy.inspect(engine)
+if not inspector.has_table("usuario"):
+    with app.app_context():
+        database.drop_all()
+        database.create_all()
+        print("Base de dados criada")
+else:
+    print("Base de dados já existente")
 
 from SECID import routes
