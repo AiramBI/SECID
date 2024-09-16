@@ -1,4 +1,3 @@
-from Demos.win32ts_logoff_disconnected import username
 from flask import render_template, redirect, url_for, flash, request
 from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras
