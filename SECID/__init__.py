@@ -7,38 +7,36 @@ import os
 
 app = Flask(__name__)
 
-
-DATABASE_URL= "postgresql://postgres:VoZfcHBKDAeIvFVPVhfvaZzMHWmSuEeh@autorack.proxy.rlwy.net:30030/railway"
+# Configurações
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
+
+# Configuração do banco de dados
 if os.getenv("DATABASE_URL"):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-else:    
+else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SECID.db'
 
+# Inicialização das extensões
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'alert-info'
 
-
+# Importar modelos
 from SECID import models
+
+# Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
-if not inspector.has_table("usuario"):
-    with app.app_context():
-        database.drop_all()
-        database.create_all()
 
-from SECID import models
-engine = sqlalchemy.create._engine(app.config['SQLALCHEMY_DATABASE_URI'])
-inspect = sqlachemy.inspect(engine)
 if not inspector.has_table("usuario"):
     with app.app_context():
-        database.drop_all()
-        database.create_all()
+        database.drop_all()  # Remove todas as tabelas existentes (opcional)
+        database.create_all()  # Cria todas as tabelas
         print("Base de dados criada")
 else:
     print("Base de dados já existente")
 
+# Importar as rotas
 from SECID import routes
