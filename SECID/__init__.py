@@ -7,6 +7,8 @@ import os
 
 app = Flask(__name__)
 
+
+DATABASE_URL= "postgresql://postgres:VoZfcHBKDAeIvFVPVhfvaZzMHWmSuEeh@autorack.proxy.rlwy.net:30030/railway"
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
 if os.getenv("DATABASE_URL"):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
