@@ -20,7 +20,7 @@ class Usuario(database.Model, UserMixin):
     cargo = database.Column(database.String, nullable=False)
     foto_perfil = database.Column(database.String, default='default.jpg')
     posts = database.relationship('Post', backref='autor', lazy=True)
-    cursos = database.Column(database.Integer,nullable = False, default='Não Informado')
+    cursos = database.Column(database.String,nullable = False, default='Não Informado')
 
 class Post(database.Model):
     id = database.Column(database.Integer, primary_key=True)
