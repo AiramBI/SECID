@@ -82,6 +82,16 @@ def usuario():
 def administrador():
     return render_template('administrador.html')
 
+@app.route('/usuario/medicao')
+@login_required
+def medicao():
+    return render_template('medicao.html')
+
+@app.route('/paineis/sei')
+@login_required
+def sei():
+    return render_template('sei.html')
+
 
 
 @app.route('/noticias')
