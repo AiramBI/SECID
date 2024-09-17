@@ -88,25 +88,53 @@
     <div class="container">
         <div class="form-container">
             <h1>Criar Despacho SEI</h1>
-            <form action="/submit" method="post">
+            <form action="/submit" method="post" enctype="multipart/form-data">
                 <label for="projectName">Nome do Projeto:</label>
-                <input type="text" id="projectName" name="projectName" required>
-
+                <select id="projectName" name="projectName" required>
+                    <option value="">Selecione o projeto</option>
+                    <option value="Três Rios II - Av. Zoelo">Três Rios II - Av. Zoelo</option>
+                    <option value="Cachoeiras de Macacu I - Praça Vilage Japuíba">Cachoeiras de Macacu I - Praça Vilage Japuíba</option>
+                    <option value="Cachoeiras de Macacu II - Recapeamento">Cachoeiras de Macacu II - Recapeamento</option>
+                    <option value="Cachoeiras de Macacu III - Bairro Guararapes">Cachoeiras de Macacu III - Bairro Guararapes</option>
+                    <option value="Itaboraí I - AV. 22 de Maio">Itaboraí I - AV. 22 de Maio</option>
+                    <option value="Itaboraí IX - Bairro Santo Antônio">Itaboraí IX - Bairro Santo Antônio</option>
+                    <option value="Itaboraí II - Jardim Imperial">Itaboraí II - Jardim Imperial</option>
+                    <option value="Itaboraí V - Bairro Gebara">Itaboraí V - Bairro Gebara</option>
+                    <option value="Itaboraí VII - Bairro Aldeia da Prata">Itaboraí VII - Bairro Aldeia da Prata</option>
+                    <option value="Itaboraí VIII - Bairros Marambaia e Vila Brasil">Itaboraí VIII - Bairros Marambaia e Vila Brasil</option>
+                    <option value="Laje do Muriaé I - Córrego Fundo e do Vai e Volta">Laje do Muriaé I - Córrego Fundo e do Vai e Volta</option>
+                    <option value="Macaé I - Construção de Ponte">Macaé I - Construção de Ponte</option>
+                    <option value="Mesquita - Bairro Chatuba">Mesquita - Bairro Chatuba</option>
+                    <option value="Porciúncula I - Drenagem e Pavimentação">Porciúncula I - Drenagem e Pavimentação</option>
+                    <option value="São Gonçalo I - MUVI">São Gonçalo I - MUVI</option>
+                    <option value="São Gonçalo II - Bairro Bom Retiro">São Gonçalo II - Bairro Bom Retiro</option>
+                    <option value="São Gonçalo III - Bairro Vista Alegre">São Gonçalo III - Bairro Vista Alegre</option>
+                    <option value="São Gonçalo IV - AV. Jornalista Roberto Marinho">São Gonçalo IV - AV. Jornalista Roberto Marinho</option>
+                    <option value="São Gonçalo V - Bairro Marambaia">São Gonçalo V - Bairro Marambaia</option>
+                    <option value="São Pedro da Aldeia I - Bairro Colinas">São Pedro da Aldeia I - Bairro Colinas</option>
+                    <option value="São Pedro da Aldeia II - Estrada da Boa Vista">São Pedro da Aldeia II - Estrada da Boa Vista</option>
+                    <option value="Três Rios I - Construção de Galeria de Drenagem">Três Rios I - Construção de Galeria de Drenagem</option>
+                </select>
+            
                 <label for="measurementDate">Data da Medição:</label>
                 <input type="date" id="measurementDate" name="measurementDate" required>
-
+            
                 <label for="description">Descrição:</label>
                 <textarea id="description" name="description" required></textarea>
-
+            
                 <label for="quantity">Quantidade Medida:</label>
-                <input type="number" id="quantity" name="quantity" step="0.01" required>
-
+                <input type="number" id="quantity" name="quantity" step="0.01" required oninput="calculateTotal()">
+            
                 <label for="unitPrice">Preço Unitário:</label>
-                <input type="number" id="unitPrice" name="unitPrice" step="0.01" required>
-
+                <input type="number" id="unitPrice" name="unitPrice" step="0.01" required oninput="calculateTotal()">
+            
                 <label for="totalPrice">Preço Total:</label>
-                <input type="number" id="totalPrice" name="totalPrice" step="0.01" required>
-
+                <input type="number" id="totalPrice" name="totalPrice" step="0.01" readonly>
+            
+                <!-- Campo para upload de documentos -->
+                <label for="documents">Anexar Documentos (PDF, Imagens):</label>
+                <input type="file" id="documents" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+            
                 <input type="submit" value="Enviar Medição">
             </form>
         </div>
