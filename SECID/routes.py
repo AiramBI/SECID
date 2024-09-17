@@ -52,10 +52,21 @@ def logout():
 
 
 
-@app.route('/paineis')
+@app.route('/paineis/gestor')
 @login_required
 def paines():
-    return render_template('paines.html')
+    return render_template('gestor.html')
+
+@app.route('/paineis/administrativo')
+@login_required
+def administrativo():
+    return render_template('administrativo.html')
+
+@app.route('/paineis/financeiro')
+@login_required
+def financeiro():
+    return render_template('financeiro.html')
+
 
 
 
