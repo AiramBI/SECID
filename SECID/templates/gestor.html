@@ -2,9 +2,30 @@
 
 {% block body%}
 <div class="container">
-        <div class="panel">
-            <h2>Painel do Gestor</h2>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiNGU2NTUzM2MtZWRjOC00ZWMyLWEyNjgtNTYwN2E5NTI1YTAzIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" target="_blank">Abrir Painel em Nova Aba</a>
-            <iframe title="PAINEL_SECID_PROTOTIPO" width="1500" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiNGU2NTUzM2MtZWRjOC00ZWMyLWEyNjgtNTYwN2E5NTI1YTAzIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" frameborder="0" allowFullScreen="true"></iframe>
-        </div>
+    <div class="panel">
+        <h2>Painel do Gestor</h2>
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiNGU2NTUzM2MtZWRjOC00ZWMyLWEyNjgtNTYwN2E5NTI1YTAzIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" target="_blank">Abrir Painel em Nova Aba</a>
+        <iframe title="PAINEL_SECID_PROTOTIPO" width="1500" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiNGU2NTUzM2MtZWRjOC00ZWMyLWEyNjgtNTYwN2E5NTI1YTAzIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Centraliza verticalmente */
+    }
+
+    .panel {
+        text-align: center;
+    }
+
+    iframe {
+        max-width: 100%;
+        height: auto;
+        width: 1500px;
+        height: 700px;
+    }
+</style>
 {% endblock %}
