@@ -1,10 +1,29 @@
 {%extends 'base.html' %}
 
-{% block body%}
+{% block body %}
 <div class="container">
-        <div class="panel">
-            <h2>Painel Administrativo</h2>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiZjA4Y2I3NmItMzViZS00MDU5LThkNjQtMTBkYzhlZDI2YzRkIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" target="_blank">Abrir Painel em Nova Aba</a>
-            <iframe title="PAINEL_SECID_PROTOTIPO" width="1500" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiZjA4Y2I3NmItMzViZS00MDU5LThkNjQtMTBkYzhlZDI2YzRkIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" frameborder="0" allowFullScreen="true"></iframe>
-        </div>
+    <div class="panel">
+        <h2>Painel Administrativo</h2>
+        <a href="https://app.powerbi.com/view?r=eyJrIjoiZjA4Y2I3NmItMzViZS00MDU5LThkNjQtMTBkYzhlZDI2YzRkIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" target="_blank">Abrir Painel em Nova Aba</a>
+        <iframe title="PAINEL_SECID_PROTOTIPO" width="1500" height="700" src="https://app.powerbi.com/view?r=eyJrIjoiZjA4Y2I3NmItMzViZS00MDU5LThkNjQtMTBkYzhlZDI2YzRkIiwidCI6ImQ5NDAwNGQ1LWIxYzEtNGU0NS1hMjQyLThkMmU4M2ZjNjcxZSJ9" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center; /* Centraliza horizontalmente */
+        padding-top: 20px; /* Espaçamento superior */
+    }
+
+    .panel {
+        text-align: center; /* Centraliza o conteúdo do painel (título e link) */
+    }
+
+    iframe {
+        max-width: 100%; /* Responsividade */
+        width: 1500px; /* Largura fixa para telas maiores */
+        height: 700px; /* Altura do iframe */
+    }
+</style>
 {% endblock %}
