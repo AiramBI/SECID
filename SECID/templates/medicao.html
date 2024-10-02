@@ -116,24 +116,135 @@
                     <option value="Três Rios I - Construção de Galeria de Drenagem">Três Rios I - Construção de Galeria de Drenagem</option>
                 </select>
             
-                <label for="measurementDate">Data da Medição:</label>
-                <input type="date" id="measurementDate" name="measurementDate" required>
+                <label for="measurementDate">Data Inicial Medição:</label>
+                <input type="date" id="measurementDateinicial" name="measurementDate" required>
+
+                <label for="measurementDate">Data Final Medição:</label>
+                <input type="date" id="measurementDatefinal" name="measurementDate" required>
             
                 <label for="description">Descrição:</label>
                 <textarea id="description" name="description" required></textarea>
             
-                <label for="quantity">Quantidade Medida:</label>
+<!--                 <label for="quantity">Quantidade Medida:</label>
                 <input type="number" id="quantity" name="quantity" step="0.01" required oninput="calculateTotal()">
             
                 <label for="unitPrice">Preço Unitário:</label>
-                <input type="number" id="unitPrice" name="unitPrice" step="0.01" required oninput="calculateTotal()">
+                <input type="number" id="unitPrice" name="unitPrice" step="0.01" required oninput="calculateTotal()"> -->
             
                 <label for="totalPrice">Preço Total:</label>
                 <input type="number" id="totalPrice" name="totalPrice" step="0.01" readonly>
             
                 <!-- Campo para upload de documentos -->
-                <label for="documents">Anexar Documentos (PDF, Imagens):</label>
-                <input type="file" id="documents" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                <label for="documents">1 - Carta assinada pela empresa (PDF - Ass do responsável empresa):</label>
+                <input type="file" id="documents1" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+
+                <!-- Campo para upload de documentos -->
+                <label for="documents">2 - Publicação da Comissão de Fiscalização:</label>
+                <input type="file" id="documents2" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">3 - Planilha de Medição (PDF, assinada e carimbada pelos fiscais e empresa):</label>
+                <input type="file" id="documents3" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">3.1 - Planilha de Medição - Arquivo em Excel:</label>
+                <input type="file" id="documents3.1" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">4 - Memória de Cálculo (PDF, assinada e carimbada pelos fiscais e empresa):</label>
+                <input type="file" id="documents4" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">5 - Cronograma Físico - Financeiro "LEGÍVEL" (PDF, assinada e carimbada pelos fiscais e empresa):</label>
+                <input type="file" id="documents5" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">6 - Diário de Obras (PDF, Todas as folhas assinadas e carimbadas pelos fiscais e empresa):</label>
+                <input type="file" id="documents6" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">7 - Relatório Fotográfico (PDF, assinada e carimbada pelos fiscais e empresa):</label>
+                <input type="file" id="documents7" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">8 - Relação de Funcionários (PDF, Referente ao mês da medição, assinada e carimbada pela empresa):</label>
+                <input type="file" id="documents8" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents"> 9 - Folha de ponto dos funcionários (PDF, Referente ao mês da medição, assinada pelos funcionários):</label>
+                <input type="file" id="documents9" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents"> 10 - GFD FGTS DIGITAL C/ relatório das guias emitidas que conste os funcionários exclusivos da obra relacionados
+nos itens 8 e 9 , da competência da medição (PDF, assinada e carimbada pela empresa):
+</label>
+                <input type="file" id="documents10" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">10.1 - DCTF WEB com relatórios das contribuições previdenciárias dos funcionários exclusivos da obra relacionados
+nos itens 8 e 9, da competência da medição (PDF, assinada e carimbada pela empresa);:</label>
+                <input type="file" id="documents10.1" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">11 - Guias e Comprovantes de Pagamentos de FGTS (com comprovantes de pagamento das guias rescisórias dos
+funcionários demitidos) e INSS da competência anterior ( PDF):</label>
+                <input type="file" id="documents11" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">12 - Folha de Pagamento da competência das medições (PDF, assinada e carimbada pela empresa):</label>
+                <input type="file" id="documents12" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">13 - Comprovante de Pagamento de salários Funcionários da medição atual, inclusive rescisões (PDF, assinada e
+carimbada pela empresa);:</label>
+                <input type="file" id="documents13" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">14 - Plano de segurança do Trabalho dentro da validade. Geralmente de dois anos. (PDF, assinada e carimbada pela
+empresa):</label>
+                <input type="file" id="documents14" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15 - Certidões atualizadas e recentes ou fundamentação legal necessária em caso de dispensa (PDF):</label>
+                <input type="file" id="documents15" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15.1 - Certidão de regularidade junto ao FGTS:</label>
+                <input type="file" id="documents15.1" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15.2 - Certidão negativa de débito trabalhista:</label>
+                <input type="file" id="documents15.2" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15.3 - Certidão negativa de débitos federais:</label>
+                <input type="file" id="documents15.3" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15.4 - Certidão de regularidade fiscal junto ao ICMS;:</label>
+                <input type="file" id="documents15.4" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">15.5 - Certidão de regularidade fiscal junto ao ISS;:</label>
+                <input type="file" id="documents15.5" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">16 - Contrato:</label>
+                <input type="file" id="documents16" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">17 - ART emitida pelo CREA do profissional responsável relacionado à obra:</label>
+                <input type="file" id="documents17" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">18 - Nota de empenho:</label>
+                <input type="file" id="documents18" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                <!-- Campo para upload de documentos -->
+                <label for="documents">19 - Nota fiscal e ISS, APÓS AUTORIZAÇÃO DE EMISSÃO PELA SUBGFISO (PDF, assinada e carimbada pela empresa):</label>
+                <input type="file" id="documents19" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png">
+                
+                
             
                 <input type="submit" value="Enviar Medição">
             </form>
