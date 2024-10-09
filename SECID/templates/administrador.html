@@ -1,5 +1,204 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
-{% block body%}
-administrador
+{% block body %}
+<div class="container">
+
+    <h1>Cadastrar Nova Obra</h1>
+
+    <hr>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="" class="border p-5 mt-5">
+                {{ form_obras.csrf_token }}
+                <fieldset>
+                    <div class="form-group">
+                        {{ form_obras.obra.label(class="form-control-label") }}
+                        {% if form_obras.obra.errors %}
+                            {{ form_obras.obra(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.obra.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.obra(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.sei.label(class="form-control-label") }}
+                        {% if form_obras.sei.errors %}
+                            {{ form_obras.sei(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.sei.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.sei(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.contrato.label(class="form-control-label") }}
+                        {% if form_obras.contrato.errors %}
+                            {{ form_obras.contrato(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.contrato.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.contrato(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.empresa.label(class="form-control-label") }}
+                        {% if form_obras.empresa.errors %}
+                            {{ form_obras.empresa(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.empresa.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.empresa(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.cnpj.label(class="form-control-label") }}
+                        {% if form_obras.cnpj.errors %}
+                            {{ form_obras.cnpj(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.cnpj.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.cnpj(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.valor_inicial.label(class="form-control-label") }}
+                        {% if form_obras.valor_inicial.errors %}
+                            {{ form_obras.valor_inicial(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.valor_inicial.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.valor_inicial(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.prazo_inicial.label(class="form-control-label") }}
+                        {% if form_obras.prazo_inicial.errors %}
+                            {{ form_obras.prazo_inicial(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.prazo_inicial.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.prazo_inicial(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.inicio_obra.label(class="form-control-label") }}
+                        {% if form_obras.inicio_obra.errors %}
+                            {{ form_obras.inicio_obra(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.inicio_obra.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.inicio_obra(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.aditivos_prazo.label(class="form-control-label") }}
+                        {% if form_obras.aditivos_prazo.errors %}
+                            {{ form_obras.aditivos_prazo(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.aditivos_prazo.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.aditivos_prazo(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.aditivos_valor.label(class="form-control-label") }}
+                        {% if form_obras.aditivos_valor.errors %}
+                            {{ form_obras.aditivos_valor(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.aditivos_valor.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.aditivos_valor(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.prazo_atual.label(class="form-control-label") }}
+                        {% if form_obras.prazo_atual.errors %}
+                            {{ form_obras.prazo_atual(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.prazo_atual.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.prazo_atual(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.valor_atual.label(class="form-control-label") }}
+                        {% if form_obras.valor_atual.errors %}
+                            {{ form_obras.valor_atual(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.valor_atual.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.valor_atual(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_obras.aniversario.label(class="form-control-label") }}
+                        {% if form_obras.aniversario.errors %}
+                            {{ form_obras.aniversario(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.aniversario.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.aniversario(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                </fieldset>
+                {{ form_obras.botao_submit_obras(class="btn btn-primary mt-3") }}
+            </form>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
+

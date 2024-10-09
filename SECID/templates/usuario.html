@@ -17,8 +17,12 @@
                     <div class="mt-3">
                       <h4 class="maiusculo">{{current_user.username}}</h4>
                       <p class="text-secondary mb-1">{{current_user.cargo}}</p>
-                      <button class="btn btn-primary"><a class="dropdown-item text-black" href="{{ url_for ('sei')}}">Criar Despacho Padrão</a></button>
-                      <button class="btn btn-outline-primary"><a class="dropdown-item text-black" href="{{ url_for ('medicao')}}">Realizar Medicao</a></button>
+<!--                      <button class="btn btn-primary"><a class="dropdown-item text-black" href="{{ url_for ('sei')}}">Criar Despacho Padrão</a></button>-->
+                      <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+                      <button type="button" class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao')}}">Realizar Medicao Documentos</a></button>
+                      <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2')}}">Realizar Medicao Fiscal</a></button>
+                      <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao3')}}">Realizar Gestor</a></button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -75,6 +79,49 @@
                     </div>
                   </div>
                   <hr>
+
+                  <h1>Lista de Obras</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>SEI</th>
+                <th>Obra</th>
+                <th>Contrato</th>
+                <th>Empresa</th>
+                <th>CNPJ</th>
+                <th>Valor Inicial</th>
+                <th>Prazo Inicial</th>
+                <th>Início da Obra</th>
+                <th>Aditivos Prazo</th>
+                <th>Aditivos Valor</th>
+                <th>Prazo Atual</th>
+                <th>Valor Atual</th>
+                <th>Aniversário</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obra in obras %}
+            <tr>
+                <td>{{ obra.id }}</td>
+                <td>{{ obra.sei }}</td>
+                <td>{{ obra.obra }}</td>
+                <td>{{ obra.contrato }}</td>
+                <td>{{ obra.empresa }}</td>
+                <td>{{ obra.cnpj }}</td>
+                <td>{{ obra.valor_inicial }}</td>
+                <td>{{ obra.prazo_inicial }}</td>
+                <td>{{ obra.inicio_obra }}</td>
+                <td>{{ obra.aditivos_prazo }}</td>
+                <td>{{ obra.aditivos_valor }}</td>
+                <td>{{ obra.prazo_atual }}</td>
+                <td>{{ obra.valor_atual }}</td>
+                <td>{{ obra.aniversario }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <!--                  <div class="row">-->
 <!--                    <div class="col-sm-3">-->
 <!--                      <h6 class="mb-0">Mobile</h6>-->
