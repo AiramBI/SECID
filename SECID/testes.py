@@ -1,7 +1,7 @@
 from Demos.win32ts_logoff_disconnected import username
 
 from SECID import app, database
-from SECID.models import Usuario
+from SECID.models import Usuario, Obras, Medicao
 
 with app.app_context():
    database.drop_all() #deleta o banco de dados
