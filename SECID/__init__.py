@@ -26,17 +26,26 @@ login_manager.login_message_category = 'alert-info'
 # Importar modelos
 from SECID import models
 
-# Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
-engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-inspector = sqlalchemy.inspect(engine)
 
-if not inspector.has_table("medicao"):
-    with app.app_context():
-        database.drop_all()  # Remove todas as tabelas existentes (opcional)
-        database.create_all()  # Cria todas as tabelas
-        print("Base de dados criada")
-else:
-    print("Base de dados já existente")
+# Remover todas as tabelas existentes e criar novas
+with app.app_context():
+    print("Excluindo todas as tabelas existentes...")
+    database.drop_all()  # Remove todas as tabelas
+    print("Criando novas tabelas...")
+    database.create_all()  # Cria todas as tabelas definidas no modelo
+    print("Base de dados criada com sucesso.")
+
+# Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
+# engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+# inspector = sqlalchemy.inspect(engine)
+
+# if not inspector.has_table("medicao"):
+#     with app.app_context():
+#         database.drop_all()  # Remove todas as tabelas existentes (opcional)
+#         database.create_all()  # Cria todas as tabelas
+#         print("Base de dados criada")
+# else:
+#     print("Base de dados já existente")
 
 # Importar as rotas
 from SECID import routes
