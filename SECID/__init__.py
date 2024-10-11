@@ -27,10 +27,13 @@ login_manager.login_message_category = 'alert-info'
 from SECID import models
 
 
-# Remover todas as tabelas existentes e criar novas
+# Remover todas as tabelas existentes e criar novas com CASCADE
 with app.app_context():
     print("Excluindo todas as tabelas existentes...")
-    database.drop_all()  # Remove todas as tabelas
+    # Remove todas as tabelas, incluindo as que possuem dependências
+    database.engine.execute('DROP TABLE IF EXISTS post CASCADE')
+    database.engine.execute('DROP TABLE IF EXISTS usuario CASCADE')
+
     print("Criando novas tabelas...")
     database.create_all()  # Cria todas as tabelas definidas no modelo
     print("Base de dados criada com sucesso.")
