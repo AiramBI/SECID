@@ -27,7 +27,7 @@ login_manager.login_message_category = 'alert-info'
 from SECID import models
 
 
-Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
+# Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
 
