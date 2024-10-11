@@ -77,7 +77,7 @@ def financeiro():
 @app.route('/usuario')
 @login_required
 def usuario():
-    # obras = Obras.query.all()
+    obras = Obras.query.all()
     return render_template('usuario.html',obras =obras)
 
 
