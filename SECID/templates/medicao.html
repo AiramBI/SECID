@@ -10,6 +10,23 @@
         <div class="col">
             <form method="POST" action="" class="border p-5 mt-5">
                 {{ form_medicao.csrf_token }}
+                
+                <div class="form-group">
+                        {{ form_medicao.projeto_nome.label(class="form-control-label") }}
+                        {% if form_medicao.projeto_nome.errors %}
+                            {{ form_medicao.projeto_nome(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_medicao.projeto_nome.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_medicao.projeto_nome(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                
+                
                 <fieldset>
 
                     <div class="form-group">
@@ -26,19 +43,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="form-group">
-                        {{ form_medicao.projeto_nome.label(class="form-control-label") }}
-                        {% if form_medicao.projeto_nome.errors %}
-                            {{ form_medicao.projeto_nome(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.projeto_nome.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.projeto_nome(class="form-control") }}
-                        {% endif %}
-                    </div>
+                    
 
                     <div class="form-group">
                         {{ form_medicao.numero_medicao.label(class="form-control-label") }}
