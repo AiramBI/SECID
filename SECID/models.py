@@ -35,12 +35,12 @@ class Obras(database.Model):
     cnpj = database.Column(database.String, nullable=False)
     valor_inicial = database.Column(database.Float, nullable=False)
     prazo_inicial = database.Column(database.String, nullable=False)
-    inicio_obra = database.Column(database.String, nullable=False)
-    aditivos_prazo = database.Column(database.String, nullable=False)
-    aditivos_valor = database.Column(database.Float, nullable=False)
+    inicio_obra = database.Column(database.Date, nullable=False)
+    aditivos_prazo = database.Column(database.String, nullable=True)
+    aditivos_valor = database.Column(database.Float, nullable=True)
     prazo_atual = database.Column(database.String, nullable=False)
     valor_atual = database.Column(database.Float, nullable=False)
-    aniversario = database.Column(database.String, nullable=False)
+    aniversario = database.Column(database.Date, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
 
 
