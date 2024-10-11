@@ -27,28 +27,17 @@ login_manager.login_message_category = 'alert-info'
 from SECID import models
 
 
-# Remover todas as tabelas existentes e criar novas com CASCADE
-with app.app_context():
-    print("Excluindo todas as tabelas existentes...")
-    # Remove todas as tabelas, incluindo as que possuem dependências
-    database.engine.execute('DROP TABLE IF EXISTS post CASCADE')
-    database.engine.execute('DROP TABLE IF EXISTS usuario CASCADE')
+Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
+engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+inspector = sqlalchemy.inspect(engine)
 
-    print("Criando novas tabelas...")
-    database.create_all()  # Cria todas as tabelas definidas no modelo
-    print("Base de dados criada com sucesso.")
-
-# Verificar se a tabela "usuario" existe e criar o banco de dados, se necessário
-# engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-# inspector = sqlalchemy.inspect(engine)
-
-# if not inspector.has_table("medicao"):
-#     with app.app_context():
-#         database.drop_all()  # Remove todas as tabelas existentes (opcional)
-#         database.create_all()  # Cria todas as tabelas
-#         print("Base de dados criada")
-# else:
-#     print("Base de dados já existente")
+if not inspector.has_table("usuario"):
+    with app.app_context():
+        database.drop_all()  # Remove todas as tabelas existentes (opcional)
+        database.create_all()  # Cria todas as tabelas
+        print("Base de dados criada")
+else:
+    print("Base de dados já existente")
 
 # Importar as rotas
 from SECID import routes
