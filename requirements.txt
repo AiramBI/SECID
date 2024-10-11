@@ -26,3 +26,4 @@ flask_sqlalchemy>=2.5
 flask_login>=0.6.2
 webdriver-manager==4.0.2
 selenium==4.25.0
+Flask-Migrate>=3.1.0
