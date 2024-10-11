@@ -26,7 +26,7 @@ class Usuario(database.Model, UserMixin):
 class Obras(database.Model):
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
     obra = database.Column(database.String, nullable=False)
-    sei = database.Column(database.Integer, nullable=False)
+    sei = database.Column(database.String, nullable=False)
     # modelo = database.Column(database.String, nullable=False)
     # documento = database.Column(database.String, nullable=False)
     contrato =database.Column(database.String, nullable=False)
