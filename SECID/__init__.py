@@ -25,7 +25,7 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'alert-info'
 
 # Inicialização do Flask-Migrate
-    migrate = Migrate(app, database)
+migrate = Migrate(app, database)
 
 # Importar modelos
 from SECID import models
