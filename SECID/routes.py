@@ -3,10 +3,10 @@ from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao
 from SECID.models import Usuario, Obras, Medicao
 from flask_login import current_user, login_required, login_user, logout_user
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service as ChromeService
-# from webdriver_manager.chrome import ChromeDriverManager
-# from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
