@@ -30,7 +30,7 @@ from SECID import models
 engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
 
-if not inspector.has_table("obras"):
+if not inspector.has_table("medicao"):
     with app.app_context():
         database.drop_all()  # Remove todas as tabelas existentes (opcional)
         database.create_all()  # Cria todas as tabelas
