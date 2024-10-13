@@ -76,44 +76,30 @@
                         {% endif %}
                     </div>
 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
-
-                        <div class="form-group">
-                            <!-- Label do campo valor -->
-                            {{ form_medicao.valor.label(class="form-control-label") }}
-                            
-                            <!-- Verificação de erros no campo -->
-                            {% if form_medicao.valor.errors %}
-                                <!-- Campo valor com classe de erro -->
-                                {{ form_medicao.valor(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    <!-- Loop pelos erros para exibir -->
-                                    {% for erro in form_medicao.valor.errors %}
-                                        {{ erro }}
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                <!-- Campo valor sem erro -->
-                                {{ form_medicao.valor(class="form-control") }}
-                            {% endif %}
-                        </div>
+                    <div class="form-group">
+                        {{ form_medicao.valor.label(class="form-control-label") }}
                         
-                        <!-- Aplicar máscara de moeda ao campo -->
-                        <script>
-                            $(document).ready(function(){
-                                // Aplicar a máscara ao campo 'valor'
-                                $("input[name='valor']").inputmask({
-                                    alias: 'currency',        // Define o formato como moeda
-                                    prefix: 'R$ ',            // Prefixo de moeda brasileiro (R$)
-                                    groupSeparator: '.',      // Separador de milhares
-                                    radixPoint: ',',          // Separador de decimais
-                                    autoGroup: true,          // Agrupamento automático de milhares
-                                    digits: 2,                // Duas casas decimais
-                                    digitsOptional: false,    // Não permite número sem decimais
-                                    clearMaskOnLostFocus: false  // Mantém o valor formatado ao perder o foco
-                                });
-                            });
-                        </script>
+                        {% if form_medicao.valor.errors %}
+                            {{ form_medicao.valor(class="form-control is-invalid", id="valor") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_medicao.valor.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_medicao.valor(class="form-control", id="valor") }}
+                        {% endif %}
+                    </div>
+                    
+                    <script>
+                        document.getElementById('valor').addEventListener('input', function (e) {
+                            let value = e.target.value;
+                            value = value.replace(/\D/g, '');  // Remove tudo o que não é número
+                            value = (value / 100).toFixed(2);  // Divide por 100 para ajustar casas decimais
+                            value = value.replace('.', ',');  // Substitui o ponto pela vírgula
+                            e.target.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');  // Adiciona o separador de milhares
+                        });
+                    </script>
 
 <!--                     <div class="form-group">
                         {{ form_medicao.valor.label(class="form-control-label") }}
