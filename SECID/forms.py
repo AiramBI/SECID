@@ -49,7 +49,7 @@ class FormObras(FlaskForm):
 
 class FormMedicao(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
-    projeto_nome = StringField('Nome do Projeto', validators=[DataRequired()])  # Nome do Projeto
+    projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
     valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
@@ -57,31 +57,31 @@ class FormMedicao(FlaskForm):
     data_final = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
 
     # Documentos
-    documento_1 = FileField('Carta assinada pela empresa', validators=[DataRequired()])
-    documento_2 = FileField('Publicação da Comissão de Fiscalização', validators=[DataRequired()])
-    documento_3 = FileField('Planilha de Medição (PDF)', validators=[DataRequired()])
-    documento_3_1 = FileField('Planilha de Medição - Arquivo em Excel', validators=[DataRequired()])
-    documento_4 = FileField('Memória de Cálculo', validators=[DataRequired()])
-    documento_5 = FileField('Cronograma Físico - Financeiro', validators=[DataRequired()])
-    documento_6 = FileField('Diário de Obras', validators=[DataRequired()])
-    documento_7 = FileField('Relatório Fotográfico', validators=[DataRequired()])
-    documento_8 = FileField('Relação de Funcionários', validators=[DataRequired()])
-    documento_9 = FileField('Folha de ponto dos funcionários', validators=[DataRequired()])
-    documento_10 = FileField('GFD FGTS DIGITAL', validators=[DataRequired()])
-    documento_10_1 = FileField('DCTF WEB', validators=[DataRequired()])
-    documento_11 = FileField('Guias e Comprovantes de Pagamentos de FGTS', validators=[DataRequired()])
-    documento_12 = FileField('Folha de Pagamento', validators=[DataRequired()])
-    documento_13 = FileField('Comprovante de Pagamento de salários', validators=[DataRequired()])
-    documento_14 = FileField('Plano de segurança do Trabalho', validators=[DataRequired()])
-    documento_15 = FileField('Certidões atualizadas', validators=[DataRequired()])
-    documento_15_1 = FileField('Certidão de regularidade junto ao FGTS', validators=[DataRequired()])
-    documento_15_2 = FileField('Certidão negativa de débito trabalhista', validators=[DataRequired()])
-    documento_15_3 = FileField('Certidão negativa de débitos federais', validators=[DataRequired()])
-    documento_15_4 = FileField('Certidão de regularidade fiscal junto ao ICMS', validators=[DataRequired()])
-    documento_15_5 = FileField('Certidão de regularidade fiscal junto ao ISS', validators=[DataRequired()])
-    documento_16 = FileField('Contrato', validators=[DataRequired()])
-    documento_17 = FileField('ART emitida pelo CREA', validators=[DataRequired()])
-    documento_18 = FileField('Nota de empenho', validators=[DataRequired()])
-    documento_19 = FileField('Nota fiscal e ISS', validators=[DataRequired()])
+    documento_1 = FileField('01.Carta assinada pela empresa', validators=[DataRequired()])
+    documento_2 = FileField('02.Publicação da Comissão de Fiscalização', validators=[DataRequired()])
+    documento_3 = FileField('03.Planilha de Medição (PDF)', validators=[DataRequired()])
+    documento_3_1 = FileField('03.1.Planilha de Medição - Arquivo em Excel', validators=[DataRequired()])
+    documento_4 = FileField('04.Memória de Cálculo', validators=[DataRequired()])
+    documento_5 = FileField('05.Cronograma Físico - Financeiro', validators=[DataRequired()])
+    documento_6 = FileField('06.Diário de Obras', validators=[DataRequired()])
+    documento_7 = FileField('07.Relatório Fotográfico', validators=[DataRequired()])
+    documento_8 = FileField('08.Relação de Funcionários', validators=[DataRequired()])
+    documento_9 = FileField('09.Folha de ponto dos funcionários', validators=[DataRequired()])
+    documento_10 = FileField('10.GFD FGTS DIGITAL', validators=[DataRequired()])
+    documento_10_1 = FileField('10.1.DCTF WEB', validators=[DataRequired()])
+    documento_11 = FileField('11.Guias e Comprovantes de Pagamentos de FGTS', validators=[DataRequired()])
+    documento_12 = FileField('12.Folha de Pagamento', validators=[DataRequired()])
+    documento_13 = FileField('13.Comprovante de Pagamento de salários', validators=[DataRequired()])
+    documento_14 = FileField('14.Plano de segurança do Trabalho', validators=[DataRequired()])
+    documento_15 = FileField('15.Certidões atualizadas', validators=[DataRequired()])
+    documento_15_1 = FileField('15.1.Certidão de regularidade junto ao FGTS', validators=[DataRequired()])
+    documento_15_2 = FileField('15.2.Certidão negativa de débito trabalhista', validators=[DataRequired()])
+    documento_15_3 = FileField('15.3.Certidão negativa de débitos federais', validators=[DataRequired()])
+    documento_15_4 = FileField('15.4.Certidão de regularidade fiscal junto ao ICMS', validators=[DataRequired()])
+    documento_15_5 = FileField('15.5.Certidão de regularidade fiscal junto ao ISS', validators=[DataRequired()])
+    documento_16 = FileField('16.Contrato', validators=[DataRequired()])
+    documento_17 = FileField('17.ART emitida pelo CREA', validators=[DataRequired()])
+    documento_18 = FileField('18.Nota de empenho', validators=[DataRequired()])
+    documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired()])
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
