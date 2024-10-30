@@ -76,29 +76,34 @@
                     </div>
 
                     <div class="form-group">
-                        {{ form_medicao.valor.label(class="form-control-label") }}
+                            {{ form_medicao.valor.label(class="form-control-label") }}
+                            
+                            {% if form_medicao.valor.errors %}
+                                {{ form_medicao.valor(class="form-control is-invalid", id="valor") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in form_medicao.valor.errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_medicao.valor(class="form-control", id="valor") }}
+                            {% endif %}
+                        </div>
                         
-                        {% if form_medicao.valor.errors %}
-                            {{ form_medicao.valor(class="form-control is-invalid", id="valor") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.valor.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.valor(class="form-control", id="valor") }}
-                        {% endif %}
-                    </div>
-                    
-                    <script>
-                        document.getElementById('valor').addEventListener('input', function (e) {
-                            let value = e.target.value;
-                            value = value.replace(/\D/g, '');  // Remove tudo o que não é número
-                            value = (value / 100).toFixed(2);  // Divide por 100 para ajustar casas decimais
-                            value = value.replace('.', ',');  // Substitui o ponto pela vírgula
-                            e.target.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');  // Adiciona o separador de milhares
-                        });
-                    </script>
+                        <script>
+                            document.getElementById('valor').addEventListener('input', function (e) {
+                                let value = e.target.value.replace(/\D/g, '');  // Remove tudo o que não é número
+                                value = (parseInt(value, 10) / 100).toFixed(2);  // Divide por 100 para ajustar casas decimais
+                                e.target.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.').replace('.', ',');  // Formata para a moeda brasileira
+                            });
+                        
+                            // Remover a formatação para enviar apenas o número ao backend
+                            document.getElementById('formulario-medicao').addEventListener('submit', function () {
+                                let campoValor = document.getElementById('valor');
+                                // Remove a formatação de moeda antes de enviar
+                                campoValor.value = campoValor.value.replace(/[^\d,]/g, '').replace(',', '.');  // Remove tudo exceto números e vírgula
+                            });
+                        </script>
 
 <!--                     <div class="form-group">
                         {{ form_medicao.valor.label(class="form-control-label") }}
