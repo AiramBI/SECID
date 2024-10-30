@@ -145,60 +145,74 @@ def administrador():
 #     finally:
 #         # Fecha o navegador após a navegação
 #         driver.quit()
-@app.route('/usuario/medicao', methods =['GET','POST'])
+# Configurações para uploads de arquivos
+UPLOAD_FOLDER = '/caminho/para/pasta/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def save_file(file):
+    if file:
+        filename = secure_filename(file.filename)
+        caminho_arquivo = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(caminho_arquivo)
+        return filename
+    return None
+
+@app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
 def medicao():
     form_medicao = FormMedicao()
 
-    # Verifica se o formulário foi submetido corretamente
     if form_medicao.validate_on_submit():
-        # print("Formulário validado com sucesso!")
-        # Cria uma nova instância da obra com os dados do formulário
-        medicao1 = Medicao(
-            sei=form_medicao.sei.data,
-            projeto_nome=form_medicao.projeto_nome.data,
-            numero_medicao=form_medicao.numero_medicao.data,
-            descricao=form_medicao.descricao.data,
-            valor=form_medicao.valor.data,
-            data_inicial=form_medicao.data_inicial.data,
-            data_final=form_medicao.data_final.data,
-            documento_1=form_medicao.documento_1.data,
-            documento_2=form_medicao.documento_2.data,
-            documento_3=form_medicao.documento_3.data,
-            documento_3_1=form_medicao.documento_3_1.data,
-            documento_4=form_medicao.documento_4.data,
-            documento_5=form_medicao.documento_5.data,
-            documento_6=form_medicao.documento_6.data,
-            documento_7=form_medicao.documento_7.data,
-            documento_8=form_medicao.documento_8.data,
-            documento_9=form_medicao.documento_9.data,
-            documento_10=form_medicao.documento_10.data,
-            documento_10_1=form_medicao.documento_10_1.data,
-            documento_11=form_medicao.documento_11.data,
-            documento_12=form_medicao.documento_12.data,
-            documento_13=form_medicao.documento_13.data,
-            documento_14=form_medicao.documento_14.data,
-            documento_15=form_medicao.documento_15.data,
-            documento_15_1=form_medicao.documento_15_1.data,
-            documento_15_2=form_medicao.documento_15_2.data,
-            documento_15_3=form_medicao.documento_15_3.data,
-            documento_15_4=form_medicao.documento_15_4.data,
-            documento_15_5=form_medicao.documento_15_5.data,
-            documento_16=form_medicao.documento_16.data,
-            documento_17=form_medicao.documento_17.data,
-            documento_18=form_medicao.documento_18.data,
-            documento_19=form_medicao.documento_19.data
-        )
-        # Adiciona a obra ao banco de dados
-        database.session.add(medicao1)
-        database.session.commit()
+        try:
+            # Salva os arquivos e cria uma nova instância de Medicao
+            medicao1 = Medicao(
+                sei=form_medicao.sei.data,
+                projeto_nome=form_medicao.projeto_nome.data,
+                numero_medicao=form_medicao.numero_medicao.data,
+                descricao=form_medicao.descricao.data,
+                valor=form_medicao.valor.data,
+                data_inicial=form_medicao.data_inicial.data,
+                data_final=form_medicao.data_final.data,
+                documento_1=save_file(form_medicao.documento_1.data),
+                documento_2=save_file(form_medicao.documento_2.data),
+                documento_3=save_file(form_medicao.documento_3.data),
+                documento_3_1=save_file(form_medicao.documento_3_1.data),
+                documento_4=save_file(form_medicao.documento_4.data),
+                documento_5=save_file(form_medicao.documento_5.data),
+                documento_6=save_file(form_medicao.documento_6.data),
+                documento_7=save_file(form_medicao.documento_7.data),
+                documento_8=save_file(form_medicao.documento_8.data),
+                documento_9=save_file(form_medicao.documento_9.data),
+                documento_10=save_file(form_medicao.documento_10.data),
+                documento_10_1=save_file(form_medicao.documento_10_1.data),
+                documento_11=save_file(form_medicao.documento_11.data),
+                documento_12=save_file(form_medicao.documento_12.data),
+                documento_13=save_file(form_medicao.documento_13.data),
+                documento_14=save_file(form_medicao.documento_14.data),
+                documento_15=save_file(form_medicao.documento_15.data),
+                documento_15_1=save_file(form_medicao.documento_15_1.data),
+                documento_15_2=save_file(form_medicao.documento_15_2.data),
+                documento_15_3=save_file(form_medicao.documento_15_3.data),
+                documento_15_4=save_file(form_medicao.documento_15_4.data),
+                documento_15_5=save_file(form_medicao.documento_15_5.data),
+                documento_16=save_file(form_medicao.documento_16.data),
+                documento_17=save_file(form_medicao.documento_17.data),
+                documento_18=save_file(form_medicao.documento_18.data),
+                documento_19=save_file(form_medicao.documento_19.data)
+            )
+            
+            # Adiciona a medição ao banco de dados
+            database.session.add(medicao1)
+            database.session.commit()
 
-        flash('Medicao Cadastrada{}'.format(form_medicao.numero_medicao.data), 'alert-success')
+            flash('Medição cadastrada com sucesso!', 'alert-success')
+            return redirect(url_for('administrador'))
 
-        # # Chama a função que irá abrir a página com o Selenium em modo headless
-        # abrir_pagina_com_selenium()
+        except Exception as e:
+            flash(f'Ocorreu um erro ao processar o formulário: {str(e)}', 'danger')
+            app.logger.error(f"Erro ao processar o formulário: {str(e)}")
+            database.session.rollback()
 
-        return redirect(url_for('administrador'))
     return render_template('medicao.html', form_medicao=form_medicao)
 
 @app.route('/usuario/medicao2', methods =['GET','POST'])
