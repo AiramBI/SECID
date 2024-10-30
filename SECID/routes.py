@@ -148,7 +148,8 @@ def administrador():
 #         # Fecha o navegador após a navegação
 #         driver.quit()
 # Configurações para uploads de arquivos
-UPLOAD_FOLDER = '/caminho/para/pasta/uploads'
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Diretório base do projeto
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')  # Caminho para a pasta 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def save_file(file):
