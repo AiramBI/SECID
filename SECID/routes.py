@@ -226,15 +226,15 @@ def medicao2():
         try:
             # Salva os arquivos e cria uma nova instância de Medicao
             medicao2 = Medicao2(
-                sei=form_medicao.sei.data,
-                obra=form_medicao.projeto_nome.data,
-                numero_medicao=form_medicao.numero_medicao.data,
-                descricao=form_medicao.descricao.data,
-                valor=form_medicao.valor.data,
-                data_inicial=form_medicao.data_inicial.data,
-                data_final=form_medicao.data_final.data,
-                documento_1=save_file(form_medicao.documento_1.data),
-                documento_2=save_file(form_medicao.documento_2.data)
+                sei=form_medicao2.sei.data,
+                obra=form_medicao2.projeto_nome.data,
+                numero_medicao2=form_medicao2.numero_medicao.data,
+                descricao=form_medicao2.descricao.data,
+                valor=form_medicao2.valor.data,
+                data_inicial=form_medicao2.data_inicial.data,
+                data_final=form_medicao2.data_final.data,
+                documento_1=save_file(form_medicao2.documento_1.data),
+                documento_2=save_file(form_medicao2.documento_2.data)
                 )
             
             # Adiciona a medição ao banco de dados
