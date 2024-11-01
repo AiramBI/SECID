@@ -89,6 +89,22 @@ class Medicao(database.Model):
                                    default=datetime.utcnow)  # Data de criação do registro
 
 
+
+class Medicao2(database.Model):
+
+    id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+    sei = database.Column(database.Integer, nullable=False)  # Número SEI
+    obra = database.Column(database.String, nullable=False)  # Nome do Projeto
+    numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
+    descricao = database.Column(database.String, nullable=False)  # Descrição da Medição
+    valor = database.Column(database.Float, nullable=False)  # Valor da Medição
+    data_inicial = database.Column(database.String, nullable=False)  # Data Inicial da Medição
+    data_final = database.Column(database.String, nullable=False)  # Data Final da Medição
+
+    # Documentos
+    documento_1 = database.Column(database.String, nullable=False)  # 1 - Carta assinada pela empresa
+    documento_2 = database.Column(database.String, nullable=False)  # 2 - Publicação da Comissão de Fiscalização
+
 #modelos
 # Despacho de Encaminhamento de Análise
 # Nota tecnica aditivo de contrato
