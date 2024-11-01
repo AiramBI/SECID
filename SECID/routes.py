@@ -217,6 +217,20 @@ def medicao():
 
     return render_template('medicao.html', form_medicao=form_medicao)
 
+# Configuração da pasta para upload
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Função save_file para salvar o arquivo no diretório configurado
+def save_file(file):
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        return filename
+    return None
+
+
 @app.route('/usuario/medicao2', methods =['GET','POST'])
 @login_required
 def medicao2():
