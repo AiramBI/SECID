@@ -148,17 +148,16 @@ def administrador():
 #         # Fecha o navegador após a navegação
 #         driver.quit()
 # Configurações para uploads de arquivos
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Diretório base do projeto
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static')  # Caminho para a pasta 'static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Diretório base do projeto
+#UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static')  # Caminho para a pasta 'static/uploads'
+#app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def save_file(file):
-    if file:
-        filename = secure_filename(file.filename)
-        caminho_arquivo = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(caminho_arquivo)
-        return filename
-    return None
+def salvar_arquivo(arquivo):
+    filename = secure_filename(arquivo.filename)
+    caminho_arquivo = os.path.join(app.root_path,'static', filename)
+    file.save(caminho_arquivo)
+    return filename
+    
 
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
