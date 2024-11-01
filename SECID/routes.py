@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
-from SECID.models import Usuario, Obras, Medicao
+from SECID.models import Usuario, Obras, Medicao, Medicao2
 from flask_login import current_user, login_required, login_user, logout_user
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -225,9 +225,9 @@ def medicao2():
     if form_medicao2.validate_on_submit():
         try:
             # Salva os arquivos e cria uma nova instância de Medicao
-            medicao2 = Medicao(
+            medicao2 = Medicao2(
                 sei=form_medicao.sei.data,
-                projeto_nome=form_medicao.projeto_nome.data,
+                obra=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
                 descricao=form_medicao.descricao.data,
                 valor=form_medicao.valor.data,
