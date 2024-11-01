@@ -249,7 +249,7 @@ def medicao2():
             app.logger.error(f"Erro ao processar o formulário: {str(e)}")
             database.session.rollback()
 
-    return render_template('medicao2.html', form_medicao=form_medicao)
+    return render_template('medicao2.html', form_medicao2=form_medicao2)
 
 @app.route('/usuario/medicao3', methods =['GET','POST'])
 @login_required
