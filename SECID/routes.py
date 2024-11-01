@@ -152,12 +152,7 @@ def administrador():
 #UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static')  # Caminho para a pasta 'static/uploads'
 #app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def salvar_arquivo(arquivo):
-    filename = secure_filename(arquivo.filename)
-    caminho_arquivo = os.path.join(app.root_path,'static', filename)
-    file.save(caminho_arquivo)
-    return filename
-    
+   
 
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
@@ -250,6 +245,9 @@ def medicao2():
                 documento_1=save_file(form_medicao2.documento_1.data),
                 documento_2=save_file(form_medicao2.documento_2.data)
                 )
+            app.logger.info(f"Salvando arquivo documento_1: {form_medicao2.documento_1.data.filename}")
+            app.logger.info(f"Salvando arquivo documento_2: {form_medicao2.documento_2.data.filename}")
+
             
             # Adiciona a medição ao banco de dados
             database.session.add(medicao2)
