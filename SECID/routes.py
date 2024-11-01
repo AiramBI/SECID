@@ -220,7 +220,36 @@ def medicao():
 @app.route('/usuario/medicao2', methods =['GET','POST'])
 @login_required
 def medicao2():
-    return render_template('medicao2.html')
+    form_medicao = FormMedicao()
+
+    if form_medicao.validate_on_submit():
+        try:
+            # Salva os arquivos e cria uma nova instância de Medicao
+            medicao1 = Medicao(
+                sei=form_medicao.sei.data,
+                projeto_nome=form_medicao.projeto_nome.data,
+                numero_medicao=form_medicao.numero_medicao.data,
+                descricao=form_medicao.descricao.data,
+                valor=form_medicao.valor.data,
+                data_inicial=form_medicao.data_inicial.data,
+                data_final=form_medicao.data_final.data,
+                documento_1=save_file(form_medicao.documento_1.data),
+                documento_2=save_file(form_medicao.documento_2.data)
+                )
+            
+            # Adiciona a medição ao banco de dados
+            database.session.add(medicao1)
+            database.session.commit()
+
+            flash('Medição cadastrada com sucesso!', 'alert-success')
+            return redirect(url_for('administrador'))
+
+        except Exception as e:
+            flash(f'Ocorreu um erro ao processar o formulário: {str(e)}', 'danger')
+            app.logger.error(f"Erro ao processar o formulário: {str(e)}")
+            database.session.rollback()
+
+    return render_template('medicao2.html', form_medicao=form_medicao)
 
 @app.route('/usuario/medicao3', methods =['GET','POST'])
 @login_required
