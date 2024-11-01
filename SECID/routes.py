@@ -265,7 +265,7 @@ def medicao2():
 
     return render_template('medicao2.html', form_medicao2=form_medicao2)
 
-@app.route('/download/documento_1')
+@app.route('/download/<filename>')
 def download_file(filename):
     try:
         # Tenta enviar o arquivo especificado para o navegador
