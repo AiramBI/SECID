@@ -85,3 +85,19 @@ class FormMedicao(FlaskForm):
     documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired()])
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
+
+
+class FormMedicao2(FlaskForm):
+    sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
+    projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
+    numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
+    descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
+    valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+    data_inicial = StringField('Data Inicial', validators=[DataRequired()])  # Data Inicial da Medição
+    data_final = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
+
+    # Documentos
+    documento_1 = FileField('01.Carta assinada pela empresa', validators=[DataRequired()])
+    documento_2 = FileField('02.Publicação da Comissão de Fiscalização', validators=[DataRequired()])
+
+    botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
