@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash, request
 from SECID import app, database,bcrypt
-from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao
+from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
 from SECID.models import Usuario, Obras, Medicao
 from flask_login import current_user, login_required, login_user, logout_user
 from selenium import webdriver
@@ -220,12 +220,12 @@ def medicao():
 @app.route('/usuario/medicao2', methods =['GET','POST'])
 @login_required
 def medicao2():
-    form_medicao = FormMedicao()
+    form_medicao2 = FormMedicao2()
 
-    if form_medicao.validate_on_submit():
+    if form_medicao2.validate_on_submit():
         try:
             # Salva os arquivos e cria uma nova instância de Medicao
-            medicao1 = Medicao(
+            medicao2 = Medicao(
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
@@ -238,7 +238,7 @@ def medicao2():
                 )
             
             # Adiciona a medição ao banco de dados
-            database.session.add(medicao1)
+            database.session.add(medicao2)
             database.session.commit()
 
             flash('Medição cadastrada com sucesso!', 'alert-success')
