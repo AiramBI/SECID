@@ -242,7 +242,7 @@ def medicao2():
             medicao2 = Medicao2(
                 sei=form_medicao2.sei.data,
                 obra=form_medicao2.projeto_nome.data,
-                numero_medicao2=form_medicao2.numero_medicao.data,
+                numero_medicao=form_medicao2.numero_medicao.data,
                 descricao=form_medicao2.descricao.data,
                 valor=form_medicao2.valor.data,
                 data_inicial=form_medicao2.data_inicial.data,
