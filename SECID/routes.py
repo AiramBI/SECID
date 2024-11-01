@@ -265,6 +265,16 @@ def medicao2():
 
     return render_template('medicao2.html', form_medicao2=form_medicao2)
 
+@app.route('/download/2_-_Copia_13.pdf')
+def download_file(filename):
+    try:
+        # Tenta enviar o arquivo especificado para o navegador
+        return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
+    except FileNotFoundError:
+        # Retorna uma mensagem de erro se o arquivo não for encontrado
+        abort(404, "Arquivo não encontrado")
+
+
 @app.route('/usuario/medicao3', methods =['GET','POST'])
 @login_required
 def medicao3():
