@@ -355,7 +355,7 @@ def executar_automacao():
         botao.click()
 
         # Fecha o navegador
-        driver.quit()
+        navegador.quit()
         logging.info("Navegador fechado, automação concluída.")
 
     except Exception as e:
