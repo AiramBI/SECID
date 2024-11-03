@@ -282,58 +282,70 @@ senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 def executar_automacao():
     try:
         with sync_playwright() as p:
-            # Inicializa o navegador em modo não headless para visualizar as ações
-            browser = p.chromium.launch(headless=True)  # Altere para headless=True se não precisar ver o navegador
+            print("Iniciando o Playwright...")
+            # Inicializa o navegador em modo headless
+            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"])
             page = browser.new_page()
-    
+            print("Navegador Chromium iniciado.")
+
             # Acessa a página de login do SEI
             page.goto("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
-    
+            print("Página de login acessada.")
+
             # Login
             page.wait_for_selector('//*[@id="txtUsuario"]')
             page.fill('//*[@id="txtUsuario"]', login)
-    
+            print("Login preenchido.")
+
             page.wait_for_selector('//*[@id="pwdSenha"]')
             page.fill('//*[@id="pwdSenha"]', senha)
-    
+            print("Senha preenchida.")
+
             # Seleciona o órgão "SEFAZ" na lista suspensa
             page.wait_for_selector('//*[@id="selOrgao"]')
             page.select_option('//*[@id="selOrgao"]', label='SEFAZ')
-    
+            print("Órgão SEFAZ selecionado.")
+
             # Clica no botão de login
             page.wait_for_selector('//*[@id="Acessar"]')
             page.click('//*[@id="Acessar"]')
-    
+            print("Botão de login clicado.")
+
             # Aguarda a página carregar e fecha o popup
             page.wait_for_selector("//img[@title='Fechar janela (ESC)']", timeout=10000)
             page.click("//img[@title='Fechar janela (ESC)']")
-    
+            print("Popup de janela fechado.")
+
             # Busca o processo
             page.wait_for_selector('//*[@id="txtPesquisaRapida"]')
             page.fill('//*[@id="txtPesquisaRapida"]', 'SEI-040009/000654/2024')
             page.press('//*[@id="txtPesquisaRapida"]', 'Enter')
-    
+            print("Processo buscado.")
+
             # Acessa o iframe e anotações
             page.wait_for_selector('iframe#ifrVisualizacao')
             frame = page.frame(name="ifrVisualizacao")
             frame.wait_for_selector("//img[@alt='Anotações']")
             frame.click("//img[@alt='Anotações']")
-    
+            print("Anotações acessadas.")
+
             # Escreve a anotação
             frame.wait_for_selector('//*[@id="txaDescricao"]')
             frame.fill('//*[@id="txaDescricao"]', 'SEI-040009/000654/2024')
-    
+            print("Anotação preenchida.")
+
             # Clica no botão "Salvar"
             frame.wait_for_selector('//*[@name="sbmRegistrarAnotacao"]')
             frame.click('//*[@name="sbmRegistrarAnotacao"]')
-    
-            print("Login e automação realizados com sucesso!")
-    
+            print("Anotação salva com sucesso!")
+
             # Fecha o navegador
             browser.close()
-    
+            print("Navegador fechado, automação concluída.")
+
     except Exception as e:
         print(f"Ocorreu um erro: {traceback.format_exc()}")
+
 
 # Rota no Flask para acionar a automação
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
