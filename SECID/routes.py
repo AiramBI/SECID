@@ -282,7 +282,7 @@ def executar_automacao():
     try:
         with sync_playwright() as p:
             # Inicializa o navegador em modo não headless para visualizar as ações
-            browser = p.chromium.launch(headless=False)  # Altere para headless=True se não precisar ver o navegador
+            browser = p.chromium.launch(headless=True)  # Altere para headless=True se não precisar ver o navegador
             page = browser.new_page()
     
             # Acessa a página de login do SEI
