@@ -15,7 +15,6 @@ import traceback
 from werkzeug.utils import secure_filename
 import os
 import chromedriver_autoinstaller
-import undetected_chromedriver as uc
 
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
@@ -287,7 +286,7 @@ def executar_automacao():
     
 
     # Inicialize o WebDriver do Chrome com as opções
-    navegador = uc.Chrome(options=chrome_options)
+    navegador = webdriver.Chrome(options=chrome_options)
 
     try:
         # INICIO BLOCO DE LOGIN
