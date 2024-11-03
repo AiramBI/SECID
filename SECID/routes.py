@@ -284,7 +284,21 @@ senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
 def executar_automacao():
     try:
+        logging.info("Iniciando o Selenium...")
+
+        # Configuração para o servidor Selenium remoto no Railway
+        options = webdriver.ChromeOptions()
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        navegador = webdriver.Remote(
+            command_executor='https://standalone-chrome-production-1308.up.railway.app/wd/hub',
+            options=options
+        )
+        
+        
         # INICIO BLOCO DE LOGIN
+
+        
         # Acessando a página de login do SEI
         navegador.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
     
