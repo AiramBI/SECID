@@ -291,9 +291,10 @@ def executar_automacao():
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Remote(
-            command_executor='https://standalone-chrome-production-1308.up.railway.app/wd/hub',
-            options=options
+        command_executor='http://standalone-chrome-production-1308.up.railway.app/wd/hub',
+        options=options
         )
+
         
         wait = WebDriverWait(driver, 10)
         logging.info("Navegador Selenium iniciado.")
