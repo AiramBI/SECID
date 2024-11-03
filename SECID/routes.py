@@ -284,68 +284,60 @@ senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
 def executar_automacao():
     try:
-        logging.info("Iniciando o Selenium...")
-
-        # Configuração para o servidor Selenium remoto no Railway
-        options = webdriver.ChromeOptions()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Remote(
-        command_executor='http://standalone-chrome-production-1308.up.railway.app/wd/hub',
-        options=options
+        # INICIO BLOCO DE LOGIN
+        # Acessando a página de login do SEI
+        navegador.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
+    
+        # Localizando o campo de usuário e inserindo o login
+        usuario = navegador.find_element(By.XPATH, '//*[@id="txtUsuario"]')
+        usuario.send_keys(login)
+    
+        # Localizando o campo de senha e inserindo a senha
+        campoSenha = navegador.find_element(By.XPATH, '//*[@id="pwdSenha"]')
+        campoSenha.send_keys(senha)
+    
+        # Selecionando o órgão 'SEFAZ' na lista suspensa
+        exercicio = Select(navegador.find_element(By.XPATH, '//*[@id="selOrgao"]'))
+        exercicio.select_by_visible_text('SEFAZ')
+    
+        # Clicando no botão de login
+        btnLogin = navegador.find_element(By.XPATH, '//*[@id="Acessar"]')
+        btnLogin.click()
+    
+        # Maximizar a janela do navegador
+        navegador.maximize_window()
+        time.sleep(1)
+        WebDriverWait(navegador, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//img[@title='Fechar janela (ESC)']"))
         )
-
-        
-        wait = WebDriverWait(driver, 10)
-        logging.info("Navegador Selenium iniciado.")
-
-        # Acessa a página de login do SEI
-        driver.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
-        logging.info("Página de login acessada.")
-
-        # Login
-        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txtUsuario"]')))
-        driver.find_element(By.XPATH, '//*[@id="txtUsuario"]').send_keys(login)
-        logging.info("Login preenchido.")
-
-        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="pwdSenha"]')))
-        driver.find_element(By.XPATH, '//*[@id="pwdSenha"]').send_keys(senha)
-        logging.info("Senha preenchida.")
-
-        # Seleciona o órgão "SEFAZ" na lista suspensa
-        orgao_select = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="selOrgao"]')))
-        orgao_select.click()
-        ActionChains(driver).move_to_element(orgao_select).click().send_keys("SEFAZ").send_keys(Keys.ENTER).perform()
-        logging.info("Órgão SEFAZ selecionado.")
-
-        # Clica no botão de login
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="Acessar"]'))).click()
-        logging.info("Botão de login clicado.")
-
-        # Fecha o popup
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@title='Fechar janela (ESC)']"))).click()
-        logging.info("Popup de janela fechado.")
-
-        # Busca o processo
-        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txtPesquisaRapida"]')))
-        search_box = driver.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
-        search_box.send_keys('SEI-040009/000654/2024')
-        search_box.send_keys(Keys.ENTER)
-        logging.info("Processo buscado.")
-
-        # Acessa o iframe e as anotações
-        wait.until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='Anotações']"))).click()
-        logging.info("Anotações acessadas.")
-
-        # Escreve a anotação
-        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txaDescricao"]')))
-        driver.find_element(By.XPATH, '//*[@id="txaDescricao"]').send_keys('SEI-040009/000654/2024')
-        logging.info("Anotação preenchida.")
-
-        # Clica no botão "Salvar"
-        wait.until(EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))).click()
-        logging.info("Anotação salva com sucesso!")
+        # Encontre o elemento do botão de fechar
+        botao_fechar = navegador.find_element(By.XPATH, "//img[@title='Fechar janela (ESC)']")
+        botao_fechar.click()
+    
+        #FIM DO BLOCO DE LOGIN 
+    
+        #INICIO DO BLOCO DE PROCURAR UM PROCESSO
+        # PROCURAR PROCESSO
+        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
+        procurar_processo.send_keys('SEI-040009/000654/2024'+ Keys.ENTER)
+    
+    
+        #teste anotação
+        navegador.switch_to.default_content()
+        WebDriverWait(navegador,5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        WebDriverWait(navegador,5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
+    
+        # escrever anotação
+        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txaDescricao"]')
+        procurar_processo.send_keys('SEI-040009/000654/2024')
+    
+        #salvar
+        botao = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))
+        )
+    
+        # Clique no botão
+        botao.click()
 
         # Fecha o navegador
         driver.quit()
