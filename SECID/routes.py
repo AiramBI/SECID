@@ -19,6 +19,7 @@ import playwright
 from playwright.sync_api import sync_playwright
 import logging
 import subprocess
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 try:
@@ -291,67 +292,71 @@ senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
 def executar_automacao():
     try:
-        with sync_playwright() as p:
-            logging.info("Iniciando o Playwright...")
-            # Inicializa o navegador em modo headless
-            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-setuid-sandbox"])
-            page = browser.new_page()
-            logging.info("Navegador Chromium iniciado.")
+        logging.info("Iniciando o Selenium...")
 
-            # Acessa a página de login do SEI
-            page.goto("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
-            logging.info("Página de login acessada.")
+        # Configuração para o servidor Selenium remoto no Railway
+        options = webdriver.ChromeOptions()
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        driver = webdriver.Remote(
+            command_executor='https://standalone-chrome-production-1308.up.railway.app/wd/hub',
+            options=options
+        )
+        
+        wait = WebDriverWait(driver, 10)
+        logging.info("Navegador Selenium iniciado.")
 
-            # Login
-            page.wait_for_selector('//*[@id="txtUsuario"]')
-            page.fill('//*[@id="txtUsuario"]', login)
-            logging.info("Login preenchido.")
+        # Acessa a página de login do SEI
+        driver.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
+        logging.info("Página de login acessada.")
 
-            page.wait_for_selector('//*[@id="pwdSenha"]')
-            page.fill('//*[@id="pwdSenha"]', senha)
-            logging.info("Senha preenchida.")
+        # Login
+        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txtUsuario"]')))
+        driver.find_element(By.XPATH, '//*[@id="txtUsuario"]').send_keys(login)
+        logging.info("Login preenchido.")
 
-            # Seleciona o órgão "SEFAZ" na lista suspensa
-            page.wait_for_selector('//*[@id="selOrgao"]')
-            page.select_option('//*[@id="selOrgao"]', label='SEFAZ')
-            logging.info("Órgão SEFAZ selecionado.")
+        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="pwdSenha"]')))
+        driver.find_element(By.XPATH, '//*[@id="pwdSenha"]').send_keys(senha)
+        logging.info("Senha preenchida.")
 
-            # Clica no botão de login
-            page.wait_for_selector('//*[@id="Acessar"]')
-            page.click('//*[@id="Acessar"]')
-            logging.info("Botão de login clicado.")
+        # Seleciona o órgão "SEFAZ" na lista suspensa
+        orgao_select = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="selOrgao"]')))
+        orgao_select.click()
+        ActionChains(driver).move_to_element(orgao_select).click().send_keys("SEFAZ").send_keys(Keys.ENTER).perform()
+        logging.info("Órgão SEFAZ selecionado.")
 
-            # Aguarda a página carregar e fecha o popup
-            page.wait_for_selector("//img[@title='Fechar janela (ESC)']", timeout=10000)
-            page.click("//img[@title='Fechar janela (ESC)']")
-            logging.info("Popup de janela fechado.")
+        # Clica no botão de login
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="Acessar"]'))).click()
+        logging.info("Botão de login clicado.")
 
-            # Busca o processo
-            page.wait_for_selector('//*[@id="txtPesquisaRapida"]')
-            page.fill('//*[@id="txtPesquisaRapida"]', 'SEI-040009/000654/2024')
-            page.press('//*[@id="txtPesquisaRapida"]', 'Enter')
-            logging.info("Processo buscado.")
+        # Fecha o popup
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@title='Fechar janela (ESC)']"))).click()
+        logging.info("Popup de janela fechado.")
 
-            # Acessa o iframe e anotações
-            page.wait_for_selector('iframe#ifrVisualizacao')
-            frame = page.frame(name="ifrVisualizacao")
-            frame.wait_for_selector("//img[@alt='Anotações']")
-            frame.click("//img[@alt='Anotações']")
-            logging.info("Anotações acessadas.")
+        # Busca o processo
+        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txtPesquisaRapida"]')))
+        search_box = driver.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
+        search_box.send_keys('SEI-040009/000654/2024')
+        search_box.send_keys(Keys.ENTER)
+        logging.info("Processo buscado.")
 
-            # Escreve a anotação
-            frame.wait_for_selector('//*[@id="txaDescricao"]')
-            frame.fill('//*[@id="txaDescricao"]', 'SEI-040009/000654/2024')
-            logging.info("Anotação preenchida.")
+        # Acessa o iframe e as anotações
+        wait.until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        wait.until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='Anotações']"))).click()
+        logging.info("Anotações acessadas.")
 
-            # Clica no botão "Salvar"
-            frame.wait_for_selector('//*[@name="sbmRegistrarAnotacao"]')
-            frame.click('//*[@name="sbmRegistrarAnotacao"]')
-            logging.info("Anotação salva com sucesso!")
+        # Escreve a anotação
+        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="txaDescricao"]')))
+        driver.find_element(By.XPATH, '//*[@id="txaDescricao"]').send_keys('SEI-040009/000654/2024')
+        logging.info("Anotação preenchida.")
 
-            # Fecha o navegador
-            browser.close()
-            logging.info("Navegador fechado, automação concluída.")
+        # Clica no botão "Salvar"
+        wait.until(EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))).click()
+        logging.info("Anotação salva com sucesso!")
+
+        # Fecha o navegador
+        driver.quit()
+        logging.info("Navegador fechado, automação concluída.")
 
     except Exception as e:
         logging.error(f"Ocorreu um erro: {traceback.format_exc()}")
