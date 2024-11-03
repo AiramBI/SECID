@@ -352,9 +352,10 @@ def executar_automacao():
         botao = WebDriverWait(navegador, 10).until(
         EC.element_to_be_clickable((By.XPATH, '//button[@value = "Salvar"]'))
         )
+        botao.click()
 
         # Fecha o navegador
-        time.sleep(5)
+        time.sleep(1)
         navegador.quit()
         logging.info("Navegador fechado, automação concluída.")
 
