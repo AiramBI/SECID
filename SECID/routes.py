@@ -342,8 +342,10 @@ def executar_automacao():
         WebDriverWait(navegador,5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
         WebDriverWait(navegador,5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
     
-        # escrever anotação
-        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txaDescricao"]')
+        procurar_processo = WebDriverWait(navegador, 10).until(
+        EC.visibility_of_element_located((By.XPATH, '//*[@id="txaDescricao"]'))
+        )
+        # Envia o texto para o campo de anotação
         procurar_processo.send_keys('SEI-040009/000654/2024')
     
         #salvar
