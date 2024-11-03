@@ -339,8 +339,8 @@ def executar_automacao():
     
         #teste anotação
         navegador.switch_to.default_content()
-        WebDriverWait(navegador,5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
-        WebDriverWait(navegador,5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
+        WebDriverWait(navegador,10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        WebDriverWait(navegador,10).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
     
         procurar_processo = WebDriverWait(navegador, 10).until(
         EC.visibility_of_element_located((By.XPATH, '//*[@id="txaDescricao"]'))
