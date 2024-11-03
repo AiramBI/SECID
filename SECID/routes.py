@@ -18,8 +18,6 @@ import chromedriver_autoinstaller
 import playwright
 from playwright.sync_api import sync_playwright
 
-# Garante a instalação dos navegadores Playwright
-playwright.install()
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
 
