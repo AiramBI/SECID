@@ -4,11 +4,16 @@ from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormM
 from SECID.models import Usuario, Obras, Medicao, Medicao2
 from flask_login import current_user, login_required, login_user, logout_user
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.common.keys import  Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
 from werkzeug.utils import secure_filename
 import os
+import time
+import traceback
 
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
@@ -267,9 +272,74 @@ def download_file(filename):
         abort(404, "Arquivo não encontrado")
 
 
-@app.route('/usuario/medicao3', methods =['GET','POST'])
+# Variáveis de login
+login = "asantos2"
+senha = "Ivinhema1994#*#*#*"
+
+def executar_automacao():
+    # Inicialize o navegador Edge
+    navegador = webdriver.Edge()  # Certifique-se de que o WebDriver Edge está no PATH
+
+    try:
+        # INICIO BLOCO DE LOGIN
+        navegador.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
+
+        # Login
+        usuario = navegador.find_element(By.XPATH, '//*[@id="txtUsuario"]')
+        usuario.send_keys(login)
+
+        campoSenha = navegador.find_element(By.XPATH, '//*[@id="pwdSenha"]')
+        campoSenha.send_keys(senha)
+
+        # Seleção de órgão
+        exercicio = Select(navegador.find_element(By.XPATH, '//*[@id="selOrgao"]'))
+        exercicio.select_by_visible_text('SEFAZ')
+
+        # Botão de login
+        btnLogin = navegador.find_element(By.XPATH, '//*[@id="Acessar"]')
+        btnLogin.click()
+
+        # Maximiza o navegador e aguarda o carregamento
+        navegador.maximize_window()
+        time.sleep(1)
+        WebDriverWait(navegador, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//img[@title='Fechar janela (ESC)']"))
+        )
+        navegador.find_element(By.XPATH, "//img[@title='Fechar janela (ESC)']").click()
+        
+        # Busca de processo
+        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
+        procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
+
+        # Acessa anotações e escreve
+        navegador.switch_to.default_content()
+        WebDriverWait(navegador, 5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='Anotações']"))).click()
+        anotacao = navegador.find_element(By.XPATH, '//*[@id="txaDescricao"]')
+        anotacao.send_keys('SEI-040009/000654/2024')
+
+        # Salvar a anotação
+        botao = WebDriverWait(navegador, 10).until(
+            EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))
+        )
+        botao.click()
+
+        print("Login e automação realizados com sucesso!")
+
+    except TimeoutException:
+        print("Erro: O elemento não foi encontrado no tempo esperado.")
+    except Exception as e:
+        print(f"Ocorreu um erro: {traceback.format_exc()}")
+    finally:
+        time.sleep(5)
+        navegador.quit()
+
+# Definição da rota
+@app.route('/usuario/medicao3', methods=['GET', 'POST'])
 @login_required
 def medicao3():
+    # Executa o código Selenium quando essa rota é acessada
+    executar_automacao()
     return render_template('medicao3.html')
 
 @app.route('/paineis/sei')
