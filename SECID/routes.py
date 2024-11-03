@@ -15,8 +15,11 @@ import traceback
 from werkzeug.utils import secure_filename
 import os
 import chromedriver_autoinstaller
+import playwright
 from playwright.sync_api import sync_playwright
 
+# Garante a instalação dos navegadores Playwright
+playwright.install()
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
 
