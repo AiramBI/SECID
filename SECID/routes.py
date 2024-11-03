@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import  Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.keys import  Keys
 
 from werkzeug.utils import secure_filename
 import os
@@ -277,8 +278,14 @@ login = "asantos2"
 senha = "Ivinhema1994#*#*#*"
 
 def executar_automacao():
-    # Inicialize o navegador Edge
-    navegador = webdriver.Edge()  # Certifique-se de que o WebDriver Edge está no PATH
+    # Configurações para o Chrome em modo headless
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Executa sem abrir o navegador
+    chrome_options.add_argument("--no-sandbox")  # Necessário em alguns ambientes server-side
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Otimiza para ambientes Docker
+
+    # Inicialize o WebDriver do Chrome com as opções
+    navegador = webdriver.Chrome(options=chrome_options)
 
     try:
         # INICIO BLOCO DE LOGIN
@@ -299,8 +306,7 @@ def executar_automacao():
         btnLogin = navegador.find_element(By.XPATH, '//*[@id="Acessar"]')
         btnLogin.click()
 
-        # Maximiza o navegador e aguarda o carregamento
-        navegador.maximize_window()
+        # Maximiza o navegador (efetivo somente no modo com interface)
         time.sleep(1)
         WebDriverWait(navegador, 10).until(
             EC.presence_of_element_located((By.XPATH, "//img[@title='Fechar janela (ESC)']"))
