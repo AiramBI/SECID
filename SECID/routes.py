@@ -14,6 +14,7 @@ import time
 import traceback
 from werkzeug.utils import secure_filename
 import os
+import chromedriver_autoinstaller
 
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
@@ -282,6 +283,7 @@ def executar_automacao():
     chrome_options.add_argument("--headless")  # Executa sem abrir o navegador
     chrome_options.add_argument("--no-sandbox")  # Necessário em alguns ambientes server-side
     chrome_options.add_argument("--disable-dev-shm-usage")  # Otimiza para ambientes Docker
+    
 
     # Inicialize o WebDriver do Chrome com as opções
     navegador = webdriver.Chrome(options=chrome_options)
