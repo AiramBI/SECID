@@ -354,6 +354,7 @@ def executar_automacao():
         )
 
         # Fecha o navegador
+        time.sleep(5)
         navegador.quit()
         logging.info("Navegador fechado, automação concluída.")
 
