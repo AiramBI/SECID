@@ -280,59 +280,59 @@ senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
 def executar_automacao():
     try:
-    with sync_playwright() as p:
-        # Inicializa o navegador em modo não headless para visualizar as ações
-        browser = p.chromium.launch(headless=False)  # Altere para headless=True se não precisar ver o navegador
-        page = browser.new_page()
-
-        # Acessa a página de login do SEI
-        page.goto("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
-
-        # Login
-        page.wait_for_selector('//*[@id="txtUsuario"]')
-        page.fill('//*[@id="txtUsuario"]', login)
-
-        page.wait_for_selector('//*[@id="pwdSenha"]')
-        page.fill('//*[@id="pwdSenha"]', senha)
-
-        # Seleciona o órgão "SEFAZ" na lista suspensa
-        page.wait_for_selector('//*[@id="selOrgao"]')
-        page.select_option('//*[@id="selOrgao"]', label='SEFAZ')
-
-        # Clica no botão de login
-        page.wait_for_selector('//*[@id="Acessar"]')
-        page.click('//*[@id="Acessar"]')
-
-        # Aguarda a página carregar e fecha o popup
-        page.wait_for_selector("//img[@title='Fechar janela (ESC)']", timeout=10000)
-        page.click("//img[@title='Fechar janela (ESC)']")
-
-        # Busca o processo
-        page.wait_for_selector('//*[@id="txtPesquisaRapida"]')
-        page.fill('//*[@id="txtPesquisaRapida"]', 'SEI-040009/000654/2024')
-        page.press('//*[@id="txtPesquisaRapida"]', 'Enter')
-
-        # Acessa o iframe e anotações
-        page.wait_for_selector('iframe#ifrVisualizacao')
-        frame = page.frame(name="ifrVisualizacao")
-        frame.wait_for_selector("//img[@alt='Anotações']")
-        frame.click("//img[@alt='Anotações']")
-
-        # Escreve a anotação
-        frame.wait_for_selector('//*[@id="txaDescricao"]')
-        frame.fill('//*[@id="txaDescricao"]', 'SEI-040009/000654/2024')
-
-        # Clica no botão "Salvar"
-        frame.wait_for_selector('//*[@name="sbmRegistrarAnotacao"]')
-        frame.click('//*[@name="sbmRegistrarAnotacao"]')
-
-        print("Login e automação realizados com sucesso!")
-
-        # Fecha o navegador
-        browser.close()
-
-except Exception as e:
-    print(f"Ocorreu um erro: {traceback.format_exc()}")
+        with sync_playwright() as p:
+            # Inicializa o navegador em modo não headless para visualizar as ações
+            browser = p.chromium.launch(headless=False)  # Altere para headless=True se não precisar ver o navegador
+            page = browser.new_page()
+    
+            # Acessa a página de login do SEI
+            page.goto("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
+    
+            # Login
+            page.wait_for_selector('//*[@id="txtUsuario"]')
+            page.fill('//*[@id="txtUsuario"]', login)
+    
+            page.wait_for_selector('//*[@id="pwdSenha"]')
+            page.fill('//*[@id="pwdSenha"]', senha)
+    
+            # Seleciona o órgão "SEFAZ" na lista suspensa
+            page.wait_for_selector('//*[@id="selOrgao"]')
+            page.select_option('//*[@id="selOrgao"]', label='SEFAZ')
+    
+            # Clica no botão de login
+            page.wait_for_selector('//*[@id="Acessar"]')
+            page.click('//*[@id="Acessar"]')
+    
+            # Aguarda a página carregar e fecha o popup
+            page.wait_for_selector("//img[@title='Fechar janela (ESC)']", timeout=10000)
+            page.click("//img[@title='Fechar janela (ESC)']")
+    
+            # Busca o processo
+            page.wait_for_selector('//*[@id="txtPesquisaRapida"]')
+            page.fill('//*[@id="txtPesquisaRapida"]', 'SEI-040009/000654/2024')
+            page.press('//*[@id="txtPesquisaRapida"]', 'Enter')
+    
+            # Acessa o iframe e anotações
+            page.wait_for_selector('iframe#ifrVisualizacao')
+            frame = page.frame(name="ifrVisualizacao")
+            frame.wait_for_selector("//img[@alt='Anotações']")
+            frame.click("//img[@alt='Anotações']")
+    
+            # Escreve a anotação
+            frame.wait_for_selector('//*[@id="txaDescricao"]')
+            frame.fill('//*[@id="txaDescricao"]', 'SEI-040009/000654/2024')
+    
+            # Clica no botão "Salvar"
+            frame.wait_for_selector('//*[@name="sbmRegistrarAnotacao"]')
+            frame.click('//*[@name="sbmRegistrarAnotacao"]')
+    
+            print("Login e automação realizados com sucesso!")
+    
+            # Fecha o navegador
+            browser.close()
+    
+    except Exception as e:
+        print(f"Ocorreu um erro: {traceback.format_exc()}")
 
 # Rota no Flask para acionar a automação
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
