@@ -349,7 +349,7 @@ def executar_automacao():
         procurar_processo.send_keys('SEI-040009/000654/2024')
     
         #salvar
-        botao = WebDriverWait(driver, 10).until(
+        botao = WebDriverWait(navegador, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Salvar')]"))
         )
     
