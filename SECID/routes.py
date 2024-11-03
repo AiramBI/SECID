@@ -22,15 +22,7 @@ import subprocess
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-try:
-    logging.info("Instalando Chromium...")
-    subprocess.run(["playwright", "install", "chromium"], check=True)
-except Exception as e:
-    logging.error(f"Erro ao instalar Chromium: {e}")
-
 logging.basicConfig(level=logging.INFO)
-
-lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
 
 @app.route('/')
 def home():
