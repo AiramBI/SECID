@@ -18,10 +18,16 @@ import chromedriver_autoinstaller
 import playwright
 from playwright.sync_api import sync_playwright
 import logging
+import subprocess
 
+
+try:
+    logging.info("Instalando Chromium...")
+    subprocess.run(["playwright", "install", "chromium"], check=True)
+except Exception as e:
+    logging.error(f"Erro ao instalar Chromium: {e}")
 
 logging.basicConfig(level=logging.INFO)
-
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
 
