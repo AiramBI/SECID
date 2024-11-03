@@ -28,3 +28,4 @@ webdriver-manager==4.0.2
 selenium==4.25.0
 Flask-Migrate>=3.1.0
 chromedriver-autoinstaller
+undetected-chromedriver
