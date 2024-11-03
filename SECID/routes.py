@@ -288,6 +288,7 @@ def executar_automacao():
 
         # Configuração para o servidor Selenium remoto no Railway
         options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         navegador = webdriver.Remote(
@@ -347,7 +348,7 @@ def executar_automacao():
     
         #salvar
         botao = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))
+        EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Salvar')]"))
         )
     
         # Clique no botão
