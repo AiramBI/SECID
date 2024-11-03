@@ -15,6 +15,7 @@ import traceback
 from werkzeug.utils import secure_filename
 import os
 import chromedriver_autoinstaller
+from playwright.sync_api import sync_playwright
 
 
 lista_usuarios = ['Marina','Pedro','Danilo','Joao','Kleber']
@@ -273,79 +274,61 @@ def download_file(filename):
         abort(404, "Arquivo não encontrado")
 
 
-# Variáveis de login
-login = "asantos2"
-senha = "Ivinhema1994#*#*#*"
+# Variáveis de login (ou configure como variáveis de ambiente)
+login = os.getenv("LOGIN", "asantos2")  # Coloque a senha em variáveis de ambiente para maior segurança
+senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
 def executar_automacao():
-    # Configurações para o Chrome em modo headless
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Executa sem abrir o navegador
-    chrome_options.add_argument("--no-sandbox")  # Necessário em alguns ambientes server-side
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Otimiza para ambientes Docker
-    
-
-    # Inicialize o WebDriver do Chrome com as opções
-    navegador = webdriver.Chrome(options=chrome_options)
-
     try:
-        # INICIO BLOCO DE LOGIN
-        navegador.get("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
+        with sync_playwright() as p:
+            # Inicializa o navegador em modo headless
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
 
-        # Login
-        usuario = navegador.find_element(By.XPATH, '//*[@id="txtUsuario"]')
-        usuario.send_keys(login)
+            # Acessa a página de login do SEI
+            page.goto("https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI")
 
-        campoSenha = navegador.find_element(By.XPATH, '//*[@id="pwdSenha"]')
-        campoSenha.send_keys(senha)
+            # Login
+            page.fill('//*[@id="txtUsuario"]', login)
+            page.fill('//*[@id="pwdSenha"]', senha)
 
-        # Seleção de órgão
-        exercicio = Select(navegador.find_element(By.XPATH, '//*[@id="selOrgao"]'))
-        exercicio.select_by_visible_text('SEFAZ')
+            # Seleciona o órgão "SEFAZ" na lista suspensa
+            page.select_option('//*[@id="selOrgao"]', label='SEFAZ')
 
-        # Botão de login
-        btnLogin = navegador.find_element(By.XPATH, '//*[@id="Acessar"]')
-        btnLogin.click()
+            # Clica no botão de login
+            page.click('//*[@id="Acessar"]')
 
-        # Maximiza o navegador (efetivo somente no modo com interface)
-        time.sleep(1)
-        WebDriverWait(navegador, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//img[@title='Fechar janela (ESC)']"))
-        )
-        navegador.find_element(By.XPATH, "//img[@title='Fechar janela (ESC)']").click()
-        
-        # Busca de processo
-        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
-        procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
+            # Aguarda a página carregar e fecha o popup
+            page.wait_for_selector("//img[@title='Fechar janela (ESC)']", timeout=10000)
+            page.click("//img[@title='Fechar janela (ESC)']")
 
-        # Acessa anotações e escreve
-        navegador.switch_to.default_content()
-        WebDriverWait(navegador, 5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
-        WebDriverWait(navegador, 5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt='Anotações']"))).click()
-        anotacao = navegador.find_element(By.XPATH, '//*[@id="txaDescricao"]')
-        anotacao.send_keys('SEI-040009/000654/2024')
+            # Busca o processo
+            page.fill('//*[@id="txtPesquisaRapida"]', 'SEI-040009/000654/2024')
+            page.press('//*[@id="txtPesquisaRapida"]', 'Enter')
 
-        # Salvar a anotação
-        botao = WebDriverWait(navegador, 10).until(
-            EC.element_to_be_clickable((By.NAME, "sbmRegistrarAnotacao"))
-        )
-        botao.click()
+            # Acessa o iframe e anotações
+            page.wait_for_selector('iframe#ifrVisualizacao')
+            frame = page.frame(name="ifrVisualizacao")
+            frame.click("//img[@alt='Anotações']")
 
-        print("Login e automação realizados com sucesso!")
+            # Escreve a anotação
+            frame.fill('//*[@id="txaDescricao"]', 'SEI-040009/000654/2024')
 
-    except TimeoutException:
-        print("Erro: O elemento não foi encontrado no tempo esperado.")
+            # Clica no botão "Salvar"
+            frame.click('//*[@name="sbmRegistrarAnotacao"]')
+
+            print("Login e automação realizados com sucesso!")
+
+            # Fecha o navegador
+            browser.close()
+
     except Exception as e:
         print(f"Ocorreu um erro: {traceback.format_exc()}")
-    finally:
-        time.sleep(5)
-        navegador.quit()
 
-# Definição da rota
+# Rota no Flask para acionar a automação
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
 @login_required
 def medicao3():
-    # Executa o código Selenium quando essa rota é acessada
     executar_automacao()
     return render_template('medicao3.html')
 
