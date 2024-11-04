@@ -100,7 +100,7 @@ def executarautomacao():
         label_element.click()
 
  
-        caminho_arquivo = os.path.join(os.path.dirname(__file__), 'static', '2_-_Copia_12.pdf')
+        caminho_arquivo = os.path.join(os.path.dirname(__file__), 'static', 'carteira.pdf')
     
         # Localize o campo de upload e envie o caminho do arquivo
         campo_upload = navegador.find_element(By.ID, "filArquivo")
