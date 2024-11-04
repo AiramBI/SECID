@@ -246,7 +246,7 @@ def download_file(filename):
 login = os.getenv("LOGIN", "asantos2")
 senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
-def executar_automacao():
+def executar_automacao2():
     try:
         logging.info("Iniciando o Selenium...")
 
