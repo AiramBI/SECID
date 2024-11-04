@@ -16,7 +16,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 login = os.getenv("LOGIN", "asantos2")
 senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
 
-def executar_automacao():
+def executarautomacao():
     session_id = None  # Para armazenar o ID da sessão e garantir que podemos fechar depois
     
     try:
