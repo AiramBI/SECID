@@ -14,11 +14,7 @@ import time
 import traceback
 from werkzeug.utils import secure_filename
 import os
-import chromedriver_autoinstaller
-import playwright
-from playwright.sync_api import sync_playwright
 import logging
-import subprocess
 from selenium.webdriver.common.action_chains import ActionChains
 
 
