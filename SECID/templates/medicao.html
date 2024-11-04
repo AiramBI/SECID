@@ -10,6 +10,7 @@
                 {{ form_medicao.csrf_token }}
                 
                 <fieldset>
+                    <!-- Campos do formulário fixos -->
                     <div class="form-group">
                         {{ form_medicao.projeto_nome.label(class="form-control-label") }}
                         {% if form_medicao.projeto_nome.errors %}
@@ -110,22 +111,23 @@
                     </div>
 
                     <!-- Campos para os documentos -->
-                    {% for i in range(1, 20) %}
-                        <div class="form-group">
-                            {{ getattr(form_medicao, 'documento_' ~ i).label(class="form-control-label") }}
-                            {% if getattr(form_medicao, 'documento_' ~ i).errors %}
-                                {{ getattr(form_medicao, 'documento_' ~ i)(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for erro in getattr(form_medicao, 'documento_' ~ i).errors %}
-                                        {{ erro }}
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ getattr(form_medicao, 'documento_' ~ i)(class="form-control") }}
-                            {% endif %}
-                        </div>
+                    {% for field in form_medicao %}
+                        {% if field.name.startswith('documento_') %}
+                            <div class="form-group">
+                                {{ field.label(class="form-control-label") }}
+                                {% if field.errors %}
+                                    {{ field(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in field.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ field(class="form-control") }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     {% endfor %}
-
                 </fieldset>
                 {{ form_medicao.botao_submit_medicao(class="btn btn-primary mt-3") }}
             </form>
