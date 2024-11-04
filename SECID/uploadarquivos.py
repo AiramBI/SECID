@@ -24,7 +24,7 @@ def executarautomacao():
 
         # Configuração para o servidor Selenium remoto no Railway
         options = webdriver.ChromeOptions()
-        options.add_argument("--headless")  # Remova o comentário para rodar headless
+        #options.add_argument("--headless")  # Remova o comentário para rodar headless
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         
