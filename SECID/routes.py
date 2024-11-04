@@ -136,53 +136,15 @@ def save_file(file):
         return filename
     return None
 
-TEMP_UPLOAD_FOLDER = os.path.join(app.root_path, 'temp_uploads')
-os.makedirs(TEMP_UPLOAD_FOLDER, exist_ok=True)
-
-@app.route('/upload_temp', methods=['POST'])
-@login_required
-def upload_temp():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
-    
-    file = request.files['file']
-    
-    if file:
-        filename = f"{uuid.uuid4()}_{file.filename}"
-        temp_path = os.path.join(TEMP_UPLOAD_FOLDER, filename)
-        file.save(temp_path)
-        
-        return jsonify({"temp_path": temp_path}), 200
-    else:
-        return jsonify({"error": "File upload failed"}), 400
-
-   
-
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
 def medicao():
     form_medicao = FormMedicao()
-    
+
     if form_medicao.validate_on_submit():
         try:
-            # Recebe os caminhos temporários dos arquivos
-            temp_paths = request.form.getlist('temp_paths[]')
-            final_paths = []
-            
-            # Define a pasta final
-            FINAL_UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
-            os.makedirs(FINAL_UPLOAD_FOLDER, exist_ok=True)
-            
-            # Move os arquivos para a pasta final e armazena os caminhos
-            for temp_path in temp_paths:
-                if os.path.exists(temp_path):
-                    filename = os.path.basename(temp_path)
-                    final_path = os.path.join(FINAL_UPLOAD_FOLDER, filename)
-                    os.rename(temp_path, final_path)
-                    final_paths.append(final_path)
-            
-            # Salve o relatório no banco de dados com os caminhos finais
-            medicao = Medicao(
+            # Salva os arquivos e cria uma nova instância de Medicao
+            medicao1 = Medicao(
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
@@ -190,10 +152,18 @@ def medicao():
                 valor=form_medicao.valor.data,
                 data_inicial=form_medicao.data_inicial.data,
                 data_final=form_medicao.data_final.data,
-                documentos=final_paths  # Ajuste para armazenar a lista de caminhos
+                documento_1=save_file(form_medicao.documento_1.data),
+                documento_2=save_file(form_medicao.documento_2.data),
+                documento_3=save_file(form_medicao.documento_3.data),
+                documento_3_1=save_file(form_medicao.documento_3_1.data),
+                documento_4=save_file(form_medicao.documento_4.data),
+                documento_5=save_file(form_medicao.documento_5.data)
             )
-            database.session.add(medicao)
+            
+            # Adiciona a medição ao banco de dados
+            database.session.add(medicao1)
             database.session.commit()
+
             flash('Medição cadastrada com sucesso!', 'alert-success')
             return redirect(url_for('administrador'))
 
