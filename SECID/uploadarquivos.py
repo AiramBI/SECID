@@ -98,8 +98,9 @@ def executarautomacao():
         #Nivel de Acesso(Publico)
         label_element = navegador.find_element(By.XPATH, "//label[@for='optPublico']")
         label_element.click()
-    
-        caminho_arquivo = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static', '2_-_Copia_12.pdf'))
+
+ 
+        caminho_arquivo = os.path.join(os.path.dirname(__file__), 'static', '2_-_Copia_12.pdf')
     
         # Localize o campo de upload e envie o caminho do arquivo
         campo_upload = navegador.find_element(By.ID, "filArquivo")
