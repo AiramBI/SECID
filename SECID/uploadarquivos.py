@@ -110,6 +110,8 @@ def executarautomacao():
     
         botao_salvar = navegador.find_element(By.ID, "btnSalvar")
         botao_salvar.click()
+
+        time.sleep(2)
         
     
         # FIM DO BLOCO DE LOGIN
