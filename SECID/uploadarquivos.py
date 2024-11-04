@@ -63,6 +63,49 @@ def executarautomacao():
         )
         botao_fechar = navegador.find_element(By.XPATH, "//img[@title='Fechar janela (ESC)']")
         botao_fechar.click()
+
+        #UPLOAD DE DOCUMENTOS
+        navegador.switch_to.default_content()
+        WebDriverWait(navegador,5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        WebDriverWait(navegador,5).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Incluir Documento']"))).click()
+        upload_documento = navegador.find_element(By.LINK_TEXT, "Externo")
+        upload_documento.click()
+    
+    
+        #TIPO DE DOCUMENTO
+        tipo_documento = navegador.find_element(By.XPATH, '//*[@id="selSerie"]')
+        tipo_documento.send_keys('Anexo')
+    
+        #DataDocumento
+        data_documento = navegador.find_element(By.XPATH, '//*[@id="txtDataElaboracao"]')
+        data_documento.send_keys('30/10/2024')
+    
+        #Nome Documento
+        nome_documento = navegador.find_element(By.XPATH, '//*[@id="txtNumero"]')
+        nome_documento.send_keys('nometeste')
+    
+        #Formato (Digitalizado nesta Unidade)
+        formato = navegador.find_element(By.XPATH, "//label[@for='optDigitalizado']")
+        formato.click()
+    
+        formato = navegador.find_element(By.XPATH, '//*[@id="selTipoConferencia"]')
+        formato.send_keys('Cópia Simples')
+    
+        #Nivel de Acesso(Publico)
+        label_element = navegador.find_element(By.XPATH, "//label[@for='optPublico']")
+        label_element.click()
+    
+        caminho_arquivo = os.path.join(current_app.root_path, 'static', "2_-_Copia_12.pdf")
+    
+        # Localize o campo de upload e envie o caminho do arquivo
+        campo_upload = navegador.find_element(By.ID, "filArquivo")
+        campo_upload.send_keys(caminho_arquivo)
+    
+        time.sleep(5)
+    
+        botao_salvar = navegador.find_element(By.ID, "btnSalvar")
+        botao_salvar.click()
+        
     
         # FIM DO BLOCO DE LOGIN
     
@@ -71,21 +114,21 @@ def executarautomacao():
         procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
     
         # Acessa o campo de anotação
-        navegador.switch_to.default_content()
-        WebDriverWait(navegador, 10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
-        WebDriverWait(navegador, 10).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
+        #navegador.switch_to.default_content()
+        #WebDriverWait(navegador, 10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        #WebDriverWait(navegador, 10).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Anotações']"))).click()
     
         # Preenche a anotação
-        campo_anotacao = WebDriverWait(navegador, 10).until(
-            EC.visibility_of_element_located((By.XPATH, '//*[@id="txaDescricao"]'))
-        )
-        campo_anotacao.send_keys('SEI-040009/000654/2024')
+        #campo_anotacao = WebDriverWait(navegador, 10).until(
+        #    EC.visibility_of_element_located((By.XPATH, '//*[@id="txaDescricao"]'))
+        #)
+        #campo_anotacao.send_keys('SEI-040009/000654/2024')
     
         # Clica no botão de salvar
-        botao_salvar = WebDriverWait(navegador, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '//button[@value = "Salvar"]'))
-        )
-        botao_salvar.click()
+        #botao_salvar = WebDriverWait(navegador, 10).until(
+        #    EC.element_to_be_clickable((By.XPATH, '//button[@value = "Salvar"]'))
+        #)
+        #botao_salvar.click()
 
         logging.info("Anotação salva com sucesso!")
 
