@@ -329,7 +329,7 @@ def executar_automacao2():
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
 @login_required
 def medicao3():
-    executar_automacao()
+    executarautomacao()
     return render_template('medicao3.html')
 
 @app.route('/paineis/sei')
