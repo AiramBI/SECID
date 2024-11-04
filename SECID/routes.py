@@ -82,7 +82,6 @@ def financeiro():
 
 
 
-
 @app.route('/usuario')
 @login_required
 def usuario():
@@ -131,29 +130,6 @@ def administrador():
     # Renderiza a página novamente, passando o formulário
     # print("Erros de validação:", form_obras.errors)
     return render_template('administrador.html', form_obras=form_obras)
-
-# def abrir_pagina_com_selenium():
-#     chrome_options = Options()
-#     chrome_options.add_argument('--headless')  # Executa em modo headless (sem abrir janela)
-#     chrome_options.add_argument('--no-sandbox')  # Necessário em alguns ambientes Linux
-#     chrome_options.add_argument('--disable-dev-shm-usage')  # Para ambientes limitados de recursos
-#
-#     # Inicializa o ChromeDriver
-#     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-#
-#     try:
-#         # Acesse a página desejada (substitua a URL abaixo)
-#         driver.get("https://www.google.com/")
-#         print("Página acessada com sucesso:", driver.title)
-#         # Exemplo de interação com a página: encontrar um botão e clicar
-#         # botao = driver.find_element_by_id("id_do_botao")
-#         # botao.click()
-#
-#         # Você pode realizar mais ações aqui, como fazer login, extrair informações, etc.
-#
-#     finally:
-#         # Fecha o navegador após a navegação
-#         driver.quit()
 
 # Configuração da pasta para upload
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
