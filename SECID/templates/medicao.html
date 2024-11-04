@@ -6,7 +6,7 @@
     <hr>
     <div class="row">
         <div class="col">
-            <form method="POST" action="" class="border p-5 mt-5" enctype="multipart/form-data">
+            <form id="formulario-medicao" method="POST" action="" class="border p-5 mt-5" enctype="multipart/form-data">
                 {{ form_medicao.csrf_token }}
                 
                 <fieldset>
@@ -116,14 +116,14 @@
                             <div class="form-group">
                                 {{ field.label(class="form-control-label") }}
                                 {% if field.errors %}
-                                    {{ field(class="form-control is-invalid") }}
+                                    {{ field(class="form-control is-invalid", onchange="uploadFile(this)") }}
                                     <div class="invalid-feedback">
                                         {% for erro in field.errors %}
                                             {{ erro }}
                                         {% endfor %}
                                     </div>
                                 {% else %}
-                                    {{ field(class="form-control") }}
+                                    {{ field(class="form-control", onchange="uploadFile(this)") }}
                                 {% endif %}
                             </div>
                         {% endif %}
@@ -134,4 +134,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function uploadFile(inputElement) {
+        let file = inputElement.files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload_temp', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.temp_path) {
+                    // Armazena o caminho temporário no campo hidden
+                    let hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'temp_paths[]';
+                    hiddenInput.value = data.temp_path;
+                    document.getElementById('formulario-medicao').appendChild(hiddenInput);
+                } else {
+                    console.error("Erro ao pré-carregar o arquivo");
+                }
+            })
+            .catch(error => console.error("Erro no upload:", error));
+        }
+    }
+</script>
+
 {% endblock %}
