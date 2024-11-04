@@ -2,9 +2,7 @@
 
 {% block body %}
 <div class="container">
-
     <h1>Criar Medição</h1>
-
     <hr>
     <div class="row">
         <div class="col">
@@ -12,8 +10,7 @@
                 {{ form_medicao.csrf_token }}
                 
                 <fieldset>
-                                
-                <div class="form-group">
+                    <div class="form-group">
                         {{ form_medicao.projeto_nome.label(class="form-control-label") }}
                         {% if form_medicao.projeto_nome.errors %}
                             {{ form_medicao.projeto_nome(class="form-control is-invalid") }}
@@ -26,10 +23,6 @@
                             {{ form_medicao.projeto_nome(class="form-control") }}
                         {% endif %}
                     </div>
-                
-                
-                
-                
 
                     <div class="form-group">
                         {{ form_medicao.sei.label(class="form-control-label") }}
@@ -44,8 +37,6 @@
                             {{ form_medicao.sei(class="form-control") }}
                         {% endif %}
                     </div>
-
-                    
 
                     <div class="form-group">
                         {{ form_medicao.numero_medicao.label(class="form-control-label") }}
@@ -76,36 +67,6 @@
                     </div>
 
                     <div class="form-group">
-                            {{ form_medicao.valor.label(class="form-control-label") }}
-                            
-                            {% if form_medicao.valor.errors %}
-                                {{ form_medicao.valor(class="form-control is-invalid", id="valor") }}
-                                <div class="invalid-feedback">
-                                    {% for erro in form_medicao.valor.errors %}
-                                        {{ erro }}
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form_medicao.valor(class="form-control", id="valor") }}
-                            {% endif %}
-                        </div>
-                        
-<!--                         <script>
-                            document.getElementById('valor').addEventListener('input', function (e) {
-                                let value = e.target.value.replace(/\D/g, '');  // Remove tudo o que não é número
-                                value = (parseInt(value, 10) / 100).toFixed(2);  // Divide por 100 para ajustar casas decimais
-                                e.target.value = 'R$ ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, '.').replace('.', ',');  // Formata para a moeda brasileira
-                            });
-                        
-                            // Remover a formatação para enviar apenas o número ao backend
-                            document.getElementById('formulario-medicao').addEventListener('submit', function () {
-                                let campoValor = document.getElementById('valor');
-                                // Remove a formatação de moeda antes de enviar
-                                campoValor.value = campoValor.value.replace(/[^\d,]/g, '').replace(',', '.');  // Remove tudo exceto números e vírgula
-                            });
-                        </script> -->
-
-<!--                     <div class="form-group">
                         {{ form_medicao.valor.label(class="form-control-label") }}
                         {% if form_medicao.valor.errors %}
                             {{ form_medicao.valor(class="form-control is-invalid") }}
@@ -117,8 +78,9 @@
                         {% else %}
                             {{ form_medicao.valor(class="form-control") }}
                         {% endif %}
-                    </div> -->
+                    </div>
 
+                    <!-- Campos de data inicial e final -->
                     <div class="form-group">
                         {{ form_medicao.data_inicial.label(class="form-control-label") }}
                         {% if form_medicao.data_inicial.errors %}
@@ -132,7 +94,7 @@
                             {{ form_medicao.data_inicial(class="form-control", type="date") }}
                         {% endif %}
                     </div>
-                    
+
                     <div class="form-group">
                         {{ form_medicao.data_final.label(class="form-control-label") }}
                         {% if form_medicao.data_final.errors %}
@@ -147,405 +109,27 @@
                         {% endif %}
                     </div>
 
-<!--                     <div class="form-group">
-                        {{ form_medicao.data_inicial.label(class="form-control-label") }}
-                        {% if form_medicao.data_inicial.errors %}
-                            {{ form_medicao.data_inicial(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.data_inicial.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.data_inicial(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.data_final.label(class="form-control-label") }}
-                        {% if form_medicao.data_final.errors %}
-                            {{ form_medicao.data_final(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.data_final.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.data_final(class="form-control") }}
-                        {% endif %}
-                    </div> -->
-
-                    <!-- Documentos -->
-                    <div class="form-group">
-                        {{ form_medicao.documento_1.label(class="form-control-label") }}
-                        {% if form_medicao.documento_1.errors %}
-                            {{ form_medicao.documento_1(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_1.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_1(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_2.label(class="form-control-label") }}
-                        {% if form_medicao.documento_2.errors %}
-                            {{ form_medicao.documento_2(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_2.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_2(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_3.label(class="form-control-label") }}
-                        {% if form_medicao.documento_3.errors %}
-                            {{ form_medicao.documento_3(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_3.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_3(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_3_1.label(class="form-control-label") }}
-                        {% if form_medicao.documento_3_1.errors %}
-                            {{ form_medicao.documento_3_1(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_3_1.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_3_1(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_4.label(class="form-control-label") }}
-                        {% if form_medicao.documento_4.errors %}
-                            {{ form_medicao.documento_4(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_4.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_4(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_5.label(class="form-control-label") }}
-                        {% if form_medicao.documento_5.errors %}
-                            {{ form_medicao.documento_5(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_5.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_5(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_6.label(class="form-control-label") }}
-                        {% if form_medicao.documento_6.errors %}
-                            {{ form_medicao.documento_6(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_6.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_6(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_7.label(class="form-control-label") }}
-                        {% if form_medicao.documento_7.errors %}
-                            {{ form_medicao.documento_7(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_7.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_7(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_8.label(class="form-control-label") }}
-                        {% if form_medicao.documento_8.errors %}
-                            {{ form_medicao.documento_8(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_8.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_8(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_9.label(class="form-control-label") }}
-                        {% if form_medicao.documento_9.errors %}
-                            {{ form_medicao.documento_9(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_9.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_9(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_10.label(class="form-control-label") }}
-                        {% if form_medicao.documento_10.errors %}
-                            {{ form_medicao.documento_10(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_10.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_10(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_10_1.label(class="form-control-label") }}
-                        {% if form_medicao.documento_10_1.errors %}
-                            {{ form_medicao.documento_10_1(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_10_1.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_10_1(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_11.label(class="form-control-label") }}
-                        {% if form_medicao.documento_11.errors %}
-                            {{ form_medicao.documento_11(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_11.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_11(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_12.label(class="form-control-label") }}
-                        {% if form_medicao.documento_12.errors %}
-                            {{ form_medicao.documento_12(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_12.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_12(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_13.label(class="form-control-label") }}
-                        {% if form_medicao.documento_13.errors %}
-                            {{ form_medicao.documento_13(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_13.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_13(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_14.label(class="form-control-label") }}
-                        {% if form_medicao.documento_14.errors %}
-                            {{ form_medicao.documento_14(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_14.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_14(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15.errors %}
-                            {{ form_medicao.documento_15(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15_1.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15_1.errors %}
-                            {{ form_medicao.documento_15_1(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15_1.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15_1(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15_2.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15_2.errors %}
-                            {{ form_medicao.documento_15_2(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15_2.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15_2(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15_3.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15_3.errors %}
-                            {{ form_medicao.documento_15_3(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15_3.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15_3(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15_4.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15_4.errors %}
-                            {{ form_medicao.documento_15_4(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15_4.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15_4(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_15_5.label(class="form-control-label") }}
-                        {% if form_medicao.documento_15_5.errors %}
-                            {{ form_medicao.documento_15_5(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_15_5.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_15_5(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_16.label(class="form-control-label") }}
-                        {% if form_medicao.documento_16.errors %}
-                            {{ form_medicao.documento_16(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_16.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_16(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_17.label(class="form-control-label") }}
-                        {% if form_medicao.documento_17.errors %}
-                            {{ form_medicao.documento_17(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_17.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_17(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_18.label(class="form-control-label") }}
-                        {% if form_medicao.documento_18.errors %}
-                            {{ form_medicao.documento_18(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_18.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_18(class="form-control") }}
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_medicao.documento_19.label(class="form-control-label") }}
-                        {% if form_medicao.documento_19.errors %}
-                            {{ form_medicao.documento_19(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_medicao.documento_19.errors %}
-                                    {{ erro }}
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form_medicao.documento_19(class="form-control") }}
-                        {% endif %}
-                    </div>
+                    <!-- Campos para os documentos -->
+                    {% for i in range(1, 20) %}
+                        <div class="form-group">
+                            {{ getattr(form_medicao, 'documento_' ~ i).label(class="form-control-label") }}
+                            {% if getattr(form_medicao, 'documento_' ~ i).errors %}
+                                {{ getattr(form_medicao, 'documento_' ~ i)(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for erro in getattr(form_medicao, 'documento_' ~ i).errors %}
+                                        {{ erro }}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ getattr(form_medicao, 'documento_' ~ i)(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
 
                 </fieldset>
                 {{ form_medicao.botao_submit_medicao(class="btn btn-primary mt-3") }}
             </form>
         </div>
     </div>
-
 </div>
-
 {% endblock %}
