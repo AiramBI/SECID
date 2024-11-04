@@ -64,6 +64,10 @@ def executarautomacao():
         botao_fechar = navegador.find_element(By.XPATH, "//img[@title='Fechar janela (ESC)']")
         botao_fechar.click()
 
+        # INICIO DO BLOCO DE PROCURAR UM PROCESSO
+        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
+        procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
+
         #UPLOAD DE DOCUMENTOS
         navegador.switch_to.default_content()
         WebDriverWait(navegador,5).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
@@ -109,9 +113,6 @@ def executarautomacao():
     
         # FIM DO BLOCO DE LOGIN
     
-        # INICIO DO BLOCO DE PROCURAR UM PROCESSO
-        procurar_processo = navegador.find_element(By.XPATH, '//*[@id="txtPesquisaRapida"]')
-        procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
     
         # Acessa o campo de anotação
         #navegador.switch_to.default_content()
