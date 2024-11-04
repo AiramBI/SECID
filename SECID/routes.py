@@ -162,17 +162,27 @@ def upload_temp():
 @login_required
 def medicao():
     form_medicao = FormMedicao()
-
+    
     if form_medicao.validate_on_submit():
         try:
-            # Dicionário para os documentos dinamicamente
-            documentos = {}
-            for field in form_medicao:
-                if "documento_" in field.name:
-                    documentos[field.name] = save_file(field.data)
-                    
-            # Salva os arquivos e cria uma nova instância de Medicao
-            medicao1 = Medicao(
+            # Recebe os caminhos temporários dos arquivos
+            temp_paths = request.form.getlist('temp_paths[]')
+            final_paths = []
+            
+            # Define a pasta final
+            FINAL_UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
+            os.makedirs(FINAL_UPLOAD_FOLDER, exist_ok=True)
+            
+            # Move os arquivos para a pasta final e armazena os caminhos
+            for temp_path in temp_paths:
+                if os.path.exists(temp_path):
+                    filename = os.path.basename(temp_path)
+                    final_path = os.path.join(FINAL_UPLOAD_FOLDER, filename)
+                    os.rename(temp_path, final_path)
+                    final_paths.append(final_path)
+            
+            # Salve o relatório no banco de dados com os caminhos finais
+            medicao = Medicao(
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
@@ -180,13 +190,10 @@ def medicao():
                 valor=form_medicao.valor.data,
                 data_inicial=form_medicao.data_inicial.data,
                 data_final=form_medicao.data_final.data,
-                **documentos  # Atribuição dinâmica dos documentos
+                documentos=final_paths  # Ajuste para armazenar a lista de caminhos
             )
-            
-            # Adiciona a medição ao banco de dados
-            database.session.add(medicao1)
+            database.session.add(medicao)
             database.session.commit()
-
             flash('Medição cadastrada com sucesso!', 'alert-success')
             return redirect(url_for('administrador'))
 
@@ -196,7 +203,6 @@ def medicao():
             database.session.rollback()
 
     return render_template('medicao.html', form_medicao=form_medicao)
-
 
 @app.route('/usuario/medicao2', methods =['GET','POST'])
 @login_required
