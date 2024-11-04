@@ -132,24 +132,10 @@ def executarautomacao():
 
         logging.info("Anotação salva com sucesso!")
 
+        navegador.quit()
+        
     except Exception as e:
         logging.error(f"Ocorreu um erro: {traceback.format_exc()}")
+        navegador.quit()
+    
 
-    finally:
-        # Fecha o navegador e encerra a sessão
-        if navegador:
-            navegador.quit()
-            logging.info("Navegador fechado.")
-        
-        # Exclui a sessão do Selenium Grid remoto
-        if session_id:
-            try:
-                response = requests.delete(
-                    f'https://standalone-chrome-production-1308.up.railway.app/wd/hub/session/{session_id}'
-                )
-                if response.status_code == 200:
-                    logging.info("Sessão encerrada com sucesso.")
-                else:
-                    logging.warning(f"Erro ao encerrar a sessão: {response.status_code} - {response.text}")
-            except Exception as e:
-                logging.error(f"Erro ao tentar encerrar a sessão: {e}")
