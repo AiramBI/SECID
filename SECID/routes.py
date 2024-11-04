@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory, abort
+from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory, abort, jsonify
 from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
 from SECID.models import Usuario, Obras, Medicao, Medicao2
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 import logging
 from SECID.uploadarquivos import executarautomacao
+import uuid
 
 logging.basicConfig(level=logging.INFO)
 
@@ -134,6 +135,26 @@ def save_file(file):
         file.save(file_path)
         return filename
     return None
+
+TEMP_UPLOAD_FOLDER = os.path.join(app.root_path, 'temp_uploads')
+os.makedirs(TEMP_UPLOAD_FOLDER, exist_ok=True)
+
+@app.route('/upload_temp', methods=['POST'])
+@login_required
+def upload_temp():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    
+    file = request.files['file']
+    
+    if file:
+        filename = f"{uuid.uuid4()}_{file.filename}"
+        temp_path = os.path.join(TEMP_UPLOAD_FOLDER, filename)
+        file.save(temp_path)
+        
+        return jsonify({"temp_path": temp_path}), 200
+    else:
+        return jsonify({"error": "File upload failed"}), 400
 
    
 
