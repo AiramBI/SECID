@@ -3,20 +3,12 @@ from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
 from SECID.models import Usuario, Obras, Medicao, Medicao2
 from flask_login import current_user, login_required, login_user, logout_user
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select, WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.chrome.options import Options
-import time
 import traceback
 from werkzeug.utils import secure_filename
 import os
 import logging
-from selenium.webdriver.common.action_chains import ActionChains
 
+from upload_arquivos import executar_automacao
 
 logging.basicConfig(level=logging.INFO)
 
