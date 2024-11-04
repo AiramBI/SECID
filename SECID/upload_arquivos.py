@@ -8,6 +8,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 import requests  # para fechar sessão via requisição HTTP DELETE
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Variáveis de login
 login = os.getenv("LOGIN", "asantos2")
