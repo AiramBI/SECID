@@ -7,7 +7,6 @@ import traceback
 from werkzeug.utils import secure_filename
 import os
 import logging
-
 from upload_arquivos import executar_automacao
 
 logging.basicConfig(level=logging.INFO)
