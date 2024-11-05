@@ -63,7 +63,90 @@ def executarautomacao():
     )
     procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
 
+    # Alterna para o iframe "ifrVisualizacao" e espera que ele esteja disponível
+    WebDriverWait(navegador, 10).until(
+        EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao"))
+    )
+    # Aguarda o elemento "Iniciar Processo Relacionado" estar clicável dentro do iframe
+    iniciar_processo_relacionado = WebDriverWait(navegador, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//img[@alt='Iniciar Processo Relacionado']"))
+    )
+    iniciar_processo_relacionado.click()
 
+    # Iniciar Processo Relacionado Financeiro Pagamento
+    financeiro_pagamento = WebDriverWait(navegador, 5).until(
+        EC.element_to_be_clickable((By.LINK_TEXT, "Financeiro: Pagamento"))
+    )
+    financeiro_pagamento.click()
+
+    # Escrever especificação
+    especificacao = WebDriverWait(navegador, 5).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="txtDescricao"]'))
+    )
+    especificacao.send_keys(especificacao_processo)
+
+    #Observações desta Unidade
+    observacoes = navegador.find_element(By.XPATH, '//*[@id="txaObservacoes"]')
+    observacoes.send_keys(observacoes_processo)
+
+    #Nivel de Acesso(Publico)
+    nivel_acesso = WebDriverWait(navegador, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="lblPublico"]')))
+    nivel_acesso.click()
+
+    botao_salvar = WebDriverWait(navegador, 10).until(EC.presence_of_element_located((By.ID, "btnSalvar")))
+    botao_salvar.click()
+
+    for nome in nomes_documentos:
+        #UPLOAD DE DOCUMENTOS
+        campo_clicavel = navegador.switch_to.default_content()
+        campo_clicavel2 = WebDriverWait(navegador,10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
+        incluir_documento = WebDriverWait(navegador,10).until(EC.element_to_be_clickable((By.XPATH, "//img[@alt = 'Incluir Documento']")))
+        incluir_documento.click()
+        upload_documento = navegador.find_element(By.LINK_TEXT, "Externo")
+        upload_documento.click()
+
+
+        #TIPO DE DOCUMENTO
+        tipo_documento = navegador.find_element(By.XPATH, '//*[@id="selSerie"]')
+        tipo_documento.send_keys('Anexo')
+
+        #DataDocumento
+        data_documento = navegador.find_element(By.XPATH, '//*[@id="txtDataElaboracao"]')
+        data_documento.send_keys(hoje())
+
+        #Nome Documento
+        nome_documento = navegador.find_element(By.XPATH, '//*[@id="txtNumero"]')
+        nome_documento.clear()
+        nome_documento.send_keys(nome)
+
+        #Formato (Digitalizado nesta Unidade)
+        formato = navegador.find_element(By.XPATH, "//label[@for='optDigitalizado']")
+        formato.click()
+
+        formato = navegador.find_element(By.XPATH, '//*[@id="selTipoConferencia"]')
+        formato.send_keys('Cópia Simples')
+
+        #Nivel de Acesso(Publico)
+        label_element = navegador.find_element(By.XPATH, "//label[@for='optPublico']")
+        label_element.click()
+
+        caminho_arquivo = "/app/static/seu_arquivo.pdf"
+
+        # Localize o campo de upload e envie o caminho do arquivo
+        campo_upload = navegador.find_element(By.ID, "filArquivo")
+        campo_upload.send_keys(caminho_arquivo)
+
+        # Aguarda o elemento "Remover Item" aparecer na página
+        WebDriverWait(navegador, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//img[@title='Remover Item']"))
+        )
+
+        # Depois que o elemento "Remover Item" aparece, clica no botão Salvar
+        botao_salvar = WebDriverWait(navegador, 10).until(
+            EC.element_to_be_clickable((By.ID, "btnSalvar"))
+        )
+        botao_salvar.click()
+        
     #INICIO DO BLOCO DE PROCESSO RELACIONADO
 
     #INCLUIR NOTA TÉCNICA
