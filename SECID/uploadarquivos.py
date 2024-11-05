@@ -61,7 +61,7 @@ def executarautomacao():
     
         # Configuração para o servidor Selenium remoto no Railway
         options = webdriver.ChromeOptions()
-        #options.add_argument("--headless")
+        options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         grid_url = 'https://standalone-chrome-production-1308.up.railway.app/wd/hub'
