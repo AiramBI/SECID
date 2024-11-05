@@ -184,6 +184,7 @@ def executarautomacao():
                 EC.element_to_be_clickable((By.ID, "btnSalvar"))
             )
             botao_salvar.click()
+            time.sleep(2)
             
         #INICIO DO BLOCO DE PROCESSO RELACIONADO
     
