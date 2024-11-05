@@ -27,7 +27,8 @@ def executarautomacao():
         #options.add_argument("--headless")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
-        navegador = webdriver.Chrome(options=options)
+        grid_url = "http://standalone-chrome-production-1308.up.railway.app:4444/wd/hub"
+        navegador = webdriver.Chrome(command_executor=grid_url,options=options)
         
         
         # INICIO BLOCO DE LOGIN
