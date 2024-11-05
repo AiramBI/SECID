@@ -15,6 +15,42 @@ from selenium.webdriver.common.action_chains import ActionChains
 # Variáveis de login
 login = os.getenv("LOGIN", "asantos2")
 senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
+secretaria = os.getenv("SECRETARIA","SEFAZ")
+especificacao_processo = os.getenv("ESPECIFICACAO_PROCESSO","XXXXX") #Numero da Medicação -  OOBRA -  COMPETENCIA
+observacoes_processo = os.getenv("OBSERVACOES_PROCESSO","") #ATÉ O MOMENTO NÃO TEM ATRIBUIÇÃO
+nomes_documentos = [
+    "01.Carta assinada pela empresa",
+    "02.Publicação da Comissão de Fiscalização",
+    "03.Planilha de Medição (PDF)",
+    "03.1.Planilha de Medição - Arquivo em Excel",
+    "04.Memória de Cálculo",
+    "05.Cronograma Físico - Financeiro",
+    "06.Diário de Obras",
+    "07.Relatório Fotográfico",
+    "08.Relação de Funcionários",
+    "09.Folha de ponto dos funcionários",
+    "10.GFD FGTS DIGITAL",
+    "10.1.DCTF WEB",
+    "11.Guias e Comprovantes de Pagamentos de FGTS",
+    "12.Folha de Pagamento",
+    "13.Comprovante de Pagamento de salários",
+    "14.Plano de segurança do Trabalho",
+    "15.Certidões atualizadas",
+    "15.1.Certidão de regularidade junto ao FGTS",
+    "15.2.Certidão negativa de débito trabalhista",
+    "15.3.Certidão negativa de débitos federais",
+    "15.4.Certidão de regularidade fiscal junto ao ICMS",
+    "15.5.Certidão de regularidade fiscal junto ao ISS",
+    "16.Contrato",
+    "17.ART emitida pelo CREA",
+    "18.Nota de empenho",
+    "19.Nota fiscal e ISS"
+]
+
+
+
+def hoje():
+    return datetime.now().strftime("%d/%m/%Y")  # Exemplo de formato: 04/11/2024
 
 def executarautomacao():
     session_id = None  # Para armazenar o ID da sessão e garantir que podemos fechar depois
