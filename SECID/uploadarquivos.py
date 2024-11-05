@@ -241,8 +241,8 @@ def executarautomacao():
         navegador.quit()
         logging.info("Navegador fechado, automação concluída.")
 
-except Exception as e:
-    logging.error(f"Ocorreu um erro: {traceback.format_exc()}")
-    navegador.quit()
+    except Exception as e:
+        logging.error(f"Ocorreu um erro: {traceback.format_exc()}")
+        navegador.quit()
     
 
