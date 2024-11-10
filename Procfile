@@ -1,6 +1,1 @@
-web: gunicorn --timeout 300 -w 3 --threads 4 main:app
-
-
-
-
-
+web: gunicorn --timeout 300 --limit-request-line 8190 --limit-request-field_size 0 app:app
