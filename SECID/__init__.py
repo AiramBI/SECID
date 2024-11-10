@@ -10,6 +10,8 @@ app = Flask(__name__)
 
 # Configurações
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
+app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # Limita o tamanho do upload para 20MB, por exemplo
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Cache control for file uploads
 
 # Configuração do banco de dados
 if os.getenv("DATABASE_URL"):
