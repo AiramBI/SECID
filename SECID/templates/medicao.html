@@ -116,29 +116,24 @@
             </div>
         </fieldset>
 
-        <!-- Campo para envio de documentos usando Dropzone -->
-        <div class="form-group">
-            <label class="form-control-label">Upload de Documentos</label>
-            <form action="{{ url_for('upload') }}" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
-                {{ form_medicao.csrf_token }}
-            </form>
-        </div>
-
-        <!-- Script para incluir Dropzone.js -->
-        <script src="{{ url_for('dropzone.static', filename='dropzone.js') }}"></script>
-        
-        <!-- Configurações adicionais do Dropzone -->
-        <script>
-            Dropzone.options.myAwesomeDropzone = {
-                paramName: "file", // O nome usado para enviar os arquivos
-                maxFilesize: 10, // Tamanho máximo do arquivo em MB
-                acceptedFiles: ".pdf", // Aceitar apenas arquivos PDF
-                dictDefaultMessage: "Arraste seus arquivos PDF aqui para enviar ou clique para selecionar",
-                timeout: 300000, // Tempo limite em milissegundos (5 minutos)
-                addRemoveLinks: true, // Permitir a remoção de arquivos da interface
-                dictRemoveFile: "Remover arquivo"
-            };
-        </script>
+        <!-- Campos individuais para upload de cada documento -->
+        <fieldset>
+            <legend>Upload de Documentos</legend>
+            
+            {% for i in range(1, 20) %}
+            <div class="form-group">
+                <label for="documento_{{ i }}">Documento {{ i }}</label>
+                {{ getattr(form_medicao, 'documento_' + str(i))(class="form-control-file") }}
+                {% if getattr(form_medicao, 'documento_' + str(i)).errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in getattr(form_medicao, 'documento_' + str(i)).errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </fieldset>
 
         <!-- Botão para submeter os dados do formulário -->
         {{ form_medicao.botao_submit_medicao(class="btn btn-primary mt-3") }}
