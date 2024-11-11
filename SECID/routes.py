@@ -9,6 +9,7 @@ import os
 import logging
 from SECID.uploadarquivos import executarautomacao
 import uuid
+from SECID.celery_worker import celery
 
 
 logging.basicConfig(level=logging.INFO)
@@ -56,7 +57,19 @@ def logout():
     flash('Logout Feito com Sucesso', 'alert-success')
     return redirect(url_for('home'))
 
+@app.route('/status/<task_id>')
+def status_task(task_id):
+    task = celery.AsyncResult(task_id)
+    if task.state == 'PENDING':
+        response = {'state': task.state, 'status': 'Aguardando...'}
+    elif task.state == 'SUCCESS':
+        response = {'state': task.state, 'status': 'Tarefa concluída com sucesso!'}
+    elif task.state == 'FAILURE':
+        response = {'state': task.state, 'status': str(task.info)}
+    else:
+        response = {'state': task.state, 'status': task.info}
 
+    return jsonify(response)
 
 @app.route('/paineis/gestor')
 @login_required
@@ -160,8 +173,38 @@ def medicao():
     
     if request.method == 'POST' and form_medicao.validate_on_submit():
         try:
-            # Salva os arquivos e cria uma nova instância de Medicao
-            medicao1 = Medicao(
+            # Captura os dados do formulário para enviar ao Celery
+            documentos = {
+                'documento_1': form_medicao.documento_1.data,
+                'documento_2': form_medicao.documento_2.data,
+                'documento_3': form_medicao.documento_3.data,
+                'documento_3_1': form_medicao.documento_3_1.data,
+                'documento_4': form_medicao.documento_4.data,
+                'documento_5': form_medicao.documento_5.data,
+                'documento_6': form_medicao.documento_6.data,
+                'documento_7': form_medicao.documento_7.data,
+                'documento_8': form_medicao.documento_8.data,
+                'documento_9': form_medicao.documento_9.data,
+                'documento_10': form_medicao.documento_10.data,
+                'documento_10_1': form_medicao.documento_10_1.data,
+                'documento_11': form_medicao.documento_11.data,
+                'documento_12': form_medicao.documento_12.data,
+                'documento_13': form_medicao.documento_13.data,
+                'documento_14': form_medicao.documento_14.data,
+                'documento_15': form_medicao.documento_15.data,
+                'documento_15_1': form_medicao.documento_15_1.data,
+                'documento_15_2': form_medicao.documento_15_2.data,
+                'documento_15_3': form_medicao.documento_15_3.data,
+                'documento_15_4': form_medicao.documento_15_4.data,
+                'documento_15_5': form_medicao.documento_15_5.data,
+                'documento_16': form_medicao.documento_16.data,
+                'documento_17': form_medicao.documento_17.data,
+                'documento_18': form_medicao.documento_18.data,
+                'documento_19': form_medicao.documento_19.data,
+            }
+
+            # Envia a tarefa para o Celery
+            task = processar_medicao.delay(
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
@@ -169,43 +212,14 @@ def medicao():
                 valor=form_medicao.valor.data,
                 data_inicial=form_medicao.data_inicial.data,
                 data_final=form_medicao.data_final.data,
-                documento_1=save_file(form_medicao.documento_1.data),
-                documento_2=save_file(form_medicao.documento_2.data),
-                documento_3=save_file(form_medicao.documento_3.data),
-                documento_3_1=save_file(form_medicao.documento_3_1.data),
-                documento_4=save_file(form_medicao.documento_4.data),
-                documento_5=save_file(form_medicao.documento_5.data),
-                documento_6=save_file(form_medicao.documento_6.data),
-                documento_7=save_file(form_medicao.documento_7.data),
-                documento_8=save_file(form_medicao.documento_8.data),
-                documento_9=save_file(form_medicao.documento_9.data),
-                documento_10=save_file(form_medicao.documento_10.data),
-                documento_10_1=save_file(form_medicao.documento_10_1.data),
-                documento_11=save_file(form_medicao.documento_11.data),
-                documento_12=save_file(form_medicao.documento_12.data),
-                documento_13=save_file(form_medicao.documento_13.data),
-                documento_14=save_file(form_medicao.documento_14.data),
-                documento_15=save_file(form_medicao.documento_15.data),
-                documento_15_1=save_file(form_medicao.documento_15_1.data),
-                documento_15_2=save_file(form_medicao.documento_15_2.data),
-                documento_15_3=save_file(form_medicao.documento_15_3.data),
-                documento_15_4=save_file(form_medicao.documento_15_4.data),
-                documento_15_5=save_file(form_medicao.documento_15_5.data),
-                documento_16=save_file(form_medicao.documento_16.data),
-                documento_17=save_file(form_medicao.documento_17.data),
-                documento_18=save_file(form_medicao.documento_18.data),
-                documento_19=save_file(form_medicao.documento_19.data),
+                documentos=documentos
             )
-            
-            # Adiciona a medição ao banco de dados
-            db.session.add(medicao1)
-            db.session.commit()
 
-            flash('Medição cadastrada com sucesso!', 'success')
-            return redirect(url_for('administrador'))
+            flash('Medição enviada para processamento em segundo plano!', 'success')
+            return redirect(url_for('status_task', task_id=task.id))
 
         except Exception as e:
-            flash(f'Ocorreu um erro ao processar o formulário: {str(e)}', 'danger')
+            flash(f'Ocorreu um erro ao enviar a tarefa para o Celery: {str(e)}', 'danger')
             db.session.rollback()
 
     else:
