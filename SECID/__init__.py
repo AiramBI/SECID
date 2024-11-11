@@ -7,6 +7,23 @@ import os
 from flask_dropzone import Dropzone
 from celery import Celery
 
+
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
+        broker=app.config.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+    )
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
+    return celery
+    
 app = Flask(__name__)
 
 # Configurações
@@ -61,18 +78,4 @@ else:
 # Importar as rotas
 from SECID import routes
 
-def make_celery(app):
-    celery = Celery(
-        app.import_name,
-        backend=app.config.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
-        broker=app.config.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-    )
-    celery.conf.update(app.config)
 
-    class ContextTask(celery.Task):
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return self.run(*args, **kwargs)
-
-    celery.Task = ContextTask
-    return celery
