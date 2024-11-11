@@ -9,7 +9,7 @@ import os
 import logging
 from SECID.uploadarquivos import executarautomacao
 import uuid
-from SECID.celery_worker import celery
+from SECID.celery_app import celery
 
 
 logging.basicConfig(level=logging.INFO)
