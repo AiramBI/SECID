@@ -31,22 +31,7 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SECID.db'
 
 
-def make_celery(app):
-    celery = Celery(
-        app.import_name,
-        backend=app.config.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
-        broker=app.config.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-    )
-    celery.conf.update(app.config)
-
-    class ContextTask(celery.Task):
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return self.run(*args, **kwargs)
-
-    celery.Task = ContextTask
-    return celery
-    
+   
 # Inicialização das extensões
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -75,3 +60,19 @@ else:
 
 # Importar as rotas
 from SECID import routes
+
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
+        broker=app.config.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+    )
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
+    return celery
