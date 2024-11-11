@@ -5,6 +5,7 @@ from flask_login import LoginManager
 import sqlalchemy
 import os
 from flask_dropzone import Dropzone
+from celery import Celery
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ app.config['DROPZONE_TIMEOUT'] = 300000  # 5 minutos em milissegundos
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # Limita o tamanho do upload para 20MB, por exemplo
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Cache control for file uploads
+app.config['CELERY_BROKER_URL'] = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+app.config['CELERY_RESULT_BACKEND'] = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 # Inicializar Dropzone
 dropzone = Dropzone(app)
@@ -27,6 +30,23 @@ if os.getenv("DATABASE_URL"):
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SECID.db'
 
+
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0'),
+        broker=app.config.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+    )
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
+    return celery
+    
 # Inicialização das extensões
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
