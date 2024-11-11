@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory, abort, jsonify
-from SECID import app, database,bcrypt , celery
+from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
 from SECID.models import Usuario, Obras, Medicao, Medicao2
 from flask_login import current_user, login_required, login_user, logout_user
@@ -12,35 +12,6 @@ import uuid
 
 
 logging.basicConfig(level=logging.INFO)
-
-@celery.task
-def processar_medicao(sei, projeto_nome, numero_medicao, descricao, valor, data_inicial, data_final, documentos):
-    try:
-        # Cria uma nova instância de Medicao
-        nova_medicao = Medicao(
-            sei=sei,
-            projeto_nome=projeto_nome,
-            numero_medicao=numero_medicao,
-            descricao=descricao,
-            valor=valor,
-            data_inicial=data_inicial,
-            data_final=data_final
-        )
-
-        # Salva cada documento individualmente
-        for doc_key, doc_data in documentos.items():
-            if doc_data:
-                setattr(nova_medicao, doc_key, save_file(doc_data))
-
-        db.session.add(nova_medicao)
-        db.session.commit()
-        return "Medição processada com sucesso!"
-    
-    except Exception as e:
-        db.session.rollback()
-        print(f"Erro ao processar medição: {e}")
-        return f"Erro ao processar medição: {e}"
-
 
 @app.route('/')
 def home():
@@ -230,18 +201,6 @@ def medicao():
                 'documento_18': form_medicao.documento_18.data,
                 'documento_19': form_medicao.documento_19.data,
             }
-
-            # Envia a tarefa para o Celery
-            task = processar_medicao.delay(
-                sei=form_medicao.sei.data,
-                projeto_nome=form_medicao.projeto_nome.data,
-                numero_medicao=form_medicao.numero_medicao.data,
-                descricao=form_medicao.descricao.data,
-                valor=form_medicao.valor.data,
-                data_inicial=form_medicao.data_inicial.data,
-                data_final=form_medicao.data_final.data,
-                documentos=documentos
-            )
 
             flash('Medição enviada para processamento em segundo plano!', 'success')
             return redirect(url_for('status_task', task_id=task.id))
