@@ -10,7 +10,7 @@ import logging
 from SECID.uploadarquivos import executarautomacao
 import uuid
 from flask_dropzone import Dropzone
-
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 
 logging.basicConfig(level=logging.INFO)
 
