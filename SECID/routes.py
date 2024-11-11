@@ -153,11 +153,7 @@ def medicao():
                 data_inicial=form_medicao.data_inicial.data,
                 data_final=form_medicao.data_final.data,
                 documento_1=save_file(form_medicao.documento_1.data),
-                documento_2=save_file(form_medicao.documento_2.data),
-                documento_3=save_file(form_medicao.documento_3.data),
-                documento_3_1=save_file(form_medicao.documento_3_1.data),
-                documento_4=save_file(form_medicao.documento_4.data),
-                documento_5=save_file(form_medicao.documento_5.data)
+                documento_2=save_file(form_medicao.documento_2.data)
             )
             
             # Adiciona a medição ao banco de dados
