@@ -158,7 +158,7 @@ def save_file(file):
 def medicao():
     form_medicao = FormMedicao()
     
-    if form_medicao.validate_on_submit():
+    if request.method == 'POST' and form_medicao.validate_on_submit():
         try:
             # Salva os arquivos e cria uma nova instância de Medicao
             medicao1 = Medicao(
@@ -206,14 +206,14 @@ def medicao():
 
         except Exception as e:
             flash(f'Ocorreu um erro ao processar o formulário: {str(e)}', 'danger')
-            app.logger.error(f"Erro ao processar o formulário: {str(e)}")
             db.session.rollback()
 
     else:
-        flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
+        if request.method == 'POST':
+            flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
 
     return render_template('medicao.html', form_medicao=form_medicao)
-
+    
 @app.route('/usuario/medicao2', methods =['GET','POST'])
 @login_required
 def medicao2():
