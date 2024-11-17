@@ -202,8 +202,8 @@ def medicao():
                 'documento_19': form_medicao.documento_19.data,
             }
 
-            flash('Medição enviada para processamento em segundo plano!', 'success')
-            return redirect(url_for('status_task', task_id=task.id))
+            flash('Medição cadastrada com sucesso!', 'alert-success')
+            return redirect(url_for('administrador'))
 
         except Exception as e:
             flash(f'Ocorreu um erro ao enviar a tarefa para o Celery: {str(e)}', 'danger')
