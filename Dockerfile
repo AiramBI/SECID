@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 8000
 
 # Comando para iniciar a aplicação com gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "main:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "--timeout", "300", "--graceful-timeout", "300", "--limit-request-line", "8190", "--limit-request-field_size", "0", "--worker-connections", "100", "--log-level", "debug", "--keep-alive", "10", "main:app"]
+
