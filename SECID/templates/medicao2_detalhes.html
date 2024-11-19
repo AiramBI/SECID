@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center">Detalhes da Medição ID: {{ medicao.id }}</h1>
+    <hr>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Projeto Nome:</strong> {{ medicao.projeto_nome }}</li>
+        <li class="list-group-item"><strong>Número da Medição:</strong> {{ medicao.numero_medicao }}</li>
+        <li class="list-group-item"><strong>Descrição:</strong> {{ medicao.descricao }}</li>
+        <li class="list-group-item"><strong>Valor:</strong> {{ medicao.valor }}</li>
+        <li class="list-group-item"><strong>Data Inicial:</strong> {{ medicao.data_inicial }}</li>
+        <li class="list-group-item"><strong>Data Final:</strong> {{ medicao.data_final }}</li>
+    </ul>
+    <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+{% endblock %}
