@@ -5,12 +5,41 @@
     <h1 class="text-center">Detalhes da Medição ID: {{ medicao.id }}</h1>
     <hr>
     <ul class="list-group">
+        <li class="list-group-item"><strong>SEI:</strong> {{ medicao.sei }}</li>
         <li class="list-group-item"><strong>Projeto Nome:</strong> {{ medicao.projeto_nome }}</li>
         <li class="list-group-item"><strong>Número da Medição:</strong> {{ medicao.numero_medicao }}</li>
         <li class="list-group-item"><strong>Descrição:</strong> {{ medicao.descricao }}</li>
-        <li class="list-group-item"><strong>Valor:</strong> {{ medicao.valor }}</li>
+        <li class="list-group-item"><strong>Valor:</strong> R$ {{ medicao.valor }}</li>
         <li class="list-group-item"><strong>Data Inicial:</strong> {{ medicao.data_inicial }}</li>
         <li class="list-group-item"><strong>Data Final:</strong> {{ medicao.data_final }}</li>
+
+        <!-- Links para abrir todos os documentos -->
+        <li class="list-group-item"><strong>Documento 1:</strong> <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 2:</strong> <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 3:</strong> <a href="{{ medicao.documento_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 3.1:</strong> <a href="{{ medicao.documento_3_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 4:</strong> <a href="{{ medicao.documento_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 5:</strong> <a href="{{ medicao.documento_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 6:</strong> <a href="{{ medicao.documento_6 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 7:</strong> <a href="{{ medicao.documento_7 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 8:</strong> <a href="{{ medicao.documento_8 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 9:</strong> <a href="{{ medicao.documento_9 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 10:</strong> <a href="{{ medicao.documento_10 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 10.1:</strong> <a href="{{ medicao.documento_10_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 11:</strong> <a href="{{ medicao.documento_11 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 12:</strong> <a href="{{ medicao.documento_12 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 13:</strong> <a href="{{ medicao.documento_13 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 14:</strong> <a href="{{ medicao.documento_14 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15:</strong> <a href="{{ medicao.documento_15 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15.1:</strong> <a href="{{ medicao.documento_15_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15.2:</strong> <a href="{{ medicao.documento_15_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15.3:</strong> <a href="{{ medicao.documento_15_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15.4:</strong> <a href="{{ medicao.documento_15_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 15.5:</strong> <a href="{{ medicao.documento_15_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 16:</strong> <a href="{{ medicao.documento_16 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 17:</strong> <a href="{{ medicao.documento_17 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 18:</strong> <a href="{{ medicao.documento_18 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+        <li class="list-group-item"><strong>Documento 19:</strong> <a href="{{ medicao.documento_19 }}" target="_blank" class="btn btn-link">Abrir</a></li>
     </ul>
     <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
 </div>
