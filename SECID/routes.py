@@ -122,7 +122,7 @@ def administrador():
             objeto=form_obras.aniversario.data,
             documento_gestor_contrato=form_obras.aniversario.data,
             publicacao_comissao_fiscalizacao=form_obras.aniversario.data,
-            lei_contrato=form_obras.aniversario.data,
+            lei_contrato=form_obras.aniversario.data
         )
 
         # Adiciona a obra ao banco de dados
