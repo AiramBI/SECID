@@ -27,7 +27,6 @@ class FormLogin(FlaskForm):
 
 
 class FormObras(FlaskForm):
-    # id = StringField('ID', validators=[DataRequired()])  # ID do Obra
     sei = StringField('SEI', validators=[DataRequired(),Length(22,22)])  # Número SEI
     obra = StringField('Obra', validators=[DataRequired()])  # Nome da Obra
     contrato = StringField('Contrato', validators=[DataRequired()])  # Número do Contrato
@@ -41,6 +40,11 @@ class FormObras(FlaskForm):
     prazo_atual = StringField('Prazo Atual', validators=[DataRequired()])  # Prazo Atual da Obra
     valor_atual = FloatField('Valor Atual', validators=[DataRequired()])  # Valor Atual da Obra
     aniversario = StringField('Aniversário', validators=[DataRequired()])  # Data de Aniversário do Projeto
+    fonte = StringField('Fonte', validators=[DataRequired()])  #Fonte Obra
+    objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
+    documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired()])  #Dcoumento gestor Contrato
+    publicao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
+    lei_contrato = StringField('Lei Contrato', validators=[DataRequired()])  #Lei Contrato
 
     # # Campo de seleção de usuário
     # usuario = SelectField('Usuário', coerce=int, validators=[DataRequired()])  # Usuário relacionado à obra
@@ -48,7 +52,7 @@ class FormObras(FlaskForm):
     botao_submit_obras = SubmitField('Cadastrar Obra')  # Botão de envio do formulário
 
 class FormMedicao(FlaskForm):
-    sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
+    sei = StringField('SEI', validators=[DataRequired(),Length(22,22)])  # Número SEI
     projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
