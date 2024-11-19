@@ -230,14 +230,20 @@ def medicao():
 @login_required
 def medicao2():
     if request.method == 'POST':
-        # Filtra medições com base na seleção do usuário
-        filtro = request.form.get('filtro')  # Captura o valor selecionado no formulário
-        resultados = Medicao.query.filter(Medicao.sei == filtro).all()  # Altere para outro filtro, se necessário
-        return render_template('medicao2_resultados.html', resultados=resultados, filtro=filtro)
+        # Captura o projeto selecionado pelo usuário
+        projeto_nome = request.form.get('projeto_nome')
+        # Busca os números de medição associados ao projeto
+        numeros_medicao = Medicao.query.filter(Medicao.projeto_nome == projeto_nome).all()
+        return render_template(
+            'medicao2_resultados.html', 
+            projeto_nome=projeto_nome, 
+            numeros_medicao=numeros_medicao
+        )
 
-    # Exibe opções únicas para seleção inicial (por exemplo, valores únicos de `sei`)
-    opcoes = Medicao.query.with_entities(Medicao.sei).distinct().all()
-    return render_template('medicao2.html', opcoes=opcoes)
+    # Exibe opções únicas de `projeto_nome` para seleção inicial
+    projetos = Medicao.query.with_entities(Medicao.projeto_nome).distinct().all()
+    return render_template('medicao2.html', projetos=projetos)
+
 
 @app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET'])
 @login_required
