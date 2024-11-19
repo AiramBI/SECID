@@ -250,6 +250,36 @@ def medicao2():
 def medicao2_detalhes(id):
     # Busca detalhes da medição específica
     medicao = Medicao.query.get_or_404(id)
+
+    # Ajusta o caminho dos documentos para servir via a pasta `static`
+    base_url = '/static'  # Caminho usado para servir arquivos na web
+    medicao.documento_1 = f"{base_url}/{medicao.documento_1}"  # 1 - Carta assinada pela empresa
+    medicao.documento_2 = f"{base_url}/{medicao.documento_2}"  # 2 - Publicação da Comissão de Fiscalização
+    medicao.documento_3 = f"{base_url}/{medicao.documento_3}"  # 3 - Planilha de Medição (PDF)
+    medicao.documento_3_1 = f"{base_url}/{medicao.documento_3_1}"  # 3.1 - Planilha de Medição - Arquivo em Excel
+    medicao.documento_4 = f"{base_url}/{medicao.documento_4}"  # 4 - Memória de Cálculo
+    medicao.documento_5 = f"{base_url}/{medicao.documento_5}"  # 5 - Cronograma Físico - Financeiro
+    medicao.documento_6 = f"{base_url}/{medicao.documento_6}"  # 6 - Diário de Obras
+    medicao.documento_7 = f"{base_url}/{medicao.documento_7}"  # 7 - Relatório Fotográfico
+    medicao.documento_8 = f"{base_url}/{medicao.documento_8}"  # 8 - Relação de Funcionários
+    medicao.documento_9 = f"{base_url}/{medicao.documento_9}"  # 9 - Folha de ponto dos funcionários
+    medicao.documento_10 = f"{base_url}/{medicao.documento_10}"  # 10 - GFD FGTS DIGITAL
+    medicao.documento_10_1 = f"{base_url}/{medicao.documento_10_1}"  # 10.1 - DCTF WEB
+    medicao.documento_11 = f"{base_url}/{medicao.documento_11}"  # 11 - Guias e Comprovantes de Pagamentos de FGTS
+    medicao.documento_12 = f"{base_url}/{medicao.documento_12}"  # 12 - Folha de Pagamento
+    medicao.documento_13 = f"{base_url}/{medicao.documento_13}"  # 13 - Comprovante de Pagamento de salários
+    medicao.documento_14 = f"{base_url}/{medicao.documento_14}"  # 14 - Plano de segurança do Trabalho
+    medicao.documento_15 = f"{base_url}/{medicao.documento_15}"  # 15 - Certidões atualizadas
+    medicao.documento_15_1 = f"{base_url}/{medicao.documento_15_1}"  # 15.1 - Certidão de regularidade junto ao FGTS
+    medicao.documento_15_2 = f"{base_url}/{medicao.documento_15_2}"  # 15.2 - Certidão negativa de débito trabalhista
+    medicao.documento_15_3 = f"{base_url}/{medicao.documento_15_3}"  # 15.3 - Certidão negativa de débitos federais
+    medicao.documento_15_4 = f"{base_url}/{medicao.documento_15_4}"  # 15.4 - Certidão de regularidade fiscal junto ao ICMS
+    medicao.documento_15_5 = f"{base_url}/{medicao.documento_15_5}"  # 15.5 - Certidão de regularidade fiscal junto ao ISS
+    medicao.documento_16 = f"{base_url}/{medicao.documento_16}"  # 16 - Contrato
+    medicao.documento_17 = f"{base_url}/{medicao.documento_17}"  # 17 - ART emitida pelo CREA
+    medicao.documento_18 = f"{base_url}/{medicao.documento_18}"  # 18 - Nota de empenho
+    medicao.documento_19 = f"{base_url}/{medicao.documento_19}"  # 19 - Nota fiscal e ISS
+
     return render_template('medicao2_detalhes.html', medicao=medicao)
 
 @app.route('/download/<filename>')
