@@ -47,7 +47,7 @@ class Obras(database.Model):
 class Medicao(database.Model):
 
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
-    sei = database.Column(database.Integer, nullable=False)  # Número SEI
+    sei = database.Column(database.String, nullable=False)  # Número SEI
     projeto_nome = database.Column(database.String, nullable=False)  # Nome do Projeto
     numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
     descricao = database.Column(database.String, nullable=False)  # Descrição da Medição
