@@ -106,7 +106,6 @@ def administrador():
         # Cria uma nova instância da obra com os dados do formulário
         obra = Obras(
             sei=form_obras.sei.data,
-            # id = form_obras.id.data,
             obra=form_obras.obra.data,
             contrato=form_obras.contrato.data,
             empresa=form_obras.empresa.data,
@@ -118,7 +117,12 @@ def administrador():
             aditivos_valor=form_obras.aditivos_valor.data,
             prazo_atual=form_obras.prazo_atual.data,
             valor_atual=form_obras.valor_atual.data,
-            aniversario=form_obras.aniversario.data
+            aniversario=form_obras.aniversario.data,
+            fonte=form_obras.aniversario.data,
+            objeto=form_obras.aniversario.data,
+            documento_gestor_contrato=form_obras.aniversario.data,
+            publicacao_comissao_fiscalizacao=form_obras.aniversario.data,
+            lei_contrato=form_obras.aniversario.data,
         )
 
         # Adiciona a obra ao banco de dados
