@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center">Medições do Projeto: {{ projeto_nome }}</h1>
+    <hr>
+    <ul class="list-group">
+        {% for medicao in numeros_medicao %}
+            <li class="list-group-item">
+                <a href="/usuario/medicao2/detalhes/{{ medicao.id }}">
+                    Número da Medição: {{ medicao.numero_medicao }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+{% endblock %}
