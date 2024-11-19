@@ -27,11 +27,8 @@ class Obras(database.Model):
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
     obra = database.Column(database.String, nullable=False)
     sei = database.Column(database.String, nullable=False)
-    # modelo = database.Column(database.String, nullable=False)
-    # documento = database.Column(database.String, nullable=False)
     contrato =database.Column(database.String, nullable=False)
     empresa = database.Column(database.String, nullable=False)
-    # termo = database.Column(database.String, nullable=False)
     cnpj = database.Column(database.String, nullable=False)
     valor_inicial = database.Column(database.Float, nullable=False)
     prazo_inicial = database.Column(database.Integer, nullable=False)
@@ -42,13 +39,21 @@ class Obras(database.Model):
     valor_atual = database.Column(database.Float, nullable=False)
     aniversario = database.Column(database.Date, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
+    fonte = database.Column(database.String, nullable=False)
+    objeto = database.Column(database.String, nullable=False)
+    documento_gestor_contrato = database.Column(database.String, nullable=False)
+    publicao_comissao_fiscalizacao = database.Column(database.String, nullable=False)
+    lei_contrato = database.Column(database.String, nullable=False)
 
+
+     # Relacionamento com Medicao
+    medicoes = database.relationship('Medicao', backref='obra_relacionada', lazy=True)
 
 class Medicao(database.Model):
 
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
     sei = database.Column(database.String, nullable=False)  # Número SEI
-    projeto_nome = database.Column(database.String, nullable=False)  # Nome do Projeto
+     projeto_nome = database.Column(database.String, database.ForeignKey('obras.obra'), nullable=False)  # Nome do Projeto
     numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
     descricao = database.Column(database.String, nullable=False)  # Descrição da Medição
     valor = database.Column(database.Float, nullable=False)  # Valor da Medição
