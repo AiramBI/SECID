@@ -226,40 +226,25 @@ def medicao():
 
     return render_template('medicao.html', form_medicao=form_medicao)
     
-@app.route('/usuario/medicao2', methods =['GET','POST'])
+@app.route('/usuario/medicao2', methods=['GET', 'POST'])
 @login_required
 def medicao2():
-    form_medicao2 = FormMedicao2()
+    if request.method == 'POST':
+        # Filtra medições com base na seleção do usuário
+        filtro = request.form.get('filtro')  # Captura o valor selecionado no formulário
+        resultados = Medicao.query.filter(Medicao.sei == filtro).all()  # Altere para outro filtro, se necessário
+        return render_template('medicao2_resultados.html', resultados=resultados, filtro=filtro)
 
-    if form_medicao2.validate_on_submit():
-        try:
-            # Salva os arquivos e cria uma nova instância de Medicao
-            medicao2 = Medicao2(
-                sei=form_medicao2.sei.data,
-                obra=form_medicao2.projeto_nome.data,
-                numero_medicao=form_medicao2.numero_medicao.data,
-                descricao=form_medicao2.descricao.data,
-                valor=form_medicao2.valor.data,
-                data_inicial=form_medicao2.data_inicial.data,
-                data_final=form_medicao2.data_final.data,
-                documento_1=save_file(form_medicao2.documento_1.data),
-                documento_2=save_file(form_medicao2.documento_2.data)
-                )
+    # Exibe opções únicas para seleção inicial (por exemplo, valores únicos de `sei`)
+    opcoes = Medicao.query.with_entities(Medicao.sei).distinct().all()
+    return render_template('medicao2.html', opcoes=opcoes)
 
-            
-            # Adiciona a medição ao banco de dados
-            database.session.add(medicao2)
-            database.session.commit()
-
-            flash('Medição cadastrada com sucesso!', 'alert-success')
-            return redirect(url_for('administrador'))
-
-        except Exception as e:
-            flash(f'Ocorreu um erro ao processar o formulário: {str(e)}', 'danger')
-            app.logger.error(f"Erro ao processar o formulário: {str(e)}")
-            database.session.rollback()
-
-    return render_template('medicao2.html', form_medicao2=form_medicao2)
+@app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET'])
+@login_required
+def medicao2_detalhes(id):
+    # Busca detalhes da medição específica
+    medicao = Medicao.query.get_or_404(id)
+    return render_template('medicao2_detalhes.html', medicao=medicao)
 
 @app.route('/download/<filename>')
 def download_file(filename):
