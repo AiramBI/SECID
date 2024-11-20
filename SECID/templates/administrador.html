@@ -192,6 +192,21 @@
                         {% endif %}
                     </div>
 
+                     <!-- Campo Rerratificacao -->
+                    <div class="form-group">
+                        {{ form_obras.rerratificacao.label(class="form-control-label") }}
+                        {% if form_obras.rerratificacao.errors %}
+                            {{ form_obras.rerratificacao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.rerratificacao.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.rerratificacao(class="form-control") }}
+                        {% endif %}
+                    </div>
+
                     <!-- Campo Aniversário -->
                     <div class="form-group">
                         {{ form_obras.aniversario.label(class="form-control-label") }}
