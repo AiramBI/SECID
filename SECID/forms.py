@@ -45,7 +45,7 @@ class FormObras(FlaskForm):
     documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired(),Length(min=8, max=9, message="Documento Gestor Contrato deve ter entre 8 e 9 caracteres.")])  #Dcoumento gestor Contrato
     publicacao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
     lei_contrato = StringField('Lei Contrato', validators=[DataRequired()])  #Lei Contrato
-    coordenacao = StringField('Coordenacao', validators=[DataRequired()])  #coordenacao
+    coordenacao = SelectField('Coordenação',choices=[('SECID/COORBAC', 'SECID/COORBAC'),('SECID/COOREM', 'SECID/COOREM'),('SECID/COORNOR', 'SECID/COORNOR'),('SECID/COORSUL', 'SECID/COORSUL')],validators=[DataRequired()],render_kw={"class": "form-control"})
     cod_contrato_sei = StringField('Código Contrato SEI', validators=[Optional(), Length(min=8, max=9, message="Código Contrato SEI deve ter entre 8 e 9 caracteres.")]) #Código Contrato SEI
     cod_seguro_garantia = StringField('Código Seguro Garantia', validators=[Optional(), Length(min=8, max=9, message="Código Seguro Garantia deve ter entre 8 e 9 caracteres.")])
     cod_carta_solicitacao_prorrogacao_contratual = StringField('Código Carta Solicitacação Prorrogação Contratual', validators=[Optional(), Length(min=8, max=9, message="Código Carta Solicitacação Prorrogação Contratual deve ter entre 8 e 9 caracteres.")])
