@@ -98,53 +98,53 @@ def usuario():
 @app.route('/administrador', methods =['GET','POST'])
 # @login_required
 def administrador():
-    # form_obras = FormObras()
+    form_obras = FormObras()
 
-    # # Verifica se o formulário foi submetido corretamente
-    # if form_obras.validate_on_submit():
-    #     # print("Formulário validado com sucesso!")
-    #     # Cria uma nova instância da obra com os dados do formulário
-    #     obra = Obras(
-    #         sei=form_obras.sei.data,
-    #         obra=form_obras.obra.data,
-    #         contrato=form_obras.contrato.data,
-    #         empresa=form_obras.empresa.data,
-    #         cnpj=form_obras.cnpj.data,
-    #         valor_inicial=form_obras.valor_inicial.data,
-    #         prazo_inicial=form_obras.prazo_inicial.data,
-    #         inicio_obra=form_obras.inicio_obra.data,
-    #         aditivos_prazo=form_obras.aditivos_prazo.data,
-    #         aditivos_valor=form_obras.aditivos_valor.data,
-    #         prazo_atual=form_obras.prazo_atual.data,
-    #         valor_atual=form_obras.valor_atual.data,
-    #         aniversario=form_obras.aniversario.data,
-    #         fonte=form_obras.fonte.data,
-    #         objeto=form_obras.objeto.data,
-    #         documento_gestor_contrato=form_obras.documento_gestor_contrato.data,
-    #         publicacao_comissao_fiscalizacao=form_obras.publicacao_comissao_fiscalizacao.data,
-    #         lei_contrato=form_obras.lei_contrato.data,
-    #         coordenacao=form_obras.coordenacao.data,
-    #         cod_contrato_sei=form_obras.cod_contrato_sei.data,
-    #         cod_seguro_garantia=form_obras.cod_seguro_garantia.data,
-    #         cod_carta_solicitacao_prorrogacao_contratual=form_obras.cod_carta_solicitacao_prorrogacao_contratual.data,
-    #         cod_processo_rerratificacao=form_obras.cod_processo_rerratificacao.data,
-    #         cod_termo_aditivo=form_obras.cod_termo_aditivo.data,
-    #         fiscal1=form_obras.fiscal1.data,
-    #         id_fiscal1=form_obras.id_fiscal1.data,
-    #         fiscal2=form_obras.fiscal2.data,
-    #         id_fiscal2=form_obras.id_fiscal2.data,
-    #         gestor=form_obras.gestor.data,
-    #         gestor_id=form_obras.gestor_id.data
-    #     )
+    # Verifica se o formulário foi submetido corretamente
+    if form_obras.validate_on_submit():
+        # print("Formulário validado com sucesso!")
+        # Cria uma nova instância da obra com os dados do formulário
+        obra = Obras(
+            sei=form_obras.sei.data,
+            obra=form_obras.obra.data,
+            contrato=form_obras.contrato.data,
+            empresa=form_obras.empresa.data,
+            cnpj=form_obras.cnpj.data,
+            valor_inicial=form_obras.valor_inicial.data,
+            prazo_inicial=form_obras.prazo_inicial.data,
+            inicio_obra=form_obras.inicio_obra.data,
+            aditivos_prazo=form_obras.aditivos_prazo.data,
+            aditivos_valor=form_obras.aditivos_valor.data,
+            prazo_atual=form_obras.prazo_atual.data,
+            valor_atual=form_obras.valor_atual.data,
+            aniversario=form_obras.aniversario.data,
+            fonte=form_obras.fonte.data,
+            objeto=form_obras.objeto.data,
+            documento_gestor_contrato=form_obras.documento_gestor_contrato.data,
+            publicacao_comissao_fiscalizacao=form_obras.publicacao_comissao_fiscalizacao.data,
+            lei_contrato=form_obras.lei_contrato.data,
+            coordenacao=form_obras.coordenacao.data,
+            cod_contrato_sei=form_obras.cod_contrato_sei.data,
+            cod_seguro_garantia=form_obras.cod_seguro_garantia.data,
+            cod_carta_solicitacao_prorrogacao_contratual=form_obras.cod_carta_solicitacao_prorrogacao_contratual.data,
+            cod_processo_rerratificacao=form_obras.cod_processo_rerratificacao.data,
+            cod_termo_aditivo=form_obras.cod_termo_aditivo.data,
+            fiscal1=form_obras.fiscal1.data,
+            id_fiscal1=form_obras.id_fiscal1.data,
+            fiscal2=form_obras.fiscal2.data,
+            id_fiscal2=form_obras.id_fiscal2.data,
+            gestor=form_obras.gestor.data,
+            gestor_id=form_obras.gestor_id.data
+        )
 
-    #     # Adiciona a obra ao banco de dados
-    #     database.session.add(obra)
-    #     database.session.commit()
+        # Adiciona a obra ao banco de dados
+        database.session.add(obra)
+        database.session.commit()
 
-    #     flash('Obra Cadastrada{}'.format(form_obras.obra.data), 'alert-success')
+        flash('Obra Cadastrada{}'.format(form_obras.obra.data), 'alert-success')
 
-    #     return redirect(url_for('administrador'))
-    return render_template('administrador.html')
+        return redirect(url_for('administrador'))
+    return render_template('administrador.html', form_obras=form_obras)
 
 # Configuração da pasta para upload
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
