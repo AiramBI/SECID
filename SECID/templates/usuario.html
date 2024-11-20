@@ -77,38 +77,28 @@
                   <thead>
                       <tr>
                           <th>ID</th>
-                          <th>SEI</th>
                           <th>Obra</th>
                           <th>Contrato</th>
                           <th>Empresa</th>
-                          <th>CNPJ</th>
-                          <th>Valor Inicial</th>
-                          <th>Prazo Inicial</th>
-                          <th>Início da Obra</th>
-                          <th>Aditivos Prazo</th>
-                          <th>Aditivos Valor</th>
                           <th>Prazo Atual</th>
                           <th>Valor Atual</th>
                           <th>Aniversário</th>
+                          <th>Fonte</th>
+                          <th>Coordenação</th>      
                       </tr>
                   </thead>
                   <tbody>
                       {% for obra in obras %}
                       <tr>
                           <td>{{ obra.id }}</td>
-                          <td>{{ obra.sei }}</td>
                           <td>{{ obra.obra }}</td>
                           <td>{{ obra.contrato }}</td>
                           <td>{{ obra.empresa }}</td>
-                          <td>{{ obra.cnpj }}</td>
-                          <td>{{ obra.valor_inicial }}</td>
-                          <td>{{ obra.prazo_inicial }}</td>
-                          <td>{{ obra.inicio_obra }}</td>
-                          <td>{{ obra.aditivos_prazo }}</td>
-                          <td>{{ obra.aditivos_valor }}</td>
                           <td>{{ obra.prazo_atual }}</td>
                           <td>{{ obra.valor_atual }}</td>
                           <td>{{ obra.aniversario }}</td>
+                          <td>{{ obra.fonte }}</td>
+                          <td>{{ obra.coordenacao }}</td>      
                       </tr>
                       {% endfor %}
                   </tbody>
