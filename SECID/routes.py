@@ -284,7 +284,10 @@ def medicao2_detalhes(id):
     medicao.documento_18 = f"{base_url}/{medicao.documento_18}"  # 18 - Nota de empenho
     medicao.documento_19 = f"{base_url}/{medicao.documento_19}"  # 19 - Nota fiscal e ISS
 
-    return render_template('medicao2_detalhes.html', medicao=medicao)
+    # Busca a obra associada com base no projeto_nome da medição
+    obra = Obras.query.filter_by(obra=medicao.projeto_nome).first()
+
+    return render_template('medicao2_detalhes.html', medicao=medicao, obra=obra)
 
 @app.route('/download/<filename>')
 def download_file(filename):
