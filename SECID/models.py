@@ -67,6 +67,7 @@ class Medicao(database.Model):
     sei = database.Column(database.String, nullable=False)  # Número SEI
     projeto_nome = database.Column(database.String, database.ForeignKey('obras.obra'), nullable=False)  # Nome do Projeto
     numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
+    letra_medicao = database.Column(database.String, nullable=False)  # Letra da Medição
     descricao = database.Column(database.String, nullable=False)  # Descrição da Medição
     valor = database.Column(database.Float, nullable=False)  # Valor da Medição
     reajustamento = database.Column(database.Float, nullable=False)  # Reajustamento
