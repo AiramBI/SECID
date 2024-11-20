@@ -29,3 +29,4 @@ selenium==4.25.0
 Flask-Migrate>=3.1.0
 flask_dropzone
 celery
+wtforms-sqlalchemy==0.3
