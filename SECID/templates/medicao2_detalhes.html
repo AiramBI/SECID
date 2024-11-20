@@ -13,6 +13,26 @@
         <li class="list-group-item"><strong>Data Inicial:</strong> {{ medicao.data_inicial }}</li>
         <li class="list-group-item"><strong>Data Final:</strong> {{ medicao.data_final }}</li>
 
+        <!-- Informações da Obra -->
+        {% if obra %}
+        <h2 class="text-center mt-4">Informações da Obra</h2>
+        <li class="list-group-item"><strong>Objeto:</strong> {{ obra.objeto }}</li>
+        <li class="list-group-item"><strong>SEI:</strong> {{ obra.sei }}</li>
+        <li class="list-group-item"><strong>Contrato:</strong> {{ obra.contrato }}</li>
+        <li class="list-group-item"><strong>Empresa:</strong> {{ obra.empresa }}</li>
+        <li class="list-group-item"><strong>Valor Inicial:</strong> R$ {{ obra.valor_inicial }}</li>
+        <li class="list-group-item"><strong>Prazo Inicial:</strong> {{ obra.prazo_inicial }} dias</li>
+        <li class="list-group-item"><strong>Aditivos de Prazo:</strong> {{ obra.aditivos_prazo }}</li>
+        <li class="list-group-item"><strong>Aditivos de Valor:</strong> R$ {{ obra.aditivos_valor }}</li>
+        <li class="list-group-item"><strong>Prazo Atual:</strong> {{ obra.prazo_atual }} dias</li>
+        <li class="list-group-item"><strong>Valor Atual:</strong> R$ {{ obra.valor_atual }}</li>        
+        <li class="list-group-item"><strong>Documento do Gestor de Contrato:</strong> {{ obra.documento_gestor_contrato }}</li>
+        <li class="list-group-item"><strong>Publicação da Comissão de Fiscalização:</strong> {{ obra.publicacao_comissao_fiscalizacao }}</li>
+        <li class="list-group-item"><strong>Lei do Contrato:</strong> {{ obra.lei_contrato }}</li>
+        {% else %}
+        <h2 class="text-center mt-4">Informações da Obra Não Disponíveis</h2>
+        {% endif %}
+
         <!-- Links para abrir todos os documentos -->
         <li class="list-group-item"><strong>1 - Carta assinada pela empresa:</strong> <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
         <li class="list-group-item"><strong>2 - Publicação da Comissão de Fiscalização:</strong> <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
