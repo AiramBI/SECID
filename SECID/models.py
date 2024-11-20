@@ -42,7 +42,7 @@ class Obras(database.Model):
     fonte = database.Column(database.String, nullable=False)
     objeto = database.Column(database.String, nullable=False)
     documento_gestor_contrato = database.Column(database.String, nullable=False)
-    publicao_comissao_fiscalizacao = database.Column(database.String, nullable=False)
+    publicacao_comissao_fiscalizacao = database.Column(database.String, nullable=False)
     lei_contrato = database.Column(database.String, nullable=False)
 
 
