@@ -20,9 +20,9 @@
                       <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
                       <button type="button" class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao')}}">Cadastrar Medição</a></button>
                       <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2')}}">Verificar Medição</a></button>
-                      {% if current_user.cargo == 'administrador' %}
+                      {% if current_user.cargo == 'Administrador' %}
                         <button class="btn btn-primary">
-                            <a class="dropdown-item text-white" href="{{ url_for('Administrador') }}">Cadastrar Obra</a>
+                            <a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
                         </button>
                       {% endif %}
                       </div>
