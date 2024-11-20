@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed
 from sqlalchemy.testing.pickleable import User
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, SelectField, IntegerField, FileField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp, Optional
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from SECID.models import Usuario, Obras
 
 
