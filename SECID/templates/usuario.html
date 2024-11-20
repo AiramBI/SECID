@@ -77,39 +77,63 @@
 
                   <h1>Lista de Obras</h1>
               <div class="table-responsive">
-              <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Obra</th>
-                          <th>Contrato</th>
-                          <th>Empresa</th>
-                          <th>Inicio</th>      
-                          <th>Prazo</th>
-                          <th>Valor</th>
-                          <th>Aniversário</th>
-                          <th>Fonte</th>
-                          <th>Coordenação</th>      
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for obra in obras %}
-                      <tr>
-                          <td>{{ obra.id }}</td>
-                          <td>{{ obra.obra }}</td>
-                          <td>{{ obra.contrato }}</td>
-                          <td>{{ obra.empresa }}</td>
-                          <td>{{ obra.inicio_obra }}</td>
-                          <td>{{ obra.prazo_atual }}</td>
-                          <td>{{ obra.valor_atual }}</td>
-                          <td>{{ obra.aniversario }}</td>
-                          <td>{{ obra.fonte }}</td>
-                          <td>{{ obra.coordenacao }}</td>      
-                      </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-          </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Obra</th>
+                <th>Contrato</th>
+                <th>Empresa</th>
+                <th>Inicio</th>      
+                <th>Prazo</th>
+                <th>Valor</th>
+                <th>Aniversário</th>
+                <th>Fonte</th>
+                <th>Coordenação</th>      
+            </tr>
+        </thead>
+        <tbody>
+            {% if current_user.cargo == 'administrador' %}
+                <!-- Exibe todas as obras para o administrador -->
+                {% for obra in obras %}
+                <tr>
+                    <td>{{ obra.id }}</td>
+                    <td>{{ obra.obra }}</td>
+                    <td>{{ obra.contrato }}</td>
+                    <td>{{ obra.empresa }}</td>
+                    <td>{{ obra.inicio_obra }}</td>
+                    <td>{{ obra.prazo_atual }}</td>
+                    <td>{{ obra.valor_atual }}</td>
+                    <td>{{ obra.aniversario }}</td>
+                    <td>{{ obra.fonte }}</td>
+                    <td>{{ obra.coordenacao }}</td>      
+                </tr>
+                {% endfor %}
+            {% else %}
+                <!-- Exibe apenas as obras relacionadas ao usuário -->
+                {% for obra in obras %}
+                    {% if obra.fiscal1 == current_user.username or 
+                          obra.fiscal2 == current_user.username or 
+                          obra.gestor == current_user.username %}
+                    <tr>
+                        <td>{{ obra.id }}</td>
+                        <td>{{ obra.obra }}</td>
+                        <td>{{ obra.contrato }}</td>
+                        <td>{{ obra.empresa }}</td>
+                        <td>{{ obra.inicio_obra }}</td>
+                        <td>{{ obra.prazo_atual }}</td>
+                        <td>{{ obra.valor_atual }}</td>
+                        <td>{{ obra.aniversario }}</td>
+                        <td>{{ obra.fonte }}</td>
+                        <td>{{ obra.coordenacao }}</td>      
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+             {% endif %}
+        </tbody>
+    </table>
+</div>
+
 </div>
             </div>
           </div>
