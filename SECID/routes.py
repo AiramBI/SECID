@@ -117,6 +117,7 @@ def administrador():
             aditivos_valor=form_obras.aditivos_valor.data,
             prazo_atual=form_obras.prazo_atual.data,
             valor_atual=form_obras.valor_atual.data,
+            rerratificacao=form_obras.rerratificacao.data,
             aniversario=form_obras.aniversario.data,
             fonte=form_obras.fonte.data,
             objeto=form_obras.objeto.data,
