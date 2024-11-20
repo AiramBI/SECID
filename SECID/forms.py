@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from sqlalchemy.testing.pickleable import User
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, SelectField, IntegerField, FileField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp, Optional
 from SECID.models import Usuario
 
 
@@ -27,11 +27,11 @@ class FormLogin(FlaskForm):
 
 
 class FormObras(FlaskForm):
-    sei = StringField('SEI', validators=[DataRequired(),Length(22,22)])  # Número SEI
+    sei = StringField('SEI', validators=[DataRequired(),Regexp(r'^SEI-\d{6}/\d{6}/\d{4}$', message="SEI deve seguir o formato SEI-XXXXXX/XXXXXX/XXXX (22 caracteres).")])  # Número SEI
     obra = StringField('Obra', validators=[DataRequired()])  # Nome da Obra
-    contrato = StringField('Contrato', validators=[DataRequired()])  # Número do Contrato
+    contrato = StringField('Contrato', validators=[DataRequired(),Regexp(r'^\d{3}/\d{4}$', message="Contrato deve seguir o formato XXX/XXXX (8 caracteres).")])  # Número do Contrato
     empresa = StringField('Empresa', validators=[DataRequired()])  # Nome da Empresa
-    cnpj = StringField( 'CNPJ',validators=[DataRequired(),Length(18,18)])  # CNPJ da Empresa
+    cnpj = StringField( 'CNPJ',validators=[DataRequired(),Regexp(r'^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$', message="CNPJ deve seguir o formato XX.XXX.XXX/XXXX-XX (18 caracteres).")])  # CNPJ da Empresa
     valor_inicial = FloatField('Valor Inicial', validators=[DataRequired()])  # Valor Inicial da Obra
     prazo_inicial = StringField('Prazo Inicial', validators=[DataRequired()])  # Prazo Inicial da Obra
     inicio_obra = StringField('Início da Obra', validators=[DataRequired()])  # Data de Início da Obra
@@ -40,11 +40,23 @@ class FormObras(FlaskForm):
     prazo_atual = StringField('Prazo Atual', validators=[DataRequired()])  # Prazo Atual da Obra
     valor_atual = FloatField('Valor Atual', validators=[DataRequired()])  # Valor Atual da Obra
     aniversario = StringField('Aniversário', validators=[DataRequired()])  # Data de Aniversário do Projeto
-    fonte = StringField('Fonte', validators=[DataRequired()])  #Fonte Obra
+    fonte = StringField('Fonte', validators=[DataRequired(),Length(min=3, max=3, message="Fonte deve ter exatamente 3 caracteres.")])  #Fonte Obra
     objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
-    documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired()])  #Dcoumento gestor Contrato
+    documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired(),Length(min=8, max=9, message="Documento Gestor Contrato deve ter entre 8 e 9 caracteres.")]])  #Dcoumento gestor Contrato
     publicacao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
     lei_contrato = StringField('Lei Contrato', validators=[DataRequired()])  #Lei Contrato
+    coordenacao = StringField('Coordenacao', validators=[DataRequired()])  #coordenacao
+    cod_contrato_sei = StringField('Código Contrato SEI', validators=[Optional(), Length(min=8, max=9, message="Código Contrato SEI deve ter entre 8 e 9 caracteres.")]) #Código Contrato SEI
+    cod_seguro_garantia = StringField('Código Seguro Garantia', validators=[Optional(), Length(min=8, max=9, message="Código Seguro Garantia deve ter entre 8 e 9 caracteres.")])
+    cod_carta_solicitacao_prorrogacao_contratual = StringField('Código Carta Solicitacação Prorrogação Contratual', validators=[Optional(), Length(min=8, max=9, message="Código Carta Solicitacação Prorrogação Contratual deve ter entre 8 e 9 caracteres.")])
+    cod_processo_rerratificacao = StringField('Processo Rerratificação', validators=[Optional(),Regexp(r'^SEI-\d{6}/\d{6}/\d{4}$', message="SEI deve seguir o formato SEI-XXXXXX/XXXXXX/XXXX (22 caracteres).")])  # Número SEI
+    cod_termo_aditivo = StringField('Código Termo Aditivo', validators=[Optional(), Length(min=8, max=9, message="Código Termo Aditivo deve ter entre 8 e 9 caracteres.")])
+    fiscal1 = StringField('Fiscal 1', validators=[DataRequired()])
+    id_fiscal1 = StringField('ID Fiscal 1', validators=[Optional(), Regexp(r'^\d{7}-\d$', message="ID Fiscal 1 deve seguir o formato XXXXXXX-X (9 caracteres).")])
+    fiscal2 = StringField('Fiscal 2', validators=[DataRequired()])
+    id_fiscal2 = StringField('ID Fiscal 2', validators=[Optional(), Regexp(r'^\d{7}-\d$', message="ID Fiscal 2 deve seguir o formato XXXXXXX-X (9 caracteres).")])
+    gestor = StringField('Gestor', validators=[DataRequired()])
+    gestor_id = StringField('Gestor ID', validators=[Optional(), Regexp(r'^\d{7}-\d$', message="Gestor ID deve seguir o formato XXXXXXX-X (9 caracteres).")])
 
     # # Campo de seleção de usuário
     # usuario = SelectField('Usuário', coerce=int, validators=[DataRequired()])  # Usuário relacionado à obra
@@ -57,6 +69,7 @@ class FormMedicao(FlaskForm):
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
     valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+    reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
     data_inicial = StringField('Data Inicial', validators=[DataRequired()])  # Data Inicial da Medição
     data_final = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
 
