@@ -40,6 +40,7 @@ class FormObras(FlaskForm):
     aditivos_valor = FloatField('Aditivos de Valor', validators=[DataRequired()])  # Aditivos de Valor
     prazo_atual = StringField('Prazo Atual', validators=[DataRequired()])  # Prazo Atual da Obra
     valor_atual = FloatField('Valor Atual', validators=[DataRequired()])  # Valor Atual da Obra
+    rerratificacao = FloatField('Rerratificação', validators=[DataRequired()])  # Rerratificação
     aniversario = StringField('Aniversário', validators=[DataRequired()])  # Data de Aniversário do Projeto
     fonte = StringField('Fonte', validators=[DataRequired(),Length(min=3, max=3, message="Fonte deve ter exatamente 3 caracteres.")])  #Fonte Obra
     objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
