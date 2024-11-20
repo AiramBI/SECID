@@ -207,26 +207,260 @@
                         {% endif %}
                     </div>
 
-                    <!-- Campos Adicionais -->
+                    <!-- Campo Fonte -->
                     <div class="form-group">
                         {{ form_obras.fonte.label(class="form-control-label") }}
-                        {{ form_obras.fonte(class="form-control") }}
+                        {% if form_obras.fonte.errors %}
+                            {{ form_obras.fonte(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.fonte.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.fonte(class="form-control") }}
+                        {% endif %}
                     </div>
+                    
+                    <!-- Campo Objeto -->
                     <div class="form-group">
                         {{ form_obras.objeto.label(class="form-control-label") }}
-                        {{ form_obras.objeto(class="form-control") }}
+                        {% if form_obras.objeto.errors %}
+                            {{ form_obras.objeto(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.objeto.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.objeto(class="form-control") }}
+                        {% endif %}
                     </div>
+                    
+                    <!-- Campo Documento Gestor Contrato -->
                     <div class="form-group">
                         {{ form_obras.documento_gestor_contrato.label(class="form-control-label") }}
-                        {{ form_obras.documento_gestor_contrato(class="form-control") }}
+                        {% if form_obras.documento_gestor_contrato.errors %}
+                            {{ form_obras.documento_gestor_contrato(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.documento_gestor_contrato.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.documento_gestor_contrato(class="form-control") }}
+                        {% endif %}
                     </div>
+                    
+                    <!-- Campo Publicação Comissão Fiscalização -->
                     <div class="form-group">
                         {{ form_obras.publicacao_comissao_fiscalizacao.label(class="form-control-label") }}
-                        {{ form_obras.publicacao_comissao_fiscalizacao(class="form-control") }}
+                        {% if form_obras.publicacao_comissao_fiscalizacao.errors %}
+                            {{ form_obras.publicacao_comissao_fiscalizacao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.publicacao_comissao_fiscalizacao.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.publicacao_comissao_fiscalizacao(class="form-control") }}
+                        {% endif %}
                     </div>
+                    
+                    <!-- Campo Lei Contrato -->
                     <div class="form-group">
                         {{ form_obras.lei_contrato.label(class="form-control-label") }}
-                        {{ form_obras.lei_contrato(class="form-control") }}
+                        {% if form_obras.lei_contrato.errors %}
+                            {{ form_obras.lei_contrato(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.lei_contrato.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.lei_contrato(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Campo Coordenação -->
+                    <div class="form-group">
+                        {{ form.coordenacao.label(class="form-control-label") }}
+                        {% if form.coordenacao.errors %}
+                            {{ form.coordenacao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.coordenacao.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.coordenacao(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Código Contrato SEI -->
+                    <div class="form-group">
+                        {{ form.cod_contrato_sei.label(class="form-control-label") }}
+                        {% if form.cod_contrato_sei.errors %}
+                            {{ form.cod_contrato_sei(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.cod_contrato_sei.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cod_contrato_sei(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Código Seguro Garantia -->
+                    <div class="form-group">
+                        {{ form.cod_seguro_garantia.label(class="form-control-label") }}
+                        {% if form.cod_seguro_garantia.errors %}
+                            {{ form.cod_seguro_garantia(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.cod_seguro_garantia.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cod_seguro_garantia(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Código Carta Solicitação Prorrogação Contratual -->
+                    <div class="form-group">
+                        {{ form.cod_carta_solicitacao_prorrogacao_contratual.label(class="form-control-label") }}
+                        {% if form.cod_carta_solicitacao_prorrogacao_contratual.errors %}
+                            {{ form.cod_carta_solicitacao_prorrogacao_contratual(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.cod_carta_solicitacao_prorrogacao_contratual.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cod_carta_solicitacao_prorrogacao_contratual(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Processo Rerratificação -->
+                    <div class="form-group">
+                        {{ form.cod_processo_rerratificacao.label(class="form-control-label") }}
+                        {% if form.cod_processo_rerratificacao.errors %}
+                            {{ form.cod_processo_rerratificacao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.cod_processo_rerratificacao.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cod_processo_rerratificacao(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Código Termo Aditivo -->
+                    <div class="form-group">
+                        {{ form.cod_termo_aditivo.label(class="form-control-label") }}
+                        {% if form.cod_termo_aditivo.errors %}
+                            {{ form.cod_termo_aditivo(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.cod_termo_aditivo.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cod_termo_aditivo(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Fiscal 1 -->
+                    <div class="form-group">
+                        {{ form.fiscal1.label(class="form-control-label") }}
+                        {% if form.fiscal1.errors %}
+                            {{ form.fiscal1(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.fiscal1.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.fiscal1(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo ID Fiscal 1 -->
+                    <div class="form-group">
+                        {{ form.id_fiscal1.label(class="form-control-label") }}
+                        {% if form.id_fiscal1.errors %}
+                            {{ form.id_fiscal1(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.id_fiscal1.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.id_fiscal1(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Fiscal 2 -->
+                    <div class="form-group">
+                        {{ form.fiscal2.label(class="form-control-label") }}
+                        {% if form.fiscal2.errors %}
+                            {{ form.fiscal2(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.fiscal2.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.fiscal2(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo ID Fiscal 2 -->
+                    <div class="form-group">
+                        {{ form.id_fiscal2.label(class="form-control-label") }}
+                        {% if form.id_fiscal2.errors %}
+                            {{ form.id_fiscal2(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.id_fiscal2.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.id_fiscal2(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Gestor -->
+                    <div class="form-group">
+                        {{ form.gestor.label(class="form-control-label") }}
+                        {% if form.gestor.errors %}
+                            {{ form.gestor(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.gestor.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.gestor(class="form-control") }}
+                        {% endif %}
+                    </div>
+                
+                    <!-- Campo Gestor ID -->
+                    <div class="form-group">
+                        {{ form.gestor_id.label(class="form-control-label") }}
+                        {% if form.gestor_id.errors %}
+                            {{ form.gestor_id(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form.gestor_id.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.gestor_id(class="form-control") }}
+                        {% endif %}
                     </div>
 
                 </fieldset>
