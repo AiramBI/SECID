@@ -144,7 +144,7 @@ def administrador():
     #     flash('Obra Cadastrada{}'.format(form_obras.obra.data), 'alert-success')
 
     #     return redirect(url_for('administrador'))
-    return render_template('administrador.html', form_obras=form_obras)
+    return render_template('administrador.html')
 
 # Configuração da pasta para upload
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
