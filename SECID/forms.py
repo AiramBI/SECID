@@ -43,7 +43,7 @@ class FormObras(FlaskForm):
     fonte = StringField('Fonte', validators=[DataRequired()])  #Fonte Obra
     objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
     documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired()])  #Dcoumento gestor Contrato
-    publicao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
+    publicacao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
     lei_contrato = StringField('Lei Contrato', validators=[DataRequired()])  #Lei Contrato
 
     # # Campo de seleção de usuário
