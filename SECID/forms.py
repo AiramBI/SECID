@@ -3,7 +3,8 @@ from flask_wtf.file import FileField, FileAllowed
 from sqlalchemy.testing.pickleable import User
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, SelectField, IntegerField, FileField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp, Optional
-from SECID.models import Usuario
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from SECID.models import Usuario, Obras
 
 
 class FormCriarConta(FlaskForm):
@@ -65,7 +66,7 @@ class FormObras(FlaskForm):
 
 class FormMedicao(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired(),Length(22,22)])  # Número SEI
-    projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
+    projeto_nome = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
     valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
