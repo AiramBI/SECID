@@ -42,7 +42,7 @@ class FormObras(FlaskForm):
     aniversario = StringField('Aniversário', validators=[DataRequired()])  # Data de Aniversário do Projeto
     fonte = StringField('Fonte', validators=[DataRequired(),Length(min=3, max=3, message="Fonte deve ter exatamente 3 caracteres.")])  #Fonte Obra
     objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
-    documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired(),Length(min=8, max=9, message="Documento Gestor Contrato deve ter entre 8 e 9 caracteres.")]])  #Dcoumento gestor Contrato
+    documento_gestor_contrato = StringField('Documento Gestor Contrato', validators=[DataRequired(),Length(min=8, max=9, message="Documento Gestor Contrato deve ter entre 8 e 9 caracteres.")])  #Dcoumento gestor Contrato
     publicacao_comissao_fiscalizacao = StringField('Publicação Comissão Fiscalização', validators=[DataRequired()])  #Publicação Comissão Fiscalização
     lei_contrato = StringField('Lei Contrato', validators=[DataRequired()])  #Lei Contrato
     coordenacao = StringField('Coordenacao', validators=[DataRequired()])  #coordenacao
