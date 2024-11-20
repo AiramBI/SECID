@@ -36,8 +36,8 @@ class FormObras(FlaskForm):
     valor_inicial = FloatField('Valor Inicial', validators=[DataRequired()])  # Valor Inicial da Obra
     prazo_inicial = StringField('Prazo Inicial', validators=[DataRequired()])  # Prazo Inicial da Obra
     inicio_obra = StringField('Início da Obra', validators=[DataRequired()])  # Data de Início da Obra
-    aditivos_prazo = StringField('Aditivos de Prazo', validators=[DataRequired()])  # Aditivos de Prazo
-    aditivos_valor = FloatField('Aditivos de Valor', validators=[DataRequired()])  # Aditivos de Valor
+    aditivos_prazo = StringField('Aditivos de Prazo', validators=[Optional()])  # Aditivos de Prazo
+    aditivos_valor = FloatField('Aditivos de Valor', validators=[Optional()])  # Aditivos de Valor
     prazo_atual = StringField('Prazo Atual', validators=[DataRequired()])  # Prazo Atual da Obra
     valor_atual = FloatField('Valor Atual', validators=[DataRequired()])  # Valor Atual da Obra
     rerratificacao = FloatField('Rerratificação', validators=[Optional()])  # Rerratificação
