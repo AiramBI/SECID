@@ -69,6 +69,7 @@ class Medicao(database.Model):
     numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
     descricao = database.Column(database.String, nullable=False)  # Descrição da Medição
     valor = database.Column(database.Float, nullable=False)  # Valor da Medição
+    reajustamento = database.Column(database.Float, nullable=False)  # Reajustamento
     data_inicial = database.Column(database.String, nullable=False)  # Data Inicial da Medição
     data_final = database.Column(database.String, nullable=False)  # Data Final da Medição
 
