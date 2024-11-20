@@ -55,6 +55,22 @@
                 {% endif %}
             </div>
 
+            <!-- Campo Letra da Medição -->
+            <div class="form-group">
+                {{ form_medicao.letra_medicao.label(class="form-control-label") }}
+                {% if form_medicao.letra_medicao.errors %}
+                    {{ form_medicao.letra_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.letra_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.letra_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+
+
             <!-- Campo Descrição da Medição -->
             <div class="form-group">
                 {{ form_medicao.descricao.label(class="form-control-label") }}
