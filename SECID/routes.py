@@ -118,11 +118,11 @@ def administrador():
             prazo_atual=form_obras.prazo_atual.data,
             valor_atual=form_obras.valor_atual.data,
             aniversario=form_obras.aniversario.data,
-            fonte=form_obras.aniversario.data,
-            objeto=form_obras.aniversario.data,
-            documento_gestor_contrato=form_obras.aniversario.data,
-            publicacao_comissao_fiscalizacao=form_obras.aniversario.data,
-            lei_contrato=form_obras.aniversario.data
+            fonte=form_obras.fonte.data,
+            objeto=form_obras.objeto.data,
+            documento_gestor_contrato=form_obras.documento_gestor_contrato.data,
+            publicacao_comissao_fiscalizacao=form_obras.publicacao_comissao_fiscalizacao.data,
+            lei_contrato=form_obras.lei_contrato.data
         )
 
         # Adiciona a obra ao banco de dados
