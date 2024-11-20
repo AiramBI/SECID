@@ -44,8 +44,20 @@ class Obras(database.Model):
     documento_gestor_contrato = database.Column(database.String, nullable=False)
     publicacao_comissao_fiscalizacao = database.Column(database.String, nullable=False)
     lei_contrato = database.Column(database.String, nullable=False)
+    coordenacao = database.Column(database.String, nullable=False)
+    cod_contrato_sei = database.Column(database.String, nullable=False)
+    cod_seguro_garantia = database.Column(database.String, nullable=False)
+    cod_carta_solicitacao_prorrogacao_contratual = database.Column(database.String, nullable=True)
+    cod_processo_rerratificacao = database.Column(database.String, nullable=True)
+    cod_termo_aditivo  = database.Column(database.String, nullable=True)
+    fiscal1 = database.Column(database.String, nullable=False)
+    id_fiscal1 = database.Column(database.String, nullable=False)
+    fiscal2 = database.Column(database.String, nullable=False)
+    id_fiscal2  = database.Column(database.String, nullable=False)
+    gestor  = database.Column(database.String, nullable=False)
+    gestor_id  = database.Column(database.String, nullable=False)
 
-
+    
      # Relacionamento com Medicao
     medicoes = database.relationship('Medicao', backref='obra_relacionada', lazy=True)
 
