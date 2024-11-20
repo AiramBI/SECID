@@ -123,18 +123,18 @@ def administrador():
             documento_gestor_contrato=form_obras.documento_gestor_contrato.data,
             publicacao_comissao_fiscalizacao=form_obras.publicacao_comissao_fiscalizacao.data,
             lei_contrato=form_obras.lei_contrato.data,
-            coordenacao=form.coordenacao.data,
-            cod_contrato_sei=form.cod_contrato_sei.data,
-            cod_seguro_garantia=form.cod_seguro_garantia.data,
-            cod_carta_solicitacao_prorrogacao_contratual=form.cod_carta_solicitacao_prorrogacao_contratual.data,
-            cod_processo_rerratificacao=form.cod_processo_rerratificacao.data,
-            cod_termo_aditivo=form.cod_termo_aditivo.data,
-            fiscal1=form.fiscal1.data,
-            id_fiscal1=form.id_fiscal1.data,
-            fiscal2=form.fiscal2.data,
-            id_fiscal2=form.id_fiscal2.data,
-            gestor=form.gestor.data,
-            gestor_id=form.gestor_id.data
+            coordenacao=form_obras.coordenacao.data,
+            cod_contrato_sei=form_obras.cod_contrato_sei.data,
+            cod_seguro_garantia=form_obras.cod_seguro_garantia.data,
+            cod_carta_solicitacao_prorrogacao_contratual=form_obras.cod_carta_solicitacao_prorrogacao_contratual.data,
+            cod_processo_rerratificacao=form_obras.cod_processo_rerratificacao.data,
+            cod_termo_aditivo=form_obras.cod_termo_aditivo.data,
+            fiscal1=form_obras.fiscal1.data,
+            id_fiscal1=form_obras.id_fiscal1.data,
+            fiscal2=form_obras.fiscal2.data,
+            id_fiscal2=form_obras.id_fiscal2.data,
+            gestor=form_obras.gestor.data,
+            gestor_id=form_obras.gestor_id.data
         )
 
         # Adiciona a obra ao banco de dados
