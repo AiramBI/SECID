@@ -122,7 +122,19 @@ def administrador():
             objeto=form_obras.objeto.data,
             documento_gestor_contrato=form_obras.documento_gestor_contrato.data,
             publicacao_comissao_fiscalizacao=form_obras.publicacao_comissao_fiscalizacao.data,
-            lei_contrato=form_obras.lei_contrato.data
+            lei_contrato=form_obras.lei_contrato.data,
+            coordenacao=form.coordenacao.data,
+            cod_contrato_sei=form.cod_contrato_sei.data,
+            cod_seguro_garantia=form.cod_seguro_garantia.data,
+            cod_carta_solicitacao_prorrogacao_contratual=form.cod_carta_solicitacao_prorrogacao_contratual.data,
+            cod_processo_rerratificacao=form.cod_processo_rerratificacao.data,
+            cod_termo_aditivo=form.cod_termo_aditivo.data,
+            fiscal1=form.fiscal1.data,
+            id_fiscal1=form.id_fiscal1.data,
+            fiscal2=form.fiscal2.data,
+            id_fiscal2=form.id_fiscal2.data,
+            gestor=form.gestor.data,
+            gestor_id=form.gestor_id.data
         )
 
         # Adiciona a obra ao banco de dados
@@ -183,6 +195,7 @@ def medicao():
                 numero_medicao=form_medicao.numero_medicao.data,
                 descricao=form_medicao.descricao.data,
                 valor=form_medicao.valor.data,
+                reajustamento=form_medicao.reajustamento.data,
                 data_inicial=form_medicao.data_inicial.data,
                 data_final=form_medicao.data_final.data,
                 documento_1=save_file(form_medicao.documento_1.data),
