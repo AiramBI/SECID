@@ -187,6 +187,7 @@ def medicao():
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
                 numero_medicao=form_medicao.numero_medicao.data,
+                letra_medicao=form_medicao.numero_medicao.data,
                 descricao=form_medicao.descricao.data,
                 valor=form_medicao.valor.data,
                 reajustamento=form_medicao.reajustamento.data,
