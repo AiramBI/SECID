@@ -11,6 +11,7 @@
         <li class="list-group-item"><strong>Número da Medição:</strong> {{ medicao.numero_medicao }}</li>
         <li class="list-group-item"><strong>Descrição:</strong> {{ medicao.descricao }}</li>
         <li class="list-group-item"><strong>Valor:</strong> R$ {{ medicao.valor }}</li>
+        <li class="list-group-item"><strong>Reajustamento:</strong> R$ {{ medicao.reajustamento }}</li>
         <li class="list-group-item"><strong>Data Inicial:</strong> {{ medicao.data_inicial }}</li>
         <li class="list-group-item"><strong>Data Final:</strong> {{ medicao.data_final }}</li>
 
@@ -58,6 +59,18 @@
         <li class="list-group-item"><strong>Documento do Gestor de Contrato:</strong> {{ obra.documento_gestor_contrato }}</li>
         <li class="list-group-item"><strong>Publicação da Comissão de Fiscalização:</strong> {{ obra.publicacao_comissao_fiscalizacao }}</li>
         <li class="list-group-item"><strong>Lei do Contrato:</strong> {{ obra.lei_contrato }}</li>
+        <li class="list-group-item"><strong>Coordenação:</strong> {{ obra.coordenacao }}</li>
+        <li class="list-group-item"><strong>Código do Contrato SEI:</strong> {{ obra.cod_contrato_sei }}</li>
+        <li class="list-group-item"><strong>Código do Seguro Garantia:</strong> {{ obra.cod_seguro_garantia }}</li>
+        <li class="list-group-item"><strong>Código da Carta de Solicitação de Prorrogação Contratual:</strong> {{ obra.cod_carta_solicitacao_prorrogacao_contratual }}</li>
+        <li class="list-group-item"><strong>Código do Processo de Rerratificação:</strong> {{ obra.cod_processo_rerratificacao }}</li>
+        <li class="list-group-item"><strong>Código do Termo Aditivo:</strong> {{ obra.cod_termo_aditivo }}</li>
+        <li class="list-group-item"><strong>Fiscal 1:</strong> {{ obra.fiscal1 }}</li>
+        <li class="list-group-item"><strong>ID do Fiscal 1:</strong> {{ obra.id_fiscal1 }}</li>
+        <li class="list-group-item"><strong>Fiscal 2:</strong> {{ obra.fiscal2 }}</li>
+        <li class="list-group-item"><strong>ID do Fiscal 2:</strong> {{ obra.id_fiscal2 }}</li>
+        <li class="list-group-item"><strong>Gestor:</strong> {{ obra.gestor }}</li>
+        <li class="list-group-item"><strong>ID do Gestor:</strong> {{ obra.gestor_id }}</li>
         {% else %}
         <h2 class="text-center mt-4">Informações da Obra Não Disponíveis</h2>
         {% endif %}
