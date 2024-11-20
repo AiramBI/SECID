@@ -85,6 +85,21 @@
                 {% endif %}
             </div>
 
+            <!-- Campo Valor do Reajustamento -->
+            <div class="form-group">
+                {{ form_medicao.reajustamento.label(class="form-control-label") }}
+                {% if form_medicao.reajustamento.errors %}
+                    {{ form_medicao.reajustamento(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.reajustamento.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.reajustamento(class="form-control") }}
+                {% endif %}
+            </div>
+
             <!-- Campo Data Inicial -->
             <div class="form-group">
                 {{ form_medicao.data_inicial.label(class="form-control-label") }}
