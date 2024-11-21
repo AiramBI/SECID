@@ -38,7 +38,7 @@ class Obras(database.Model):
     aditivos_valor = database.Column(database.Float, nullable=True)
     prazo_atual = database.Column(database.Integer, nullable=False)
     valor_atual = database.Column(database.Float, nullable=False)
-    reajuste = database.Column(database.Float, nullable=False)
+    reajustamento = database.Column(database.Float, nullable=False)
     rerratificacao = database.Column(database.Float, nullable=False)
     aniversario = database.Column(database.Date, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
