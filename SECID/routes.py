@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request, Flask, send_from_directory, abort, jsonify
 from SECID import app, database,bcrypt
-from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2
-from SECID.models import Usuario, Obras, Medicao, Medicao2
+from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2, FormMedicao_inicial, FormMedicao_atualizada, FormMedicao_resumida
+from SECID.models import Usuario, Obras, Medicao, Medicao2, Medicao_inicial, Medicao_atualizada, Medicao_resumida
 from flask_login import current_user, login_required, login_user, logout_user
 import traceback
 from werkzeug.utils import secure_filename
