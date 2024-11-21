@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Editar Obra: {{ obra.obra }}</h1>
+    <form method="POST">
+        {{ form_obras.hidden_tag() }}
+        
+        <!-- Renderizar cada campo do formulário -->
+        {% for field in form_obras %}
+            <div class="mb-3">
+                {{ field.label(class="form-label") }}
+                {{ field(class="form-control") }}
+                {% if field.errors %}
+                    <div class="text-danger">{{ field.errors[0] }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a href="{{ url_for('administrador') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
