@@ -23,6 +23,7 @@
                       {% if current_user.cargo == 'Administrador' %}
                         <button class="btn btn-primary">
                             <a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
+                            <a href="{{ url_for('selecionar_obra') }}" class="dropdown-item text-white">Editar Obra</a>
                         </button>
                       {% endif %}
                       </div>
