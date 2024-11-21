@@ -26,6 +26,7 @@ class Usuario(database.Model, UserMixin):
 class Obras(database.Model):
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
     obra = database.Column(database.String, nullable=False)
+    status = database.Column(database.String, nullable=False)
     sei = database.Column(database.String, nullable=False)
     contrato =database.Column(database.String, nullable=False)
     empresa = database.Column(database.String, nullable=False)
@@ -37,6 +38,7 @@ class Obras(database.Model):
     aditivos_valor = database.Column(database.Float, nullable=True)
     prazo_atual = database.Column(database.Integer, nullable=False)
     valor_atual = database.Column(database.Float, nullable=False)
+    reajuste = database.Column(database.Float, nullable=False)
     rerratificacao = database.Column(database.Float, nullable=False)
     aniversario = database.Column(database.Date, nullable=False)
     data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow)
