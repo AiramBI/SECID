@@ -93,6 +93,13 @@ def usuario():
     obras = Obras.query.all()
     return render_template('usuario.html',obras =obras)
 
+@app.route('/selecionar_obra', methods=['GET'])
+# @login_required
+def selecionar_obra():
+    # Busca todas as obras no banco de dados
+    obras = Obras.query.all()
+    return render_template('selecionar_obra.html', obras=obras)
+
 @app.route('/editar_obra/<int:id>', methods=['GET', 'POST'])
 # @login_required
 def editar_obra(id):
