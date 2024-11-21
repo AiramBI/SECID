@@ -114,6 +114,7 @@ def editar_obra(id):
         # Atualiza os campos da obra com os dados do formulário
         obra.sei = form_obras.sei.data
         obra.obra = form_obras.obra.data
+        obra.status = form_obras.status.data
         obra.contrato = form_obras.contrato.data
         obra.empresa = form_obras.empresa.data
         obra.cnpj = form_obras.cnpj.data
@@ -124,6 +125,7 @@ def editar_obra(id):
         obra.aditivos_valor = form_obras.aditivos_valor.data
         obra.prazo_atual = form_obras.prazo_atual.data
         obra.valor_atual = form_obras.valor_atual.data
+        obra.reajustamento = form_obras.reajustamento.data
         obra.rerratificacao = form_obras.rerratificacao.data
         obra.aniversario = form_obras.aniversario.data
         obra.fonte = form_obras.fonte.data
@@ -166,6 +168,7 @@ def administrador():
         obra = Obras(
             sei=form_obras.sei.data,
             obra=form_obras.obra.data,
+            status = form_obras.status.data,
             contrato=form_obras.contrato.data,
             empresa=form_obras.empresa.data,
             cnpj=form_obras.cnpj.data,
@@ -176,6 +179,7 @@ def administrador():
             aditivos_valor=form_obras.aditivos_valor.data,
             prazo_atual=form_obras.prazo_atual.data,
             valor_atual=form_obras.valor_atual.data,
+            reajustamento = form_obras.reajustamento.data,
             rerratificacao=form_obras.rerratificacao.data,
             aniversario=form_obras.aniversario.data,
             fonte=form_obras.fonte.data,
