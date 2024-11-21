@@ -30,6 +30,7 @@ class FormLogin(FlaskForm):
 class FormObras(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired(),Regexp(r'^SEI-\d{6}/\d{6}/\d{4}$', message="SEI deve seguir o formato SEI-XXXXXX/XXXXXX/XXXX (22 caracteres).")])  # Número SEI
     obra = StringField('Obra', validators=[DataRequired()])  # Nome da Obra
+    status = SelectField('status',choices=[('ENTREGUE','ENTREGUE'),('ADESÃO','ADESÃO'),('ORDEM DE INICIO','ORDEM DE INICIO'),('ORDEM DE INICIO PARCIAL','ORDEM DE INICIO PARCIAL'),('EM EXECUÇÃO','EM EXECUÇÃO')],validators=[DataRequired()],render_kw={"class": "form-control"})
     contrato = StringField('Contrato', validators=[DataRequired(),Regexp(r'^\d{3}/\d{4}$', message="Contrato deve seguir o formato XXX/XXXX (8 caracteres).")])  # Número do Contrato
     empresa = StringField('Empresa', validators=[DataRequired()])  # Nome da Empresa
     cnpj = StringField( 'CNPJ',validators=[DataRequired(),Regexp(r'^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$', message="CNPJ deve seguir o formato XX.XXX.XXX/XXXX-XX (18 caracteres).")])  # CNPJ da Empresa
@@ -41,6 +42,7 @@ class FormObras(FlaskForm):
     prazo_atual = StringField('Prazo Atual', validators=[DataRequired()])  # Prazo Atual da Obra
     valor_atual = FloatField('Valor Atual', validators=[DataRequired()])  # Valor Atual da Obra
     rerratificacao = FloatField('Rerratificação', validators=[Optional()])  # Rerratificação
+    reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Reajustamento
     aniversario = StringField('Aniversário', validators=[DataRequired()])  # Data de Aniversário do Projeto
     fonte = StringField('Fonte', validators=[DataRequired(),Length(min=3, max=3, message="Fonte deve ter exatamente 3 caracteres.")])  #Fonte Obra
     objeto = StringField('Objeto', validators=[DataRequired()])  #Objeto Obra
