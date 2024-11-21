@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>Selecione a Obra para Alteração</h1>
+    <ul class="list-group">
+        {% for obra in obras %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ obra.obra }} - {{ obra.contrato }}
+                <a href="{{ url_for('editar_obra', id=obra.id) }}" class="btn btn-primary btn-sm">Selecionar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
