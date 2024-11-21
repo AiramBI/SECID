@@ -64,6 +64,33 @@ class Obras(database.Model):
      # Relacionamento com Medicao
     medicoes = database.relationship('Medicao', backref='obra_relacionada', lazy=True)
 
+class Medicao_inicial(database.Model):
+
+    id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+    obra = database.Column(database.String, database.ForeignKey('obras.obra'), nullable=False)  # Nome do Projeto
+    medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
+    valor = database.Column(database.Float, nullable=False)  # Valor da Medição
+    acumulado = database.Column(database.Float, nullable=False)  # Valor da Medição
+
+class Medicao_atualizada(database.Model):
+
+    id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+    obra = database.Column(database.String, database.ForeignKey('obras.obra'), nullable=False)  # Nome do Projeto
+    medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
+    valor = database.Column(database.Float, nullable=False)  # Valor da Medição
+    acumulado = database.Column(database.Float, nullable=False)  # Valor da Medição
+
+class Medicao_resumida(database.Model):
+
+    id = database.Column(database.Integer, primary_key=True, autoincrement=True)
+    obra = database.Column(database.String, database.ForeignKey('obras.obra'), nullable=False)  # Nome do Projeto
+    data_inicio_medicao = database.Column(database.String, nullable=False)  # Data Inicial da Medição
+    data_fim_medicao = database.Column(database.String, nullable=False)  # Data Final da Medição
+    numero_medicao = database.Column(database.Integer, nullable=False)  # Número da Medição
+    valor_medicao = database.Column(database.Float, nullable=False)  # Valor da Medição
+    letra_medicao = database.Column(database.String, nullable=False)  # Letra da Medição
+    reajustamento = database.Column(database.Float, nullable=False)  # Reajustamento
+
 class Medicao(database.Model):
 
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
