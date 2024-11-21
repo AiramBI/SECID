@@ -93,7 +93,57 @@ def usuario():
     obras = Obras.query.all()
     return render_template('usuario.html',obras =obras)
 
+@app.route('/editar_obra/<int:id>', methods=['GET', 'POST'])
+# @login_required
+def editar_obra(id):
+    # Busca a obra pelo ID no banco de dados
+    obra = Obras.query.get_or_404(id)
 
+    # Cria o formulário e pré-preenche com os dados da obra
+    form_obras = FormObras(obj=obra)
+
+    # Verifica se o formulário foi submetido corretamente
+    if form_obras.validate_on_submit():
+        # Atualiza os campos da obra com os dados do formulário
+        obra.sei = form_obras.sei.data
+        obra.obra = form_obras.obra.data
+        obra.contrato = form_obras.contrato.data
+        obra.empresa = form_obras.empresa.data
+        obra.cnpj = form_obras.cnpj.data
+        obra.valor_inicial = form_obras.valor_inicial.data
+        obra.prazo_inicial = form_obras.prazo_inicial.data
+        obra.inicio_obra = form_obras.inicio_obra.data
+        obra.aditivos_prazo = form_obras.aditivos_prazo.data
+        obra.aditivos_valor = form_obras.aditivos_valor.data
+        obra.prazo_atual = form_obras.prazo_atual.data
+        obra.valor_atual = form_obras.valor_atual.data
+        obra.rerratificacao = form_obras.rerratificacao.data
+        obra.aniversario = form_obras.aniversario.data
+        obra.fonte = form_obras.fonte.data
+        obra.objeto = form_obras.objeto.data
+        obra.documento_gestor_contrato = form_obras.documento_gestor_contrato.data
+        obra.publicacao_comissao_fiscalizacao = form_obras.publicacao_comissao_fiscalizacao.data
+        obra.lei_contrato = form_obras.lei_contrato.data
+        obra.coordenacao = form_obras.coordenacao.data
+        obra.cod_contrato_sei = form_obras.cod_contrato_sei.data
+        obra.cod_seguro_garantia = form_obras.cod_seguro_garantia.data
+        obra.cod_carta_solicitacao_prorrogacao_contratual = form_obras.cod_carta_solicitacao_prorrogacao_contratual.data
+        obra.cod_processo_rerratificacao = form_obras.cod_processo_rerratificacao.data
+        obra.cod_termo_aditivo = form_obras.cod_termo_aditivo.data
+        obra.fiscal1 = form_obras.fiscal1.data
+        obra.id_fiscal1 = form_obras.id_fiscal1.data
+        obra.fiscal2 = form_obras.fiscal2.data
+        obra.id_fiscal2 = form_obras.id_fiscal2.data
+        obra.gestor = form_obras.gestor.data
+        obra.gestor_id = form_obras.gestor_id.data
+
+        # Salva as alterações no banco de dados
+        database.session.commit()
+
+        flash('Obra Atualizada com Sucesso', 'alert-success')
+
+        return redirect(url_for('administrador'))  # Redireciona para a lista de obras ou outra página
+    return render_template('editar_obra.html', form_obras=form_obras, obra=obra)
 
 @app.route('/administrador', methods =['GET','POST'])
 # @login_required
