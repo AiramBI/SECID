@@ -26,6 +26,27 @@ class FormLogin(FlaskForm):
         lembrar_dados = BooleanField('Lembrar Dados de Acesso')
         botao_submit_login = SubmitField('Fazer Login')
 
+class FormMedicao_resumida(FlaskForm):
+    obra = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
+    data_inicio_medicao = StringField('Data Inicial', validators=[DataRequired()])  # Data Inicial da Medição
+    data_fim_medicao = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
+    numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
+    valor_medicao = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+    letra_medicao = StringField('Número da Medição', validators=[Optional()])  # Letra da Medição
+    reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
+
+class FormMedicao_inicial(FlaskForm):
+    obra = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
+    medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
+    valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+    acumulado = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+
+class FormMedicao_atualizada(FlaskForm):
+    obra = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
+    medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
+    valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+    acumulado = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
+
 
 class FormObras(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired(),Regexp(r'^SEI-\d{6}/\d{6}/\d{4}$', message="SEI deve seguir o formato SEI-XXXXXX/XXXXXX/XXXX (22 caracteres).")])  # Número SEI
