@@ -284,9 +284,21 @@ def medicao():
                 documento_18=save_file(form_medicao.documento_18.data),
                 documento_19=save_file(form_medicao.documento_19.data)
             )
+
+            # Cria uma nova instância de Medicao_resumida
+            medicao_resumida = Medicao_resumida(
+                obra=form_medicao.projeto_nome.data,
+                data_inicio_medicao=form_medicao.data_inicial.data,
+                data_fim_medicao=form_medicao.data_final.data,
+                numero_medicao=form_medicao.numero_medicao.data,
+                valor_medicao=form_medicao.valor.data,
+                letra_medicao=form_medicao.numero_medicao.data,
+                reajustamento=form_medicao.reajustamento.data
+            )
             
             # Adiciona a medição ao banco de dados
             database.session.add(medicao1)
+            database.session.add(medicao_resumida)
             database.session.commit()
 
             flash('Medição cadastrada com sucesso!', 'alert-success')
