@@ -7,24 +7,6 @@
             .maiusculo {
                 text-transform: uppercase;
             }
-
-              /* Garante que a barra de rolagem esteja sempre disponível */
-              html, body {
-                  height: 100%;
-                  margin: 0;
-                  padding: 0;
-                  overflow-y: auto; /* Garante a barra de rolagem vertical */
-              }
-          
-              .container {
-                  margin: 0 auto;
-                  padding: 20px;
-              }
-          
-              .p-4 {
-                  overflow-y: auto; /* Ativa rolagem interna se necessário */
-              }
-</style>      
         </style>
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -40,8 +22,8 @@
                       <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2')}}">Verificar Medição</a></button>
                       {% if current_user.cargo in ['Administrador', 'Superintendente', 'Secretário', 'Subsecretário'] %}
                         <button class="btn btn-primary">
-                            <a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
-                            <a href="{{ url_for('selecionar_obra') }}" class="dropdown-item text-white">Editar Obra</a>
+                            <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
+                            <button class="btn btn-primary"><a href="{{ url_for('selecionar_obra') }}" class="dropdown-item text-white">Editar Obra</a>
                         </button>
                       {% endif %}
                       </div>
