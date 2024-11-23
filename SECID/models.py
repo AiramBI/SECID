@@ -26,6 +26,8 @@ class Usuario(database.Model, UserMixin):
 class Obras(database.Model):
     id = database.Column(database.Integer, primary_key=True, autoincrement=True)
     obra = database.Column(database.String, nullable=False)
+    cidade = database.Column(database.String, nullable=False)
+    regiao = database.Column(database.String, nullable=False)
     status = database.Column(database.String, nullable=False)
     sei = database.Column(database.String, nullable=False)
     contrato =database.Column(database.String, nullable=False)
