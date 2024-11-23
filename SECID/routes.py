@@ -15,7 +15,6 @@ logging.basicConfig(level=logging.INFO)
 
 @app.route('/')
 def home():
-
     # Consulta para pegar as 4 últimas medições ordenadas por data_criacao
     ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(4).all()
 
@@ -32,7 +31,6 @@ def home():
         for medicao, imagem in zip(ultimas_medicoes, imagens)
     ]
 
-def informacoes_regiao():
     # Consultas específicas para cada região
     regioes_dados = {
         "Norte": Obras.query
@@ -77,8 +75,8 @@ def informacoes_regiao():
         },
     ]
 
-    
-    return render_template('home.html',combinacoes=combinacoes, regioes=regioes)
+    # Retornar o template com as variáveis
+    return render_template('home.html', combinacoes=combinacoes, regioes=regioes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
