@@ -90,22 +90,15 @@
         <h2 class="text-center">Andamento das Obras</h2>
         <p class="text-center">Acompanhe conosco o andamento das nossas Obras:</p>
         <div class="row text-center">
+            {% set imagens = ['secid (1).jpeg', 'secid (7).jpeg', 'secid (9).jpeg', 'secid (2).jpeg'] %}
+            {% for medicao, imagem in medicoes|zip(imagens) %}
             <div class="col-md-3">
-                <img src="{{ url_for('static', filename='secid (1).jpeg') }}" alt="Imagem 1" class="img-fluid rounded">
-                <p class="mt-2">Medição Realizada xx% Obra XX </p>
+                <img src="{{ url_for('static', filename=imagem) }}" alt="Imagem {{ loop.index }}" class="img-fluid rounded">
+                <p class="mt-2">{{ medicao.projeto_nome }}</p>
+                <p class="mt-2">Medição Realizada Nº {{ medicao.numero_medicao }}</p>
+                <p class="mt-2">Valor: R$ {{ "%.2f"|format(medicao.valor) }}</p>
             </div>
-            <div class="col-md-3">
-                <img src="{{ url_for('static', filename='secid (7).jpeg') }}" alt="Imagem 2" class="img-fluid rounded">
-                <p class="mt-2">Medição Realizada xx% Obra XX </p>
-            </div>
-            <div class="col-md-3">
-                <img src="{{ url_for('static', filename='secid (9).jpeg') }}" alt="Imagem 3" class="img-fluid rounded">
-                <p class="mt-2">Medição Realizada xx% Obra XX </p>
-            </div>
-            <div class="col-md-3">
-                <img src="{{ url_for('static', filename='secid (2).jpeg') }}" alt="Imagem 4" class="img-fluid rounded">
-                <p class="mt-2">Medição Realizada xx% Obra XX </p>
-            </div>
+            {% endfor %}
         </div>
         <div class="text-center mt-4">
             <a href="/noticias" class="btn btn-primary">Saiba Mais</a>
