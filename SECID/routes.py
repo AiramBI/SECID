@@ -170,7 +170,7 @@ def editar_obra(id):
 
         flash('Obra Atualizada com Sucesso', 'alert-success')
 
-        return redirect(url_for('administrador'))  # Redireciona para a lista de obras ou outra página
+        return redirect(url_for('selecionar_obra'))  # Redireciona para a lista de obras ou outra página
     del form_obras.botao_submit_obras
     
     return render_template('editar_obra.html', form_obras=form_obras, obra=obra)
