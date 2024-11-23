@@ -15,6 +15,7 @@ logging.basicConfig(level=logging.INFO)
 
 @app.route('/')
 def home():
+
     # Consulta para pegar as 4 últimas medições ordenadas por data_criacao
     ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(4).all()
 
@@ -31,52 +32,7 @@ def home():
         for medicao, imagem in zip(ultimas_medicoes, imagens)
     ]
 
-    # Consultas específicas para cada região
-    regioes_dados = {
-        "Norte": Obras.query
-            .filter(Obras.regiao == "Norte")
-            .with_entities(
-                db.func.count(Obras.id).label("quantidade"),
-                db.func.sum(Obras.valor_atual).label("valor_total")
-            )
-            .first(),
-        "Metropolitana": Obras.query
-            .filter(Obras.regiao == "Metropolitana")
-            .with_entities(
-                db.func.count(Obras.id).label("quantidade"),
-                db.func.sum(Obras.valor_atual).label("valor_total")
-            )
-            .first(),
-        "Centro Sul": Obras.query
-            .filter(Obras.regiao == "Centro Sul")
-            .with_entities(
-                db.func.count(Obras.id).label("quantidade"),
-                db.func.sum(Obras.valor_atual).label("valor_total")
-            )
-            .first(),
-    }
-
-    # Formatar dados para o template
-    regioes = [
-        {
-            "nome": "Região Norte",
-            "quantidade": regioes_dados["Norte"][0],
-            "valor_total": f"{regioes_dados['Norte'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
-        },
-        {
-            "nome": "Região Metropolitana",
-            "quantidade": regioes_dados["Metropolitana"][0],
-            "valor_total": f"{regioes_dados['Metropolitana'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
-        },
-        {
-            "nome": "Região Centro Sul",
-            "quantidade": regioes_dados["Centro Sul"][0],
-            "valor_total": f"{regioes_dados['Centro Sul'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
-        },
-    ]
-
-    # Retornar o template com as variáveis
-    return render_template('home.html', combinacoes=combinacoes, regioes=regioes)
+    return render_template('home.html',combinacoes=combinacoes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
