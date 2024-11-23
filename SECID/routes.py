@@ -15,7 +15,12 @@ logging.basicConfig(level=logging.INFO)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+
+    # Consulta para pegar as últimas 4 medições ordenadas por data_criacao
+    ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(4).all()
+
+    
+    return render_template('home.html',medicoes=ultimas_medicoes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
