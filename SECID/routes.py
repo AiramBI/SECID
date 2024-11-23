@@ -32,7 +32,7 @@ def home():
         for medicao, imagem in zip(ultimas_medicoes, imagens)
     ]
 
-    def informacoes_regiao():
+def informacoes_regiao():
     # Consultas específicas para cada região
     regioes_dados = {
         "Norte": Obras.query
