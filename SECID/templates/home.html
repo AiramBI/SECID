@@ -2,7 +2,6 @@
 
 {% block body %}
 
-<!-- Ajustando altura do HTML e Body para permitir rolagem -->
 <style>
     html, body {
         height: auto;
@@ -13,38 +12,38 @@
     }
 
     .image-text-block {
-        position: relative; /* Necessário para que o texto seja posicionado em relação ao contêiner */
-        width: 100%;
-        max-width: 100%;
-        height: auto;
+        position: relative;
+        width: 100%; /* Mantém a largura responsiva */
         margin-bottom: 50px;
     }
 
     .image-text-block img {
         width: 100%;
-        height: auto;
+        height: auto; /* Garante proporção automática */
+        display: block; /* Remove espaços extras */
         border-radius: 8px;
     }
 
     .image-text-block .text-overlay {
         position: absolute;
-        top: 50%; /* Centraliza verticalmente */
-        left: 50%; /* Centraliza horizontalmente */
-        transform: translate(-50%, -50%); /* Ajusta a posição exata */
-        color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         text-align: center;
-        background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para contraste */
-        padding: 15px 20px;
+        color: white;
+        padding: 1%; /* Padding ajustável */
+        background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
         border-radius: 8px;
-        max-width: 80%; /* Limita a largura do texto */
+        width: 80%; /* Largura proporcional à imagem */
     }
 
     .text-overlay h3 {
+        font-size: 2.5vw; /* Tamanho proporcional à largura da janela */
         margin: 0;
-        font-size: 24px;
     }
 
     .text-overlay p {
+        font-size: 1.5vw; /* Tamanho proporcional à largura da janela */
         margin: 10px 0 0;
     }
 </style>
@@ -59,40 +58,12 @@
     <div class="p-4" style="width: 100%; background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: black;">
         <h1>Sistema Integrado de Engenharia e Finanças</h1>
         <p>O Sistema Integrado de Engenharia e Finanças (SIEF) foi desenvolvido para centralizar, automatizar e padronizar os processos financeiros e administrativos na administração pública, trazendo melhorias significativas. Este sistema é uma resposta eficaz a desafios como a falta de padronização, a ineficiência na gestão de gastos e a falta de transparência, que historicamente dificultam a gestão fiscal eficiente.</p>
-        <p>A peça central desta solução é um site que centraliza todas as informações fiscais e de execução de obras. O sistema conta com uma área de login que direciona cada usuário às funcionalidades necessárias, possibilita a emissão de despachos padronizados no SEI, e permite a extração de dados do SIAFE para visualização em tempo real das informações financeiras.</p>
-        <p>Além disso, o sistema considera as intempéries que podem impactar o cronograma de uma obra, como condições climáticas adversas, atrasos logísticos, reajustes de preços de materiais e mudanças nas especificações iniciais. Esses fatores podem comprometer significativamente a execução da obra no tempo previsto, gerando a necessidade de revisões tanto no cronograma quanto no orçamento.</p>
-        <p>A análise numérica desempenha um papel crucial nesse contexto. Ao utilizar modelos matemáticos e simulações, é possível reavaliar as condições atuais do projeto e, com isso, estimar novos prazos de execução que reflitam com maior precisão a realidade do canteiro de obras. Essa abordagem permite uma reprogramação fundamentada, que leva em conta todos os fatores externos e internos que afetam o andamento da construção.</p>
-        <p>A solução inclui a automação do preenchimento de informações no SEI, o que reduz significativamente a carga de trabalho manual e garante que as informações sejam processadas de forma rápida e precisa. Antes da implementação desta solução, a gestão fiscal sofria com a falta de padronização e transparência, gerando ineficiências e dificultando a administração. Com este sistema integrado, esses problemas foram amplamente resolvidos, resultando em uma gestão fiscal mais eficaz e transparente.</p>
     </div>
 </div>
 
 <!-- Bloco com apenas uma imagem depois -->
 <div class="container-fluid mt-5 d-flex justify-content-center">
-    <img src="{{ url_for('static', filename='secid (6).jpeg') }}" alt="Imagem Secundária" style="max-width: 100%; height: auto; border-radius: 8px;">
-</div>
-
-<!-- Bloco com quatro imagens menores -->
-<div class="container-fluid mt-5">
-    <h2 class="text-center">Destaques do Sistema</h2>
-    <p class="text-center">Veja algumas funcionalidades e características principais do sistema:</p>
-    <div class="row text-center">
-        <div class="col-md-3">
-            <img src="{{ url_for('static', filename='secid (1).jpeg') }}" alt="Imagem 1" class="img-fluid rounded">
-            <p class="mt-2">Legenda da Imagem 1</p>
-        </div>
-        <div class="col-md-3">
-            <img src="{{ url_for('static', filename='secid (7).jpeg') }}" alt="Imagem 2" class="img-fluid rounded">
-            <p class="mt-2">Legenda da Imagem 2</p>
-        </div>
-        <div class="col-md-3">
-            <img src="{{ url_for('static', filename='secid (9).jpeg') }}" alt="Imagem 3" class="img-fluid rounded">
-            <p class="mt-2">Legenda da Imagem 3</p>
-        </div>
-        <div class="col-md-3">
-            <img src="{{ url_for('static', filename='secid (2).jpeg') }}" alt="Imagem 4" class="img-fluid rounded">
-            <p class="mt-2">Legenda da Imagem 4</p>
-        </div>
-    </div>
+    <img src="{{ url_for('static', filename='secid (6).jpg') }}" alt="Imagem Secundária" style="max-width: 100%; height: auto; border-radius: 8px;">
 </div>
 
 <!-- Três blocos com texto dentro das imagens -->
@@ -121,3 +92,4 @@
 </div>
 
 {% endblock %}
+
