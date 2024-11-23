@@ -5,15 +5,47 @@
 <!-- Ajustando altura do HTML e Body para permitir rolagem -->
 <style>
     html, body {
-        height: auto; /* Permite que o conteúdo cresça além da tela */
-        min-height: 100%; /* Garante que ocupe pelo menos a tela inteira */
+        height: auto;
+        min-height: 100%;
         margin: 0;
         padding: 0;
-        overflow-x: hidden; /* Evita rolagem horizontal */
+        overflow-x: hidden;
     }
 
-    .container-fluid {
-        margin-bottom: 50px; /* Espaço extra entre os blocos */
+    .image-text-block {
+        position: relative; /* Necessário para que o texto seja posicionado em relação ao contêiner */
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 50px;
+    }
+
+    .image-text-block img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .image-text-block .text-overlay {
+        position: absolute;
+        top: 50%; /* Centraliza verticalmente */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translate(-50%, -50%); /* Ajusta a posição exata */
+        color: white;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para contraste */
+        padding: 15px 20px;
+        border-radius: 8px;
+        max-width: 80%; /* Limita a largura do texto */
+    }
+
+    .text-overlay h3 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .text-overlay p {
+        margin: 10px 0 0;
     }
 </style>
 
