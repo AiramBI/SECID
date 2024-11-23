@@ -31,8 +31,32 @@ def home():
         }
         for medicao, imagem in zip(ultimas_medicoes, imagens)
     ]
+
+    def informacoes_regiao():
+    # Consulta para agrupar obras por região e calcular valor total e quantidade
+    obras_por_regiao = (
+        Obras.query
+        .with_entities(
+            Obras.regiao,
+            db.func.count(Obras.id).label('quantidade'),
+            db.func.sum(Obras.valor_atual).label('valor_total')
+        )
+        .group_by(Obras.regiao)
+        .all()
+    )
+
+    # Formatar os dados para o template
+    regioes = [
+        {
+            "regiao": regiao,
+            "quantidade": quantidade,
+            "valor_total": f"{valor_total:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        }
+        for regiao, quantidade, valor_total in obras_por_regiao
+    ]
+
     
-    return render_template('home.html',combinacoes=combinacoes)
+    return render_template('home.html',combinacoes=combinacoes,regioes=regioes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
