@@ -131,6 +131,8 @@ def editar_obra(id):
         # Atualiza os campos da obra com os dados do formulário
         obra.sei = form_obras.sei.data
         obra.obra = form_obras.obra.data
+        obra.cidade = form_obras.cidade.data
+        obra.regiao = form_obras.regiao.data
         obra.status = form_obras.status.data
         obra.contrato = form_obras.contrato.data
         obra.empresa = form_obras.empresa.data
@@ -185,6 +187,8 @@ def administrador():
         obra = Obras(
             sei=form_obras.sei.data,
             obra=form_obras.obra.data,
+            cidade=form_obras.cidade.data,
+            regiao=form_obras.regiao.data,
             status = form_obras.status.data,
             contrato=form_obras.contrato.data,
             empresa=form_obras.empresa.data,
