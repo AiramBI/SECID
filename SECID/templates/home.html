@@ -1,6 +1,21 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block body %}
+
+<!-- Ajustando altura do HTML e Body para permitir rolagem -->
+<style>
+    html, body {
+        height: auto; /* Permite que o conteúdo cresça além da tela */
+        min-height: 100%; /* Garante que ocupe pelo menos a tela inteira */
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Evita rolagem horizontal */
+    }
+
+    .container-fluid {
+        margin-bottom: 50px; /* Espaço extra entre os blocos */
+    }
+</style>
 
 <!-- Bloco com apenas uma imagem antes -->
 <div class="container-fluid mt-5 d-flex justify-content-center">
