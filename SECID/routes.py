@@ -16,11 +16,17 @@ logging.basicConfig(level=logging.INFO)
 @app.route('/')
 def home():
 
-    # Consulta para pegar as últimas 4 medições ordenadas por data_criacao
+    # Consulta para pegar as 4 últimas medições ordenadas por data_criacao
     ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(4).all()
 
+    # Lista de imagens fixas
+    imagens = ['secid (1).jpeg', 'secid (7).jpeg', 'secid (9).jpeg', 'secid (2).jpeg']
+
+    # Combinar medições com imagens (até o máximo de 4)
+    combinacoes = list(zip(ultimas_medicoes, imagens))
+
     
-    return render_template('home.html',medicoes=ultimas_medicoes)
+    return render_template('home.html',combinacoes=combinacoes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
