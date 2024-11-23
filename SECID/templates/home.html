@@ -90,12 +90,12 @@
         <h2 class="text-center">Andamento das Obras</h2>
         <p class="text-center">Acompanhe conosco o andamento das nossas Obras:</p>
         <div class="row text-center">
-            {% for medicao, imagem in combinacoes %}
+            {% for combinacao in combinacoes %}
             <div class="col-md-3">
-                <img src="{{ url_for('static', filename=imagem) }}" alt="Imagem {{ loop.index }}" class="img-fluid rounded">
-                <p class="mt-2">{{ medicao.projeto_nome }}</p>
-                <p class="mt-2">Medição Realizada Nº {{ medicao.numero_medicao }}</p>
-                <p class="mt-2">Valor: R$ {{ "%.2f"|format(medicao.valor) }}</p>
+                <img src="{{ url_for('static', filename=combinacao['imagem']) }}" alt="Imagem {{ loop.index }}" class="img-fluid rounded">
+                <p class="mt-2">{{ combinacao['medicao'].projeto_nome }}</p>
+                <p class="mt-2">Medição Realizada Nº {{ combinacao['medicao'].numero_medicao }}</p>
+                <p class="mt-2">Valor: R$ {{ combinacao['valor_formatado'] }}</p>
             </div>
             {% endfor %}
         </div>
