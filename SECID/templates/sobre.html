@@ -1,6 +1,25 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block body %}
+
+<style>
+    /* Garante que a barra de rolagem esteja sempre disponível */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto; /* Garante a barra de rolagem vertical */
+    }
+
+    .container {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .p-4 {
+        overflow-y: auto; /* Ativa rolagem interna se necessário */
+    }
+</style>
 
 <div class="container mt-5 d-flex justify-content-center">
     <div class="p-4 bg-white shadow rounded">
