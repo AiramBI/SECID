@@ -13,7 +13,7 @@
 
     .image-text-block {
         position: relative;
-        width: 100%; /* Mantém a largura responsiva */
+        width: 100%;
         margin-bottom: 50px;
     }
 
@@ -26,25 +26,30 @@
 
     .image-text-block .text-overlay {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
+        bottom: 20px; /* Texto na parte inferior da imagem */
         color: white;
-        padding: 1%; /* Padding ajustável */
-        background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-        border-radius: 8px;
-        width: 80%; /* Largura proporcional à imagem */
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Para maior legibilidade */
+    }
+
+    .text-left {
+        left: 20px;
+        text-align: left;
+    }
+
+    .text-right {
+        right: 20px;
+        text-align: right;
     }
 
     .text-overlay h3 {
-        font-size: 2.5vw; /* Tamanho proporcional à largura da janela */
+        font-size: 3vw; /* Tamanho proporcional à largura da tela */
         margin: 0;
     }
 
     .text-overlay p {
-        font-size: 1.5vw; /* Tamanho proporcional à largura da janela */
-        margin: 10px 0 0;
+        font-size: 1.8vw;
+        margin: 5px 0 0;
     }
 </style>
 
@@ -79,7 +84,6 @@
     <img src="{{ url_for('static', filename='secid (6).jpeg') }}" alt="Imagem Secundária" style="width: 100%; height: auto; border-radius: 8px;">
 </div>
 
-
 <!-- Bloco com quatro imagens menores -->
 <div class="container-fluid mt-5">
     <div class="p-4" style="background: rgba(255, 255, 255, 0.85); border-radius: 8px;">
@@ -109,12 +113,11 @@
     </div>
 </div>
 
-
 <!-- Três blocos com texto dentro das imagens -->
 <div class="container-fluid mt-5">
     <div class="image-text-block mb-5">
         <img src="{{ url_for('static', filename='secid (11).jpeg') }}" alt="Imagem Bloco 1">
-        <div class="text-overlay">
+        <div class="text-overlay text-left">
             <h3>Região Noroeste</h3>
             <p>XX ações</p>
             <p>XXX.XX Milhões</p>
@@ -122,7 +125,7 @@
     </div>
     <div class="image-text-block mb-5">
         <img src="{{ url_for('static', filename='secid (10).jpeg') }}" alt="Imagem Bloco 2">
-        <div class="text-overlay">
+        <div class="text-overlay text-right">
             <h3>Região Metropolitana</h3>
             <p>XX ações</p>
             <p>XXX.XX Milhões</p>
@@ -130,7 +133,7 @@
     </div>
     <div class="image-text-block">
         <img src="{{ url_for('static', filename='secid (1).JPG') }}" alt="Imagem Bloco 3">
-        <div class="text-overlay">
+        <div class="text-overlay text-left">
             <h3>Região Serrana</h3>
             <p>XX ações</p>
             <p>XXX.XX Milhões</p>
@@ -139,4 +142,3 @@
 </div>
 
 {% endblock %}
-
