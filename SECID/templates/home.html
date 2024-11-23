@@ -105,30 +105,35 @@
     </div>
 </div>
 
-<!-- Três blocos com texto dentro das imagens -->
+<!-- Blocos de informações por região -->
 <div class="container-fluid mt-5">
+    <!-- Região Norte -->
     <div class="image-text-block mb-5">
-        <img src="{{ url_for('static', filename='secid (11).jpeg') }}" alt="Imagem Bloco 1">
+        <img src="{{ url_for('static', filename='secid (11).jpeg') }}" alt="Imagem Região Norte">
         <div class="text-overlay text-left">
-            <h3>Região Noroeste</h3>
-            <p>XX ações</p>
-            <p>XXX.XX Milhões</p>
+            <h3>{{ regioes[0].nome }}</h3>
+            <p>{{ regioes[0].quantidade }} ações</p>
+            <p>{{ regioes[0].valor_total }} Milhões</p>
         </div>
     </div>
+
+    <!-- Região Metropolitana -->
     <div class="image-text-block mb-5">
-        <img src="{{ url_for('static', filename='secid (10).jpeg') }}" alt="Imagem Bloco 2">
+        <img src="{{ url_for('static', filename='secid (10).jpeg') }}" alt="Imagem Região Metropolitana">
         <div class="text-overlay text-right">
-            <h3>Região Metropolitana</h3>
-            <p>XX ações</p>
-            <p>XXX.XX Milhões</p>
+            <h3>{{ regioes[1].nome }}</h3>
+            <p>{{ regioes[1].quantidade }} ações</p>
+            <p>{{ regioes[1].valor_total }} Milhões</p>
         </div>
     </div>
+
+    <!-- Região Centro Sul -->
     <div class="image-text-block">
-        <img src="{{ url_for('static', filename='secid (1).JPG') }}" alt="Imagem Bloco 3">
+        <img src="{{ url_for('static', filename='secid (1).JPG') }}" alt="Imagem Região Centro Sul">
         <div class="text-overlay text-left">
-            <h3>Região Serrana</h3>
-            <p>XX ações</p>
-            <p>XXX.XX Milhões</p>
+            <h3>{{ regioes[2].nome }}</h3>
+            <p>{{ regioes[2].quantidade }} ações</p>
+            <p>{{ regioes[2].valor_total }} Milhões</p>
         </div>
     </div>
 </div>
