@@ -98,7 +98,7 @@ class FormMedicao(FlaskForm):
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     letra_medicao = StringField('Número da Medição', validators=[Optional()])  # Letra da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
-    valor = FloatField('Valor da Medição', validators=[DataRequired(), validate_positive])  # Valor da Medição
+    valor = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
     reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
     data_inicial = StringField('Data Inicial', validators=[DataRequired()])  # Data Inicial da Medição
     data_final = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
@@ -133,10 +133,7 @@ class FormMedicao(FlaskForm):
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
 
-    def validate_positive(form, field):
-        if field.data is not None and field.data < 0:
-            raise ValidationError('O valor não pode ser negativo.')
-
+    
 class FormMedicao2(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
     projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
