@@ -51,6 +51,8 @@ class FormMedicao_atualizada(FlaskForm):
 class FormObras(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired(),Regexp(r'^SEI-\d{6}/\d{6}/\d{4}$', message="SEI deve seguir o formato SEI-XXXXXX/XXXXXX/XXXX (22 caracteres).")])  # Número SEI
     obra = StringField('Obra', validators=[DataRequired()])  # Nome da Obra
+    cidade = StringField('Cidade', validators=[DataRequired()])  # Nome da Obra
+    reegiao = StringField('Região', validators=[DataRequired()])  # Nome da Obra
     status = SelectField('status',choices=[('ENTREGUE','ENTREGUE'),('ADESÃO','ADESÃO'),('ORDEM DE INICIO','ORDEM DE INICIO'),('ORDEM DE INICIO PARCIAL','ORDEM DE INICIO PARCIAL'),('EM EXECUÇÃO','EM EXECUÇÃO')],validators=[DataRequired()],render_kw={"class": "form-control"})
     contrato = StringField('Contrato', validators=[DataRequired(),Regexp(r'^\d{3}/\d{4}$', message="Contrato deve seguir o formato XXX/XXXX (8 caracteres).")])  # Número do Contrato
     empresa = StringField('Empresa', validators=[DataRequired()])  # Nome da Empresa
