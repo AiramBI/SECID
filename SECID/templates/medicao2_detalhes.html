@@ -1,24 +1,7 @@
 {% extends 'base.html' %}
-<style>
-    /* Garante que a barra de rolagem esteja sempre disponível */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-y: auto; /* Garante a barra de rolagem vertical */
-    }
 
-    .container {
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .p-4 {
-        overflow-y: auto; /* Ativa rolagem interna se necessário */
-    }
-</style>
 {% block body %}
-<div class="container mt-5">
+<div class="container mt-5" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
     <h1 class="text-center">Detalhes da Medição:{{ medicao.projeto_nome }} - {{ medicao.numero_medicao }}ª Medição</h1>
     <hr>
     <ul class="list-group">
