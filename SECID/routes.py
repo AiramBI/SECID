@@ -396,7 +396,7 @@ def sei():
 
 @app.route('/sobre')
 @login_required
-def noticias():
+def sobre():
     return render_template('sobre.html')
 
 @app.route('/noticias')
