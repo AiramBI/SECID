@@ -62,17 +62,17 @@ def home():
         {
             "nome": "Região Norte",
             "quantidade": regioes_dados["Norte"][0],
-            "valor_total": f"{regioes_dados['Norte'][1] / 1_000_000:,.2f}M".replace(",", "X").replace(".", ",").replace("X", "."),
+            "valor_total": f"{regioes_dados['Norte'][1] / 1_000_000:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
         },
         {
             "nome": "Região Metropolitana",
             "quantidade": regioes_dados["Metropolitana"][0],
-            "valor_total": f"{regioes_dados['Metropolitana'][1] / 1_000_000:,.2f}M".replace(",", "X").replace(".", ",").replace("X", "."),
+            "valor_total": f"{regioes_dados['Metropolitana'][1] / 1_000_000:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
         },
         {
             "nome": "Região Centro Sul",
             "quantidade": regioes_dados["Centro Sul"][0],
-            "valor_total": f"{regioes_dados['Centro Sul'][1] / 1_000_000:,.2f}M".replace(",", "X").replace(".", ",").replace("X", "."),
+            "valor_total": f"{regioes_dados['Centro Sul'][1] / 1_000_000:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
         },
     ]
 
