@@ -416,7 +416,11 @@ def sei():
 def sobre():
     return render_template('sobre.html')
 
-# Consulta para pegar as 20 últimas medições ordenadas por data_criacao
+
+@app.route('/noticias')
+@login_required
+def noticias():
+    # Consulta para pegar as 20 últimas medições ordenadas por data_criacao
     ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(20).all()
 
     # Formatar os dados para exibição no template
