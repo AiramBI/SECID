@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="container">
+<div class="container" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
     <h1>Editar Obra: {{ obra.obra }}</h1>
     <form method="POST">
         {{ form_obras.hidden_tag() }}
