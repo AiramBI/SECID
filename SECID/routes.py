@@ -416,8 +416,18 @@ def sei():
 def sobre():
     return render_template('sobre.html')
 
-@app.route('/noticias')
-@login_required
-def noticias():
-    return render_template('noticias.html')
+# Consulta para pegar as 20 últimas medições ordenadas por data_criacao
+    ultimas_medicoes = Medicao.query.order_by(Medicao.data_criacao.desc()).limit(20).all()
+
+    # Formatar os dados para exibição no template
+    noticias = [
+        {
+            "projeto_nome": medicao.projeto_nome,
+            "numero_medicao": medicao.numero_medicao,
+            "valor_formatado": f"{medicao.valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
+        }
+        for medicao in ultimas_medicoes
+    ]
+
+    return render_template('noticias.html', noticias=noticias)
 
