@@ -22,9 +22,15 @@ def home():
     # Lista de imagens fixas
     imagens = ['secid (1).jpeg', 'secid (7).jpeg', 'secid (9).jpeg', 'secid (2).jpeg']
 
-    # Combinar medições com imagens (até o máximo de 4)
-    combinacoes = list(zip(ultimas_medicoes, imagens))
-
+    # Combinar medições com imagens e formatar valores
+    combinacoes = [
+        {
+            "medicao": medicao,
+            "imagem": imagem,
+            "valor_formatado": f"{medicao.valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        }
+        for medicao, imagem in zip(ultimas_medicoes, imagens)
+    ]
     
     return render_template('home.html',combinacoes=combinacoes)
 
