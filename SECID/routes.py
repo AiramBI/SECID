@@ -78,7 +78,7 @@ def home():
     ]
 
     
-    return render_template('home.html',combinacoes=combinacoe, regioes=regioes)
+    return render_template('home.html',combinacoes=combinacoes, regioes=regioes)
 
 @app.route('/login', methods =['GET','POST'])
 def login():
