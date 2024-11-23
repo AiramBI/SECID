@@ -33,26 +33,48 @@ def home():
     ]
 
     def informacoes_regiao():
-    # Consulta para agrupar obras por região e calcular valor total e quantidade
-    obras_por_regiao = (
-        Obras.query
-        .with_entities(
-            Obras.regiao,
-            db.func.count(Obras.id).label('quantidade'),
-            db.func.sum(Obras.valor_atual).label('valor_total')
-        )
-        .group_by(Obras.regiao)
-        .all()
-    )
+    # Consultas específicas para cada região
+    regioes_dados = {
+        "Norte": Obras.query
+            .filter(Obras.regiao == "Norte")
+            .with_entities(
+                db.func.count(Obras.id).label("quantidade"),
+                db.func.sum(Obras.valor_atual).label("valor_total")
+            )
+            .first(),
+        "Metropolitana": Obras.query
+            .filter(Obras.regiao == "Metropolitana")
+            .with_entities(
+                db.func.count(Obras.id).label("quantidade"),
+                db.func.sum(Obras.valor_atual).label("valor_total")
+            )
+            .first(),
+        "Centro Sul": Obras.query
+            .filter(Obras.regiao == "Centro Sul")
+            .with_entities(
+                db.func.count(Obras.id).label("quantidade"),
+                db.func.sum(Obras.valor_atual).label("valor_total")
+            )
+            .first(),
+    }
 
-    # Formatar os dados para o template
+    # Formatar dados para o template
     regioes = [
         {
-            "regiao": regiao,
-            "quantidade": quantidade,
-            "valor_total": f"{valor_total:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-        }
-        for regiao, quantidade, valor_total in obras_por_regiao
+            "nome": "Região Norte",
+            "quantidade": regioes_dados["Norte"][0],
+            "valor_total": f"{regioes_dados['Norte'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
+        },
+        {
+            "nome": "Região Metropolitana",
+            "quantidade": regioes_dados["Metropolitana"][0],
+            "valor_total": f"{regioes_dados['Metropolitana'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
+        },
+        {
+            "nome": "Região Centro Sul",
+            "quantidade": regioes_dados["Centro Sul"][0],
+            "valor_total": f"{regioes_dados['Centro Sul'][1]:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
+        },
     ]
 
     
