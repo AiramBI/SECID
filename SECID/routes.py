@@ -394,7 +394,10 @@ def medicao3():
 def sei():
     return render_template('sei.html')
 
-
+@app.route('/sobre')
+@login_required
+def noticias():
+    return render_template('sobre.html')
 
 @app.route('/noticias')
 @login_required
