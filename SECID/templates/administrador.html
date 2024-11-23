@@ -44,6 +44,36 @@
                         {% endif %}
                     </div>
 
+                    <!-- Campo cidade -->
+                    <div class="form-group">
+                        {{ form_obras.cidade.label(class="form-control-label") }}
+                        {% if form_obras.cidade.errors %}
+                            {{ form_obras.cidade(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.cidade.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.cidade(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Campo regiao -->
+                    <div class="form-group">
+                        {{ form_obras.regiao.label(class="form-control-label") }}
+                        {% if form_obras.regiao.errors %}
+                            {{ form_obras.regiao(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.regiao.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.regiao(class="form-control") }}
+                        {% endif %}
+                    </div>
+
                     <!-- Campo SEI -->
                     <div class="form-group">
                         {{ form_obras.sei.label(class="form-control-label") }}
