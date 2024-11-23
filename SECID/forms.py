@@ -7,6 +7,8 @@ from wtforms_sqlalchemy.fields import QuerySelectField
 from SECID.models import Usuario, Obras
 
 
+
+
 class FormCriarConta(FlaskForm):
     username = StringField('Nome Completo',validators=[DataRequired()])
     cargo = StringField('Cargo',validators=[DataRequired()])
@@ -131,6 +133,9 @@ class FormMedicao(FlaskForm):
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
 
+    def validate_positive(form, field):
+    if field.data is not None and field.data < 0:
+        raise ValidationError('O valor não pode ser negativo.')
 
 class FormMedicao2(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
