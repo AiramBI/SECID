@@ -43,6 +43,21 @@
                             {{ form_obras.obra(class="form-control") }}
                         {% endif %}
                     </div>
+                    
+                    <!-- Campo STATS -->
+                    <div class="form-group">
+                        {{ form_obras.status.label(class="form-control-label") }}
+                        {% if form_obras.status.errors %}
+                            {{ form_obras.status(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_obras.status.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_obras.status(class="form-control") }}
+                        {% endif %}
+                    </div>
 
                     <!-- Campo cidade -->
                     <div class="form-group">
