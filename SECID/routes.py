@@ -383,7 +383,7 @@ def medicao():
 
         except Exception as e:
             flash(f'Ocorreu um erro ao enviar a tarefa para o Celery: {str(e)}', 'danger')
-            db.session.rollback()
+            database.session.rollback()
 
     else:
         if request.method == 'POST':
@@ -561,10 +561,10 @@ def medicao2_detalhes(id):
             medicao.documento_19 = request.form.get('documento_19', medicao.documento_19)
 
         try:
-            db.session.commit()  # Salva as alterações no banco de dados
+            database.session.commit()  # Salva as alterações no banco de dados
             flash("Medição atualizada com sucesso!", "success")
         except Exception as e:
-            db.session.rollback()
+            database.session.rollback()
             flash(f"Erro ao atualizar a medição: {str(e)}", "error")
 
         # Redireciona para a página da medição após a atualização
