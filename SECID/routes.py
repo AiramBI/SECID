@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 import logging
 from SECID.uploadarquivos import executarautomacao
+from SECID.enviar_medicao import registrar_medicao
 import uuid
 from num2words import num2words
 
