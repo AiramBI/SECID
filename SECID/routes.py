@@ -442,11 +442,13 @@ def medicao2_detalhes(id):
         # Atualizando os documentos com novos arquivos, se enviados
         for documento in documentos:
             if documento in request.files and request.files[documento].filename:
-                novo_arquivo = save_file(request.files[documento])  # Salva o arquivo
-                setattr(medicao, documento, novo_arquivo)  # Atualiza o atributo dinamicamente
+                # Salva o novo arquivo e atualiza o atributo
+                novo_arquivo = save_file(request.files[documento])
+                setattr(medicao, documento, novo_arquivo)
             else:
-                # Mantém o valor antigo se nenhum arquivo foi enviado
-                setattr(medicao, documento, request.form.get(documento, getattr(medicao, documento)))
+                # Mantém o valor antigo explicitamente
+                valor_antigo = getattr(medicao, documento)  # Obtém o valor atual da instância
+                setattr(medicao, documento, valor_antigo)  # Reaplica o valor antigo
         
         try:
             database.session.commit()  # Salva as alterações no banco de dados
