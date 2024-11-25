@@ -47,7 +47,7 @@ def registrar_medicao():
         "18.Nota de empenho",
         "19.Nota fiscal e ISS"
     ]
-     caminho_arquivo = [
+    caminho_arquivo = [
     "medicao.documento_1",
     "medicao.documento_2",
     "medicao.documento_3",
