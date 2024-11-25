@@ -576,7 +576,7 @@ def medicao2_detalhes(id):
     lei_contrato = obra.lei_contrato if obra else ""
 
     # Informações para o checklist
-    contrato = obra.cod_contrato if obra else ""
+    contrato = obra.cod_contrato_sei if obra else ""
     seguro_garantia = obra.cod_seguro_garantia if obra else ""
     carta_solicitacao_prorrogacao_contratual = obra.cod_carta_solicitacao_prorrogacao_contratual if obra else ""
     processo_rerratificacao = obra.cod_processo_rerratificacao if obra else ""
