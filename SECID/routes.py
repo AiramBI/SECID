@@ -420,7 +420,9 @@ def medicao2_detalhes(id):
     if request.method == 'POST':
         # Atualizando os dados da medição
         medicao.valor = request.form.get('valor', medicao.valor)
-        medicao.status = request.form.get('status', medicao.status)
+        medicao.sei = request.form.get('status', medicao.sei)
+        medicao.numero_medicao = request.form.get('status', medicao.numero_medicao)
+        medicao.letra_medicao = request.form.get('status', medicao.letra_medicao)
         medicao.projeto_nome = request.form.get('projeto_nome', medicao.projeto_nome)
         medicao.descricao = request.form.get('descricao', medicao.descricao)
         medicao.reajustamento = request.form.get('reajustamento', medicao.reajustamento)
