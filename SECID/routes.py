@@ -488,9 +488,9 @@ def medicao2_detalhes(id):
     obra = Obras.query.filter_by(obra=medicao.projeto_nome).first()
 
     # Busca informações das tabelas relacionadas com base na obra
-    medicao_inicial = Medicao_inicial.query.filter_by(obra=medicao.projeto_nome).all()
-    medicao_atualizada = Medicao_atualizada.query.filter_by(obra=medicao.projeto_nome).all()
-    medicao_resumida = Medicao_resumida.query.filter_by(obra=medicao.projeto_nome).all()
+    medicao_inicial = Medicao_inicial.query.filter_by(obra=obras.obra).all()
+    medicao_atualizada = Medicao_atualizada.query.filter_by(obra=obras.obra).all()
+    medicao_resumida = Medicao_resumida.query.filter_by(obra=obras.obra).all()
     
     return render_template('medicao2_detalhes.html', medicao=medicao, obra=obra)
 
