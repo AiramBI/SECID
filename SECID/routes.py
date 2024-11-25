@@ -9,7 +9,7 @@ import os
 import logging
 from SECID.uploadarquivos import executarautomacao
 import uuid
-
+from num2words import num2words
 
 logging.basicConfig(level=logging.INFO)
 
