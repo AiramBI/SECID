@@ -444,7 +444,8 @@ def medicao2_detalhes(id):
             if documento in request.files and request.files[documento].filename:
                 # Salva o novo arquivo e atualiza o atributo
                 novo_arquivo = save_file(request.files[documento])
-                setattr(medicao, documento, novo_arquivo)
+                if novo_arquivo:
+                    setattr(medicao, documento, novo_arquivo)
             else:
                 # Mantém o valor antigo explicitamente
                 valor_antigo = getattr(medicao, documento)  # Obtém o valor atual da instância
