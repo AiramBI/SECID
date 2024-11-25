@@ -489,7 +489,7 @@ def medicao2_detalhes(id):
     print(medicao.documento_1)
 
     logging.basicConfig(level=logging.DEBUG)
-    logging.debug(f"Coordenacao: {medicao.documento1}")
+    logging.debug(f"Coordenacao: {medicao.documento_1}")
 
     # Busca a obra associada com base no projeto_nome da medição
     obra = Obras.query.filter_by(obra=medicao.projeto_nome).first()
