@@ -439,11 +439,88 @@ def medicao2_detalhes(id):
             "documento_19"
         ]
 
-        # Atualizando os documentos com novos arquivos, se enviados
-        for documento in documentos:
-            if documento in request.files and request.files[documento].filename:
-                setattr(medicao, documento, save_file(request.files[documento]))
-
+        # # Atualizando os documentos com novos arquivos, se enviados
+        # for documento in documentos:
+        #     if documento in request.files and request.files[documento].filename:
+        #         setattr(medicao, documento, save_file(request.files[documento]))
+        # Atualizando os documentos
+        if 'documento_1' in request.files and request.files['documento_1'].filename:
+            medicao.documento_1 = save_file(request.files['documento_1'])
+        
+        if 'documento_2' in request.files and request.files['documento_2'].filename:
+            medicao.documento_2 = save_file(request.files['documento_2'])
+        
+        if 'documento_3' in request.files and request.files['documento_3'].filename:
+            medicao.documento_3 = save_file(request.files['documento_3'])
+        
+        if 'documento_3_1' in request.files and request.files['documento_3_1'].filename:
+            medicao.documento_3_1 = save_file(request.files['documento_3_1'])
+        
+        if 'documento_4' in request.files and request.files['documento_4'].filename:
+            medicao.documento_4 = save_file(request.files['documento_4'])
+        
+        if 'documento_5' in request.files and request.files['documento_5'].filename:
+            medicao.documento_5 = save_file(request.files['documento_5'])
+        
+        if 'documento_6' in request.files and request.files['documento_6'].filename:
+            medicao.documento_6 = save_file(request.files['documento_6'])
+        
+        if 'documento_7' in request.files and request.files['documento_7'].filename:
+            medicao.documento_7 = save_file(request.files['documento_7'])
+        
+        if 'documento_8' in request.files and request.files['documento_8'].filename:
+            medicao.documento_8 = save_file(request.files['documento_8'])
+        
+        if 'documento_9' in request.files and request.files['documento_9'].filename:
+            medicao.documento_9 = save_file(request.files['documento_9'])
+        
+        if 'documento_10' in request.files and request.files['documento_10'].filename:
+            medicao.documento_10 = save_file(request.files['documento_10'])
+        
+        if 'documento_10_1' in request.files and request.files['documento_10_1'].filename:
+            medicao.documento_10_1 = save_file(request.files['documento_10_1'])
+        
+        if 'documento_11' in request.files and request.files['documento_11'].filename:
+            medicao.documento_11 = save_file(request.files['documento_11'])
+        
+        if 'documento_12' in request.files and request.files['documento_12'].filename:
+            medicao.documento_12 = save_file(request.files['documento_12'])
+        
+        if 'documento_13' in request.files and request.files['documento_13'].filename:
+            medicao.documento_13 = save_file(request.files['documento_13'])
+        
+        if 'documento_14' in request.files and request.files['documento_14'].filename:
+            medicao.documento_14 = save_file(request.files['documento_14'])
+        
+        if 'documento_15' in request.files and request.files['documento_15'].filename:
+            medicao.documento_15 = save_file(request.files['documento_15'])
+        
+        if 'documento_15_1' in request.files and request.files['documento_15_1'].filename:
+            medicao.documento_15_1 = save_file(request.files['documento_15_1'])
+        
+        if 'documento_15_2' in request.files and request.files['documento_15_2'].filename:
+            medicao.documento_15_2 = save_file(request.files['documento_15_2'])
+        
+        if 'documento_15_3' in request.files and request.files['documento_15_3'].filename:
+            medicao.documento_15_3 = save_file(request.files['documento_15_3'])
+        
+        if 'documento_15_4' in request.files and request.files['documento_15_4'].filename:
+            medicao.documento_15_4 = save_file(request.files['documento_15_4'])
+        
+        if 'documento_15_5' in request.files and request.files['documento_15_5'].filename:
+            medicao.documento_15_5 = save_file(request.files['documento_15_5'])
+        
+        if 'documento_16' in request.files and request.files['documento_16'].filename:
+            medicao.documento_16 = save_file(request.files['documento_16'])
+        
+        if 'documento_17' in request.files and request.files['documento_17'].filename:
+            medicao.documento_17 = save_file(request.files['documento_17'])
+        
+        if 'documento_18' in request.files and request.files['documento_18'].filename:
+            medicao.documento_18 = save_file(request.files['documento_18'])
+        
+        if 'documento_19' in request.files and request.files['documento_19'].filename:
+            medicao.documento_19 = save_file(request.files['documento_19'])
         try:
             database.session.commit()  # Salva as alterações no banco de dados
             flash("Medição atualizada com sucesso!", "success")
