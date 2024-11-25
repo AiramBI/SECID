@@ -44,6 +44,32 @@ nomes_documentos = [
     "18.Nota de empenho",
     "19.Nota fiscal e ISS"
 ]
+caminho_arquivo = [medicao.documento_1 
+    medicao.documento_2,
+    medicao.documento_3,
+    medicao.documento_3_1,
+    medicao.documento_4,
+    medicao.documento_5,
+    medicao.documento_6,
+    medicao.documento_7,
+    medicao.documento_8,
+    medicao.documento_9,
+    medicao.documento_10,
+    medicao.documento_10_1,
+    medicao.documento_11,
+    medicao.documento_12,
+    medicao.documento_13,
+    medicao.documento_14,
+    medicao.documento_15,
+    medicao.documento_15_1,
+    medicao.documento_15_2,
+    medicao.documento_15_3,
+    medicao.documento_15_4,
+    medicao.documento_15_5,
+    medicao.documento_16,
+    medicao.documento_17,
+    medicao.documento_18,
+    medicao.documento_19]
 data_inicial = "01/08/2024"
 data_final = "15/08/2024"
 valor_total_previsto = 5000000.00
@@ -210,7 +236,7 @@ try:
     botao_salvar = WebDriverWait(navegador, 10).until(EC.presence_of_element_located((By.ID, "btnSalvar")))
     botao_salvar.click()
 
-    for nome in nomes_documentos:
+    for nome, caminho_arquivo in zip(nomes_documentos, caminho_arquivo):
         #UPLOAD DE DOCUMENTOS
         campo_clicavel = navegador.switch_to.default_content()
         campo_clicavel2 = WebDriverWait(navegador,10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
@@ -244,11 +270,11 @@ try:
         label_element = navegador.find_element(By.XPATH, "//label[@for='optPublico']")
         label_element.click()
 
-        caminho_arquivo = os.path.join(os.path.dirname(__file__), 'static', 'seu_arquivo.pdf')
+        caminhoarquivo = os.path.join(os.path.dirname(__file__), 'static', 'seu_arquivo.pdf')
 
         # Localize o campo de upload e envie o caminho do arquivo
         campo_upload = navegador.find_element(By.ID, "filArquivo")
-        campo_upload.send_keys(caminho_arquivo)
+        campo_upload.send_keys(caminhoarquivo)
 
         # Aguarda o elemento "Remover Item" aparecer na página
         WebDriverWait(navegador, 10).until(
