@@ -65,6 +65,13 @@ class Obras(database.Model):
     
      # Relacionamento com Medicao
     medicoes = database.relationship('Medicao', backref='obra_relacionada', lazy=True)
+    # Relacionamento com Medicao_inicial
+    medicoes_iniciais = database.relationship('Medicao_inicial', backref='obra_relacionada', lazy=True)
+    # Relacionamento com Medicao_atualizada
+    medicoes_atualizadas = database.relationship('Medicao_atualizada', backref='obra_relacionada', lazy=True)
+    # Relacionamento com Medicao_resumida
+    medicoes_resumidas = database.relationship('Medicao_resumida', backref='obra_relacionada', lazy=True)
+
 
 class Medicao_inicial(database.Model):
 
