@@ -399,12 +399,62 @@ def medicao2():
     return render_template('medicao2.html', projetos=projetos)
 
 
-@app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET'])
+@app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET','POST'])
 @login_required
 def medicao2_detalhes(id):
     # Busca detalhes da medição específica
     medicao = Medicao.query.get_or_404(id)
 
+    
+    if request.method == 'POST':
+        # Atualizando os dados da medição
+        medicao.valor = request.form.get('valor', medicao.valor)
+        medicao.status = request.form.get('status', medicao.status)
+        medicao.projeto_nome = request.form.get('projeto_nome', medicao.projeto_nome)
+        medicao.descricao = request.form.get('descricao', medicao.descricao)
+        medicao.reajustamento = request.form.get('reajustamento', medicao.reajustamento)
+        medicao.data_inicial = request.form.get('data_inicial', medicao.data_inicial)
+        medicao.data_final = request.form.get('data_final', medicao.data_final)
+        
+        # Atualizando os documentos
+        medicao.documento_1 = request.form.get('documento_1', medicao.documento_1)
+        medicao.documento_2 = request.form.get('documento_2', medicao.documento_2)
+        medicao.documento_3 = request.form.get('documento_3', medicao.documento_3)
+        medicao.documento_3_1 = request.form.get('documento_3_1', medicao.documento_3_1)
+        medicao.documento_4 = request.form.get('documento_4', medicao.documento_4)
+        medicao.documento_5 = request.form.get('documento_5', medicao.documento_5)
+        medicao.documento_6 = request.form.get('documento_6', medicao.documento_6)
+        medicao.documento_7 = request.form.get('documento_7', medicao.documento_7)
+        medicao.documento_8 = request.form.get('documento_8', medicao.documento_8)
+        medicao.documento_9 = request.form.get('documento_9', medicao.documento_9)
+        medicao.documento_10 = request.form.get('documento_10', medicao.documento_10)
+        medicao.documento_10_1 = request.form.get('documento_10_1', medicao.documento_10_1)
+        medicao.documento_11 = request.form.get('documento_11', medicao.documento_11)
+        medicao.documento_12 = request.form.get('documento_12', medicao.documento_12)
+        medicao.documento_13 = request.form.get('documento_13', medicao.documento_13)
+        medicao.documento_14 = request.form.get('documento_14', medicao.documento_14)
+        medicao.documento_15 = request.form.get('documento_15', medicao.documento_15)
+        medicao.documento_15_1 = request.form.get('documento_15_1', medicao.documento_15_1)
+        medicao.documento_15_2 = request.form.get('documento_15_2', medicao.documento_15_2)
+        medicao.documento_15_3 = request.form.get('documento_15_3', medicao.documento_15_3)
+        medicao.documento_15_4 = request.form.get('documento_15_4', medicao.documento_15_4)
+        medicao.documento_15_5 = request.form.get('documento_15_5', medicao.documento_15_5)
+        medicao.documento_16 = request.form.get('documento_16', medicao.documento_16)
+        medicao.documento_17 = request.form.get('documento_17', medicao.documento_17)
+        medicao.documento_18 = request.form.get('documento_18', medicao.documento_18)
+        medicao.documento_19 = request.form.get('documento_19', medicao.documento_19)
+
+        try:
+            db.session.commit()  # Salva as alterações no banco de dados
+            flash("Medição atualizada com sucesso!", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Erro ao atualizar a medição: {str(e)}", "error")
+
+        # Redireciona para a página da medição após a atualização
+        return redirect(url_for('medicao2_detalhes', id=id))
+    
+    
     # Ajusta o caminho dos documentos para servir via a pasta `static`
     base_url = '/static'  # Caminho usado para servir arquivos na web
     medicao.documento_1 = f"{base_url}/{medicao.documento_1}"  # 1 - Carta assinada pela empresa
