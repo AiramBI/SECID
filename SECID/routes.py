@@ -491,6 +491,123 @@ def medicao2_detalhes(id):
     medicao_inicial = Medicao_inicial.query.filter_by(obra=medicao.projeto_nome).all()
     medicao_atualizada = Medicao_atualizada.query.filter_by(obra=medicao.projeto_nome).all()
     medicao_resumida = Medicao_resumida.query.filter_by(obra=medicao.projeto_nome).all()
+    # Variáveis com base nas tabelas
+    coordenacao = obra.coordenacao if obra else None
+    observacoes_processo = ""
+
+    nomes_documentos = [
+        "01.Carta assinada pela empresa",
+        "02.Publicação da Comissão de Fiscalização",
+        "03.Planilha de Medição (PDF)",
+        "03.1.Planilha de Medição - Arquivo em Excel",
+        "04.Memória de Cálculo",
+        "05.Cronograma Físico - Financeiro",
+        "06.Diário de Obras",
+        "07.Relatório Fotográfico",
+        "08.Relação de Funcionários",
+        "09.Folha de ponto dos funcionários",
+        "10.GFD FGTS DIGITAL",
+        "10.1.DCTF WEB",
+        "11.Guias e Comprovantes de Pagamentos de FGTS",
+        "12.Folha de Pagamento",
+        "13.Comprovante de Pagamento de salários",
+        "14.Plano de segurança do Trabalho",
+        "15.Certidões atualizadas",
+        "15.1.Certidão de regularidade junto ao FGTS",
+        "15.2.Certidão negativa de débito trabalhista",
+        "15.3.Certidão negativa de débitos federais",
+        "15.4.Certidão de regularidade fiscal junto ao ICMS",
+        "15.5.Certidão de regularidade fiscal junto ao ISS",
+        "16.Contrato",
+        "17.ART emitida pelo CREA",
+        "18.Nota de empenho",
+        "19.Nota fiscal e ISS"
+    ]
+
+    data_inicial = medicao.data_inicial
+    data_final = medicao.data_final
+
+    # Valores previstos e iniciais
+    valor_total_previsto = obra.valor_atual if obra else 0
+    valor_total_inicial = obra.valor_inicial if obra else 0
+
+    # Valor atual previsto e inicial com base nas medições
+    medicao_atualizada = (
+        Medicao_atualizada.query.filter_by(obra=obra.obra).order_by(Medicao_atualizada.medicao.desc()).first()
+        if obra else None
+    )
+    valor_atual_previsto = medicao_atualizada.acumulado if medicao_atualizada else 0
+
+    medicao_inicial = (
+        Medicao_inicial.query.filter_by(obra=obra.obra).order_by(Medicao_inicial.medicao.desc()).first()
+        if obra else None
+    )
+    valor_atual_inicial = medicao_inicial.acumulado if medicao_inicial else 0
+
+    # Valor atual medido
+    medicoes_resumidas = Medicao_resumida.query.filter_by(obra=obra.obra).all() if obra else []
+    valor_atual_medido = medicao.valor + sum(m.valor_medicao for m in medicoes_resumidas)
+
+    # Prazo e aditivos
+    aditivo = obra.aditivos_prazo if obra else 0
+    inicial = obra.prazo_inicial if obra else 0
+
+    prazo_aditivo = f"'{aditivo}' ('{num2words(aditivo, lang='pt_BR')})"
+    prazo_inicial = f"'{inicial}' ('{num2words(inicial, lang='pt_BR')})"
+
+    # Outros valores e informações
+    numero_contrato = obra.contrato if obra else ""
+    periodo_medicao = f"{data_inicial} a {data_final}"
+    numero_medicao = medicao.numero_medicao
+    porcentagem_concluida_previsto = valor_atual_previsto / valor_total_previsto if valor_total_previsto else 0
+    porcentagem_concluida_inicial = valor_atual_inicial / valor_total_inicial if valor_total_inicial else 0
+    porcentagem_concluida_medida = valor_atual_medido / valor_total_previsto if valor_total_previsto else 0
+
+    reajustamento = medicao.reajustamento
+    reajustamento_total = obra.reajustamento if obra else 0
+    valor_medicao = medicao.valor
+
+    rerratificacao = obra.rerratificacao if obra else ""
+    processo_mae = obra.sei if obra else ""
+    objeto = obra.objeto if obra else ""
+
+    documento_gestor_contrato = obra.documento_gestor_contrato if obra else ""
+    publicacao_comissao_fiscalizacao = obra.publicacao_comissao_fiscalizacao if obra else ""
+    lei_contrato = obra.lei_contrato if obra else ""
+
+    # Informações para o checklist
+    contrato = obra.cod_contrato if obra else ""
+    seguro_garantia = obra.cod_seguro_garantia if obra else ""
+    carta_solicitacao_prorrogacao_contratual = obra.cod_carta_solicitacao_prorrogacao_contratual if obra else ""
+    processo_rerratificacao = obra.cod_processo_rerratificacao if obra else ""
+    termo_aditivo = obra.cod_termo_aditivo if obra else ""
+    contratada = obra.empresa if obra else ""
+    cnpj_empresa = obra.cnpj if obra else ""
+
+    especificacao_processo = f"'{numero_medicao}'ª Medição - Obra:'{obra.obra}' - Período:'{periodo_medicao}'" if obra else ""
+
+    fiscal_tecnico_1 = obra.fiscal1 if obra else ""
+    id_fiscal_tecnico_1 = obra.id_fiscal1 if obra else ""
+    fiscal_tecnico_2 = obra.fiscal2 if obra else ""
+    id_fiscal_tecnico_2 = obra.id_fiscal2 if obra else ""
+    gestor1 = obra.gestor if obra else ""
+    id_gestor = obra.gestor_id if obra else ""
+
+    carimbo_fiscal1 = f"{fiscal_tecnico_1}\nFiscal Técnico\n{id_fiscal_tecnico_1}"
+    carimbo_fiscal2 = f"{fiscal_tecnico_2}\nFiscal Técnico\n{id_fiscal_tecnico_2}"
+    carimbo_gestor = f"{gestor1}\nGestor do Contrato\n{id_gestor}"
+
+    # Printando variáveis para depuração
+    print(f"Coordenacao: {coordenacao}")
+    print(f"Observacoes Processo: {observacoes_processo}")
+    print(f"Nomes Documentos: {nomes_documentos}")
+    print(f"Data Inicial: {data_inicial}, Data Final: {data_final}")
+    print(f"Valor Total Previsto: {valor_total_previsto}")
+    print(f"Valor Atual Previsto: {valor_atual_previsto}")
+    print(f"Obra: {obra}")
+    print(f"Medição Atualizada: {medicao_atualizada}")
+
+
     
     return render_template(
         'medicao2_detalhes.html',
@@ -498,7 +615,44 @@ def medicao2_detalhes(id):
         obra=obra,
         medicao_inicial=medicao_inicial,
         medicao_atualizada=medicao_atualizada,
-        medicao_resumida=medicao_resumida
+        medicao_resumida=medicao_resumida,coordenacao=coordenacao,
+        observacoes_processo=observacoes_processo,
+        nomes_documentos=nomes_documentos,
+        data_inicial=data_inicial,
+        data_final=data_final,
+        valor_total_previsto=valor_total_previsto,
+        valor_atual_previsto=valor_atual_previsto,
+        valor_total_inicial=valor_total_inicial,
+        valor_atual_inicial=valor_atual_inicial,
+        valor_atual_medido=valor_atual_medido,
+        prazo_aditivo=prazo_aditivo,
+        prazo_inicial=prazo_inicial,
+        numero_contrato=numero_contrato,
+        periodo_medicao=periodo_medicao,
+        numero_medicao=numero_medicao,
+        porcentagem_concluida_previsto=porcentagem_concluida_previsto,
+        porcentagem_concluida_inicial=porcentagem_concluida_inicial,
+        porcentagem_concluida_medida=porcentagem_concluida_medida,
+        reajustamento=reajustamento,
+        reajustamento_total=reajustamento_total,
+        valor_medicao=valor_medicao,
+        rerratificacao=rerratificacao,
+        processo_mae=processo_mae,
+        objeto=objeto,
+        documento_gestor_contrato=documento_gestor_contrato,
+        publicacao_comissao_fiscalizacao=publicacao_comissao_fiscalizacao,
+        lei_contrato=lei_contrato,
+        contrato=contrato,
+        seguro_garantia=seguro_garantia,
+        carta_solicitacao_prorrogacao_contratual=carta_solicitacao_prorrogacao_contratual,
+        processo_rerratificacao=processo_rerratificacao,
+        termo_aditivo=termo_aditivo,
+        contratada=contratada,
+        cnpj_empresa=cnpj_empresa,
+        especificacao_processo=especificacao_processo,
+        carimbo_fiscal1=carimbo_fiscal1,
+        carimbo_fiscal2=carimbo_fiscal2,
+        carimbo_gestor=carimbo_gestor,
     )
 
 @app.route('/download/<filename>')
