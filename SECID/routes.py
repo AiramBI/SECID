@@ -598,14 +598,16 @@ def medicao2_detalhes(id):
     carimbo_gestor = f"{gestor1}\nGestor do Contrato\n{id_gestor}"
 
     # Printando variáveis para depuração
-    print(f"Coordenacao: {coordenacao}")
-    print(f"Observacoes Processo: {observacoes_processo}")
-    print(f"Nomes Documentos: {nomes_documentos}")
-    print(f"Data Inicial: {data_inicial}, Data Final: {data_final}")
-    print(f"Valor Total Previsto: {valor_total_previsto}")
-    print(f"Valor Atual Previsto: {valor_atual_previsto}")
-    print(f"Obra: {obra}")
-    print(f"Medição Atualizada: {medicao_atualizada}")
+    logging.basicConfig(level=logging.DEBUG)
+    logging.debug(f"Coordenacao: {coordenacao}")
+    logging.debug(f"Coordenacao: {coordenacao}")
+    logging.debug(f"Observacoes Processo: {observacoes_processo}")
+    logging.debug(f"Nomes Documentos: {nomes_documentos}")
+    logging.debug(f"Data Inicial: {data_inicial}, Data Final: {data_final}")
+    logging.debug(f"Valor Total Previsto: {valor_total_previsto}")
+    logging.debug(f"Valor Atual Previsto: {valor_atual_previsto}")
+    logging.debug(f"Obra: {obra}")
+    logging.debug(f"Medição Atualizada: {medicao_atualizada}")
 
 
     
