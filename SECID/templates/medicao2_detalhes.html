@@ -17,33 +17,137 @@
             <li class="list-group-item"><strong>Data Inicial:</strong> <input type="text" name="data_inicial" value="{{ medicao.data_inicial }}" class="form-control"></li>
             <li class="list-group-item"><strong>Data Final:</strong> <input type="text" name="data_final" value="{{ medicao.data_final }}" class="form-control"></li>
 
-            <!-- Links para abrir todos os documentos -->
-            <li class="list-group-item"><strong>1 - Carta assinada pela empresa:</strong> <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>2 - Publicação da Comissão de Fiscalização:</strong> <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>3 - Planilha de Medição (PDF):</strong> <a href="{{ medicao.documento_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>3.1 - Planilha de Medição - Arquivo em Excel:</strong> <a href="{{ medicao.documento_3_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>4 - Memória de Cálculo:</strong> <a href="{{ medicao.documento_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>5 - Cronograma Físico - Financeiro:</strong> <a href="{{ medicao.documento_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>6 - Diário de Obras:</strong> <a href="{{ medicao.documento_6 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>7 - Relatório Fotográfico:</strong> <a href="{{ medicao.documento_7 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>8 - Relação de Funcionários:</strong> <a href="{{ medicao.documento_8 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>9 - Folha de ponto dos funcionários:</strong> <a href="{{ medicao.documento_9 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>10 - GFD FGTS DIGITAL:</strong> <a href="{{ medicao.documento_10 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>10.1 - DCTF WEB:</strong> <a href="{{ medicao.documento_10_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>11 - Guias e Comprovantes de Pagamentos de FGTS:</strong> <a href="{{ medicao.documento_11 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>12 - Folha de Pagamento:</strong> <a href="{{ medicao.documento_12 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>13 - Comprovante de Pagamento de salários:</strong> <a href="{{ medicao.documento_13 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>14 - Plano de segurança do Trabalho:</strong> <a href="{{ medicao.documento_14 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15 - Certidões atualizadas:</strong> <a href="{{ medicao.documento_15 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15.1 - Certidão de regularidade junto ao FGTS:</strong> <a href="{{ medicao.documento_15_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15.2 - Certidão negativa de débito trabalhista:</strong> <a href="{{ medicao.documento_15_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15.3 - Certidão negativa de débitos federais:</strong> <a href="{{ medicao.documento_15_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15.4 - Certidão de regularidade fiscal junto ao ICMS:</strong> <a href="{{ medicao.documento_15_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>15.5 - Certidão de regularidade fiscal junto ao ISS:</strong> <a href="{{ medicao.documento_15_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>16 - Contrato:</strong> <a href="{{ medicao.documento_16 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>17 - ART emitida pelo CREA:</strong> <a href="{{ medicao.documento_17 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>18 - Nota de empenho:</strong> <a href="{{ medicao.documento_18 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-            <li class="list-group-item"><strong>19 - Nota fiscal e ISS:</strong> <a href="{{ medicao.documento_19 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <!-- Campos de upload para todos os documentos -->
+            <li class="list-group-item">
+                <strong>1 - Carta assinada pela empresa:</strong> 
+                <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_1" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>2 - Publicação da Comissão de Fiscalização:</strong> 
+                <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_2" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>3 - Planilha de Medição (PDF):</strong> 
+                <a href="{{ medicao.documento_3 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_3" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>3.1 - Planilha de Medição - Arquivo em Excel:</strong> 
+                <a href="{{ medicao.documento_3_1 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_3_1" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>4 - Memória de Cálculo:</strong> 
+                <a href="{{ medicao.documento_4 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_4" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>5 - Cronograma Físico - Financeiro:</strong> 
+                <a href="{{ medicao.documento_5 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_5" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>6 - Diário de Obras:</strong> 
+                <a href="{{ medicao.documento_6 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_6" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>7 - Relatório Fotográfico:</strong> 
+                <a href="{{ medicao.documento_7 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_7" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>8 - Relação de Funcionários:</strong> 
+                <a href="{{ medicao.documento_8 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_8" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>9 - Folha de ponto dos funcionários:</strong> 
+                <a href="{{ medicao.documento_9 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_9" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>10 - GFD FGTS DIGITAL:</strong> 
+                <a href="{{ medicao.documento_10 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_10" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>10.1 - DCTF WEB:</strong> 
+                <a href="{{ medicao.documento_10_1 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_10_1" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>11 - Guias e Comprovantes de Pagamentos de FGTS:</strong> 
+                <a href="{{ medicao.documento_11 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_11" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>12 - Folha de Pagamento:</strong> 
+                <a href="{{ medicao.documento_12 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_12" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>13 - Comprovante de Pagamento de salários:</strong> 
+                <a href="{{ medicao.documento_13 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_13" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>14 - Plano de segurança do Trabalho:</strong> 
+                <a href="{{ medicao.documento_14 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_14" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15 - Certidões atualizadas:</strong> 
+                <a href="{{ medicao.documento_15 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15.1 - Certidão de regularidade junto ao FGTS:</strong> 
+                <a href="{{ medicao.documento_15_1 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15_1" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15.2 - Certidão negativa de débito trabalhista:</strong> 
+                <a href="{{ medicao.documento_15_2 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15_2" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15.3 - Certidão negativa de débitos federais:</strong> 
+                <a href="{{ medicao.documento_15_3 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15_3" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15.4 - Certidão de regularidade fiscal junto ao ICMS:</strong> 
+                <a href="{{ medicao.documento_15_4 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15_4" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>15.5 - Certidão de regularidade fiscal junto ao ISS:</strong> 
+                <a href="{{ medicao.documento_15_5 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_15_5" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>16 - Contrato:</strong> 
+                <a href="{{ medicao.documento_16 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_16" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>17 - ART emitida pelo CREA:</strong> 
+                <a href="{{ medicao.documento_17 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_17" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>18 - Nota de empenho:</strong> 
+                <a href="{{ medicao.documento_18 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_18" class="form-control mt-2">
+            </li>
+            <li class="list-group-item">
+                <strong>19 - Nota fiscal e ISS:</strong> 
+                <a href="{{ medicao.documento_19 }}" target="_blank" class="btn btn-link">Abrir</a>
+                <input type="file" name="documento_19" class="form-control mt-2">
+            </li>
 
 
             <!-- Informações da Obra -->
