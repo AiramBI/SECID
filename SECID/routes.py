@@ -488,11 +488,18 @@ def medicao2_detalhes(id):
     obra = Obras.query.filter_by(obra=medicao.projeto_nome).first()
 
     # Busca informações das tabelas relacionadas com base na obra
-    medicao_inicial = Medicao_inicial.query.filter_by(obra=Obras.obra).all()
-    medicao_atualizada = Medicao_atualizada.query.filter_by(obra=Obras.obra).all()
-    medicao_resumida = Medicao_resumida.query.filter_by(obra=Obras.obra).all()
+    medicao_inicial = Medicao_inicial.query.filter_by(obra=medicao.projeto_nome).all()
+    medicao_atualizada = Medicao_atualizada.query.filter_by(obra=medicao.projeto_nome).all()
+    medicao_resumida = Medicao_resumida.query.filter_by(obra=medicao.projeto_nome).all()
     
-    return render_template('medicao2_detalhes.html', medicao=medicao, obra=obra)
+    return render_template(
+        'medicao2_detalhes.html',
+        medicao=medicao,
+        obra=obra,
+        medicao_inicial=medicao_inicial,
+        medicao_atualizada=medicao_atualizada,
+        medicao_resumida=medicao_resumida
+    )
 
 @app.route('/download/<filename>')
 def download_file(filename):
