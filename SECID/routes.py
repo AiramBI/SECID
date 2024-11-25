@@ -538,11 +538,11 @@ def medicao2_detalhes(id):
     )
     valor_atual_previsto = medicao_atualizada.acumulado if medicao_atualizada else 0
 
-    medicao_inicial = (
+    medicao_inicial2 = (
         Medicao_inicial.query.filter_by(obra=obra.obra).order_by(Medicao_inicial.medicao.desc()).first()
         if obra else None
     )
-    valor_atual_inicial = medicao_inicial.acumulado if medicao_inicial else 0
+    valor_atual_inicial = medicao_inicial2.acumulado if medicao_inicial2 else 0
 
     # Valor atual medido
     medicoes_resumidas = Medicao_resumida.query.filter_by(obra=obra.obra).all() if obra else []
