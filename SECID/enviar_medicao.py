@@ -236,7 +236,7 @@ try:
     botao_salvar = WebDriverWait(navegador, 10).until(EC.presence_of_element_located((By.ID, "btnSalvar")))
     botao_salvar.click()
 
-    for nome, caminho_arquivo in zip(nomes_documentos, caminho_arquivo):
+    for nome, caminhoarquivo in zip(nomes_documentos, caminho_arquivo):
         #UPLOAD DE DOCUMENTOS
         campo_clicavel = navegador.switch_to.default_content()
         campo_clicavel2 = WebDriverWait(navegador,10).until(EC.frame_to_be_available_and_switch_to_it((By.ID, "ifrVisualizacao")))
