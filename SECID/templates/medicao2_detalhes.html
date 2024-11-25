@@ -2,84 +2,87 @@
 
 {% block body %}
 <div class="container mt-5" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
-    <h1 class="text-center">Detalhes da Medição:{{ medicao.projeto_nome }} - {{ medicao.numero_medicao }}ª Medição</h1>
+    <h1 class="text-center">Detalhes da Medição: {{ medicao.projeto_nome }} - {{ medicao.numero_medicao }}ª Medição</h1>
     <hr>
-    <ul class="list-group">
-        <li class="list-group-item"><strong>Identificador Medição:</strong> {{ medicao.id }}</li>
-        <li class="list-group-item"><strong>SEI:</strong> {{ medicao.sei }}</li>
-        <li class="list-group-item"><strong>Projeto Nome:</strong> {{ medicao.projeto_nome }}</li>
-        <li class="list-group-item"><strong>Número da Medição:</strong> {{ medicao.numero_medicao }}</li>
-        <li class="list-group-item"><strong>Letra da Medição:</strong> {{ medicao.letra_medicao }}</li>
-        <li class="list-group-item"><strong>Descrição:</strong> {{ medicao.descricao }}</li>
-        <li class="list-group-item"><strong>Valor:</strong> R$ {{ medicao.valor }}</li>
-        <li class="list-group-item"><strong>Reajustamento:</strong> R$ {{ medicao.reajustamento }}</li>
-        <li class="list-group-item"><strong>Data Inicial:</strong> {{ medicao.data_inicial }}</li>
-        <li class="list-group-item"><strong>Data Final:</strong> {{ medicao.data_final }}</li>
+    <form method="POST">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Identificador Medição:</strong> {{ medicao.id }}</li>
+            <li class="list-group-item"><strong>SEI:</strong> <input type="text" name="sei" value="{{ medicao.sei }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Projeto Nome:</strong> <input type="text" name="projeto_nome" value="{{ medicao.projeto_nome }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Número da Medição:</strong> <input type="number" name="numero_medicao" value="{{ medicao.numero_medicao }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Letra da Medição:</strong> <input type="text" name="letra_medicao" value="{{ medicao.letra_medicao }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Descrição:</strong> <textarea name="descricao" class="form-control">{{ medicao.descricao }}</textarea></li>
+            <li class="list-group-item"><strong>Valor:</strong> <input type="text" name="valor" value="{{ medicao.valor }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Reajustamento:</strong> <input type="text" name="reajustamento" value="{{ medicao.reajustamento }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Data Inicial:</strong> <input type="text" name="data_inicial" value="{{ medicao.data_inicial }}" class="form-control"></li>
+            <li class="list-group-item"><strong>Data Final:</strong> <input type="text" name="data_final" value="{{ medicao.data_final }}" class="form-control"></li>
 
-        <!-- Links para abrir todos os documentos -->
-        <li class="list-group-item"><strong>1 - Carta assinada pela empresa:</strong> <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>2 - Publicação da Comissão de Fiscalização:</strong> <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>3 - Planilha de Medição (PDF):</strong> <a href="{{ medicao.documento_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>3.1 - Planilha de Medição - Arquivo em Excel:</strong> <a href="{{ medicao.documento_3_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>4 - Memória de Cálculo:</strong> <a href="{{ medicao.documento_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>5 - Cronograma Físico - Financeiro:</strong> <a href="{{ medicao.documento_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>6 - Diário de Obras:</strong> <a href="{{ medicao.documento_6 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>7 - Relatório Fotográfico:</strong> <a href="{{ medicao.documento_7 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>8 - Relação de Funcionários:</strong> <a href="{{ medicao.documento_8 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>9 - Folha de ponto dos funcionários:</strong> <a href="{{ medicao.documento_9 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>10 - GFD FGTS DIGITAL:</strong> <a href="{{ medicao.documento_10 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>10.1 - DCTF WEB:</strong> <a href="{{ medicao.documento_10_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>11 - Guias e Comprovantes de Pagamentos de FGTS:</strong> <a href="{{ medicao.documento_11 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>12 - Folha de Pagamento:</strong> <a href="{{ medicao.documento_12 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>13 - Comprovante de Pagamento de salários:</strong> <a href="{{ medicao.documento_13 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>14 - Plano de segurança do Trabalho:</strong> <a href="{{ medicao.documento_14 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15 - Certidões atualizadas:</strong> <a href="{{ medicao.documento_15 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15.1 - Certidão de regularidade junto ao FGTS:</strong> <a href="{{ medicao.documento_15_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15.2 - Certidão negativa de débito trabalhista:</strong> <a href="{{ medicao.documento_15_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15.3 - Certidão negativa de débitos federais:</strong> <a href="{{ medicao.documento_15_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15.4 - Certidão de regularidade fiscal junto ao ICMS:</strong> <a href="{{ medicao.documento_15_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>15.5 - Certidão de regularidade fiscal junto ao ISS:</strong> <a href="{{ medicao.documento_15_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>16 - Contrato:</strong> <a href="{{ medicao.documento_16 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>17 - ART emitida pelo CREA:</strong> <a href="{{ medicao.documento_17 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>18 - Nota de empenho:</strong> <a href="{{ medicao.documento_18 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        <li class="list-group-item"><strong>19 - Nota fiscal e ISS:</strong> <a href="{{ medicao.documento_19 }}" target="_blank" class="btn btn-link">Abrir</a></li>
-        
-        <!-- Informações da Obra -->
-        {% if obra %}
-        <h2 class="text-center mt-4">Informações da Obra</h2>
-        <li class="list-group-item"><strong>Objeto:</strong> {{ obra.objeto }}</li>
-        <li class="list-group-item"><strong>SEI:</strong> {{ obra.sei }}</li>
-        <li class="list-group-item"><strong>Contrato:</strong> {{ obra.contrato }}</li>
-        <li class="list-group-item"><strong>Empresa:</strong> {{ obra.empresa }}</li>
-        <li class="list-group-item"><strong>Valor Inicial:</strong> R$ {{ obra.valor_inicial }}</li>
-        <li class="list-group-item"><strong>Prazo Inicial:</strong> {{ obra.prazo_inicial }} dias</li>
-        <li class="list-group-item"><strong>Aditivos de Prazo:</strong> {{ obra.aditivos_prazo }}</li>
-        <li class="list-group-item"><strong>Aditivos de Valor:</strong> R$ {{ obra.aditivos_valor }}</li>
-        <li class="list-group-item"><strong>Prazo Atual:</strong> {{ obra.prazo_atual }} dias</li>
-        <li class="list-group-item"><strong>Valor Atual:</strong> R$ {{ obra.valor_atual }}</li>
-        <li class="list-group-item"><strong>Reajustamento:</strong> R$ {{ obra.reajustamento }}</li> 
-        <li class="list-group-item"><strong>Rerratificação:</strong> R$ {{ obra.rerratificacao }}</li>   
-        <li class="list-group-item"><strong>Documento do Gestor de Contrato:</strong> {{ obra.documento_gestor_contrato }}</li>
-        <li class="list-group-item"><strong>Publicação da Comissão de Fiscalização:</strong> {{ obra.publicacao_comissao_fiscalizacao }}</li>
-        <li class="list-group-item"><strong>Lei do Contrato:</strong> {{ obra.lei_contrato }}</li>
-        <li class="list-group-item"><strong>Coordenação:</strong> {{ obra.coordenacao }}</li>
-        <li class="list-group-item"><strong>Código do Contrato SEI:</strong> {{ obra.cod_contrato_sei }}</li>
-        <li class="list-group-item"><strong>Código do Seguro Garantia:</strong> {{ obra.cod_seguro_garantia }}</li>
-        <li class="list-group-item"><strong>Código da Carta de Solicitação de Prorrogação Contratual:</strong> {{ obra.cod_carta_solicitacao_prorrogacao_contratual }}</li>
-        <li class="list-group-item"><strong>Código do Processo de Rerratificação:</strong> {{ obra.cod_processo_rerratificacao }}</li>
-        <li class="list-group-item"><strong>Código do Termo Aditivo:</strong> {{ obra.cod_termo_aditivo }}</li>
-        <li class="list-group-item"><strong>Fiscal 1:</strong> {{ obra.fiscal1 }}</li>
-        <li class="list-group-item"><strong>ID do Fiscal 1:</strong> {{ obra.id_fiscal1 }}</li>
-        <li class="list-group-item"><strong>Fiscal 2:</strong> {{ obra.fiscal2 }}</li>
-        <li class="list-group-item"><strong>ID do Fiscal 2:</strong> {{ obra.id_fiscal2 }}</li>
-        <li class="list-group-item"><strong>Gestor:</strong> {{ obra.gestor }}</li>
-        <li class="list-group-item"><strong>ID do Gestor:</strong> {{ obra.gestor_id }}</li>
-        {% else %}
-        <h2 class="text-center mt-4">Informações da Obra Não Disponíveis</h2>
-        {% endif %}
+            <!-- Links para abrir todos os documentos -->
+            <li class="list-group-item"><strong>1 - Carta assinada pela empresa:</strong> <a href="{{ medicao.documento_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>2 - Publicação da Comissão de Fiscalização:</strong> <a href="{{ medicao.documento_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>3 - Planilha de Medição (PDF):</strong> <a href="{{ medicao.documento_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>3.1 - Planilha de Medição - Arquivo em Excel:</strong> <a href="{{ medicao.documento_3_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>4 - Memória de Cálculo:</strong> <a href="{{ medicao.documento_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>5 - Cronograma Físico - Financeiro:</strong> <a href="{{ medicao.documento_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>6 - Diário de Obras:</strong> <a href="{{ medicao.documento_6 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>7 - Relatório Fotográfico:</strong> <a href="{{ medicao.documento_7 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>8 - Relação de Funcionários:</strong> <a href="{{ medicao.documento_8 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>9 - Folha de ponto dos funcionários:</strong> <a href="{{ medicao.documento_9 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>10 - GFD FGTS DIGITAL:</strong> <a href="{{ medicao.documento_10 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>10.1 - DCTF WEB:</strong> <a href="{{ medicao.documento_10_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>11 - Guias e Comprovantes de Pagamentos de FGTS:</strong> <a href="{{ medicao.documento_11 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>12 - Folha de Pagamento:</strong> <a href="{{ medicao.documento_12 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>13 - Comprovante de Pagamento de salários:</strong> <a href="{{ medicao.documento_13 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>14 - Plano de segurança do Trabalho:</strong> <a href="{{ medicao.documento_14 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15 - Certidões atualizadas:</strong> <a href="{{ medicao.documento_15 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15.1 - Certidão de regularidade junto ao FGTS:</strong> <a href="{{ medicao.documento_15_1 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15.2 - Certidão negativa de débito trabalhista:</strong> <a href="{{ medicao.documento_15_2 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15.3 - Certidão negativa de débitos federais:</strong> <a href="{{ medicao.documento_15_3 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15.4 - Certidão de regularidade fiscal junto ao ICMS:</strong> <a href="{{ medicao.documento_15_4 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>15.5 - Certidão de regularidade fiscal junto ao ISS:</strong> <a href="{{ medicao.documento_15_5 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>16 - Contrato:</strong> <a href="{{ medicao.documento_16 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>17 - ART emitida pelo CREA:</strong> <a href="{{ medicao.documento_17 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>18 - Nota de empenho:</strong> <a href="{{ medicao.documento_18 }}" target="_blank" class="btn btn-link">Abrir</a></li>
+            <li class="list-group-item"><strong>19 - Nota fiscal e ISS:</strong> <a href="{{ medicao.documento_19 }}" target="_blank" class="btn btn-link">Abrir</a></li>
 
-        
-    </ul>
+
+            <!-- Informações da Obra -->
+            {% if obra %}
+            <h2 class="text-center mt-4">Informações da Obra</h2>
+            <li class="list-group-item"><strong>Objeto:</strong> {{ obra.objeto }}</li>
+            <li class="list-group-item"><strong>SEI:</strong> {{ obra.sei }}</li>
+            <li class="list-group-item"><strong>Contrato:</strong> {{ obra.contrato }}</li>
+            <li class="list-group-item"><strong>Empresa:</strong> {{ obra.empresa }}</li>
+            <li class="list-group-item"><strong>Valor Inicial:</strong> R$ {{ obra.valor_inicial }}</li>
+            <li class="list-group-item"><strong>Prazo Inicial:</strong> {{ obra.prazo_inicial }} dias</li>
+            <li class="list-group-item"><strong>Aditivos de Prazo:</strong> {{ obra.aditivos_prazo }}</li>
+            <li class="list-group-item"><strong>Aditivos de Valor:</strong> R$ {{ obra.aditivos_valor }}</li>
+            <li class="list-group-item"><strong>Prazo Atual:</strong> {{ obra.prazo_atual }} dias</li>
+            <li class="list-group-item"><strong>Valor Atual:</strong> R$ {{ obra.valor_atual }}</li>
+            <li class="list-group-item"><strong>Reajustamento:</strong> R$ {{ obra.reajustamento }}</li> 
+            <li class="list-group-item"><strong>Rerratificação:</strong> R$ {{ obra.rerratificacao }}</li>   
+            <li class="list-group-item"><strong>Documento do Gestor de Contrato:</strong> {{ obra.documento_gestor_contrato }}</li>
+            <li class="list-group-item"><strong>Publicação da Comissão de Fiscalização:</strong> {{ obra.publicacao_comissao_fiscalizacao }}</li>
+            <li class="list-group-item"><strong>Lei do Contrato:</strong> {{ obra.lei_contrato }}</li>
+            <li class="list-group-item"><strong>Coordenação:</strong> {{ obra.coordenacao }}</li>
+            <li class="list-group-item"><strong>Código do Contrato SEI:</strong> {{ obra.cod_contrato_sei }}</li>
+            <li class="list-group-item"><strong>Código do Seguro Garantia:</strong> {{ obra.cod_seguro_garantia }}</li>
+            <li class="list-group-item"><strong>Código da Carta de Solicitação de Prorrogação Contratual:</strong> {{ obra.cod_carta_solicitacao_prorrogacao_contratual }}</li>
+            <li class="list-group-item"><strong>Código do Processo de Rerratificação:</strong> {{ obra.cod_processo_rerratificacao }}</li>
+            <li class="list-group-item"><strong>Código do Termo Aditivo:</strong> {{ obra.cod_termo_aditivo }}</li>
+            <li class="list-group-item"><strong>Fiscal 1:</strong> {{ obra.fiscal1 }}</li>
+            <li class="list-group-item"><strong>ID do Fiscal 1:</strong> {{ obra.id_fiscal1 }}</li>
+            <li class="list-group-item"><strong>Fiscal 2:</strong> {{ obra.fiscal2 }}</li>
+            <li class="list-group-item"><strong>ID do Fiscal 2:</strong> {{ obra.id_fiscal2 }}</li>
+            <li class="list-group-item"><strong>Gestor:</strong> {{ obra.gestor }}</li>
+            <li class="list-group-item"><strong>ID do Gestor:</strong> {{ obra.gestor_id }}</li>
+            {% else %}
+            <h2 class="text-center mt-4">Informações da Obra Não Disponíveis</h2>
+            {% endif %}
+        </ul>
+
+        <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+    </form>
     <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
-</div>
+</div>        
 {% endblock %}
