@@ -117,6 +117,8 @@ def  indexar_checklist_2():
 
 def hoje():
     return datetime.now().strftime("%d/%m/%Y")  # Exemplo de formato: 04/11/2024
+def registrar_medicao():
+    pass
 
 try:
     logging.info("Iniciando o Selenium...")
