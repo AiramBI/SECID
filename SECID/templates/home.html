@@ -84,27 +84,6 @@
     <img src="{{ url_for('static', filename='secid (6).jpeg') }}" alt="Imagem Secundária" style="width: 100%; height: auto; border-radius: 8px;">
 </div>
 
-<!-- Bloco com quatro imagens menores -->
-<div class="container-fluid mt-5">
-    <div class="p-4" style="background: rgba(255, 255, 255, 0.85); border-radius: 8px;">
-        <h2 class="text-center">Andamento das Obras</h2>
-        <p class="text-center">Acompanhe conosco o andamento das nossas Obras:</p>
-        <div class="row text-center">
-            {% for combinacao in combinacoes %}
-            <div class="col-md-3">
-                <img src="{{ url_for('static', filename=combinacao['imagem']) }}" alt="Imagem {{ loop.index }}" class="img-fluid rounded">
-                <p class="mt-2">{{ combinacao['medicao'].projeto_nome }}</p>
-                <p class="mt-2">Medição Realizada Nº {{ combinacao['medicao'].numero_medicao }}</p>
-                <p class="mt-2">Valor: R$ {{ combinacao['valor_formatado'] }}</p>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="text-center mt-4">
-            <a href="/noticias" class="btn btn-primary">Saiba Mais</a>
-        </div>
-    </div>
-</div>
-
 <!-- Blocos de informações por região -->
 <div class="container-fluid mt-5">
     <!-- Região Norte -->
@@ -137,5 +116,28 @@
         </div>
     </div>
 </div>
+
+
+<!-- Bloco com quatro imagens menores -->
+<div class="container-fluid mt-5">
+    <div class="p-4" style="background: rgba(255, 255, 255, 0.85); border-radius: 8px;">
+        <h2 class="text-center">Andamento das Obras</h2>
+        <p class="text-center">Acompanhe conosco o andamento das nossas Obras:</p>
+        <div class="row text-center">
+            {% for combinacao in combinacoes %}
+            <div class="col-md-3">
+                <img src="{{ url_for('static', filename=combinacao['imagem']) }}" alt="Imagem {{ loop.index }}" class="img-fluid rounded">
+                <p class="mt-2">{{ combinacao['medicao'].projeto_nome }}</p>
+                <p class="mt-2">Medição Realizada Nº {{ combinacao['medicao'].numero_medicao }}</p>
+                <p class="mt-2">Valor: R$ {{ combinacao['valor_formatado'] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="/noticias" class="btn btn-primary">Saiba Mais</a>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
