@@ -13,7 +13,7 @@ from num2words import num2words
 
 
 
-def realizar_automacao(login, senha, secretaria, especificacao_processo, coordenacao, observacoes_processo): 
+def registrar_medicao(login, senha, secretaria, especificacao_processo, coordenacao, observacoes_processo): 
    def  indexar_checklist_1():
        navegador.switch_to.default_content()
        navegador.find_element(By.XPATH, "//a[@id = 'cke_185']").click()
