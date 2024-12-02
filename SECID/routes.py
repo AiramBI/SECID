@@ -419,6 +419,17 @@ def medicao2_detalhes(id):
 
     
     if request.method == 'POST':
+        acao = request.form.get('acao')
+
+        if acao == "executar_automacao":
+            try:
+                # Executa a função registrar_medicao
+                registrar_medicao()
+                flash("Automação executada com sucesso!", "success")
+            except Exception as e:
+                flash(f"Erro ao executar a automação: {str(e)}", "error")
+            return redirect(url_for('medicao2_detalhes', id=id))
+        
         # Atualizando os dados da medição
         medicao.valor = request.form.get('valor', medicao.valor)
         medicao.sei = request.form.get('status', medicao.sei)
