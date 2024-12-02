@@ -694,7 +694,7 @@ def medicao3():
 
 
     
-    registrar_medicao()
+    registrar_medicao(login, senha, secretaria, especificacao_processo, coordenacao, observacoes_processo)
     return render_template('medicao3.html')
 
 @app.route('/paineis/sei')
