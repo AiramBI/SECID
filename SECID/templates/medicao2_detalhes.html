@@ -267,12 +267,20 @@
             
         </ul>
 
-        <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
-        <form method="POST" action="{{ url_for('medicao2_detalhes', id=medicao.id) }}">
-        <button type="submit" name="acao" value="executar_automacao">Enviar Medicao</button>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+    <!-- Botão Voltar (esquerda) -->
+    <a href="/usuario/medicao2" class="btn btn-secondary">Voltar</a>
+    
+    <!-- Botões Salvar Alterações e Enviar Medição (direita) -->
+    <div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <form method="POST" action="{{ url_for('medicao2_detalhes', id=medicao.id) }}" style="display: inline;">
+            <button type="submit" name="acao" value="executar_automacao" class="btn btn-primary">Enviar Medição</button>
+        </form>
+    </div>
+</div>
 </form>
 </form>
     </form>
-    <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
 </div>        
 {% endblock %}
