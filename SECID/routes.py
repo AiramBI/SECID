@@ -9,6 +9,7 @@ import os
 import logging
 from SECID.uploadarquivos import executarautomacao
 from SECID.enviar_medicao import registrar_medicao
+from SECID.teste import registrar_medicao
 import uuid
 from num2words import num2words
 
@@ -683,7 +684,13 @@ def download_file(filename):
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
 @login_required
 def medicao3():
-    executarautomacao()
+    especificacao_processo = "testando"
+    coordenacao = "SEFAZ/COOCPP"
+    observacoes_processo = "TESTADO
+
+
+    
+    registrar_medicao()
     return render_template('medicao3.html')
 
 @app.route('/paineis/sei')
