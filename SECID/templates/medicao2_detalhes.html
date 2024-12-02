@@ -268,6 +268,9 @@
         </ul>
 
         <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+        <form method="POST" action="{{ url_for('medicao2_detalhes', id=medicao.id) }}">
+        <button type="submit" name="acao" value="rodar_automacao">Enviar Medição</button>
+</form>
     </form>
     <a href="/usuario/medicao2" class="btn btn-secondary mt-3">Voltar</a>
 </div>        
