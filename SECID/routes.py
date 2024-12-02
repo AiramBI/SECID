@@ -686,7 +686,7 @@ def download_file(filename):
 def medicao3():
     especificacao_processo = "testando"
     coordenacao = "SEFAZ/COOCPP"
-    observacoes_processo = "TESTADO
+    observacoes_processo = "TESTADO"
 
 
     
