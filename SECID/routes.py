@@ -538,17 +538,6 @@ def download_file(filename):
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
 @login_required
 def medicao3():
-    
-    login = "asantos2"
-    senha = "Ivinhema1994#*#*#*"
-    secretaria = "SEFAZ"
-    especificacao_processo = "testando"
-    coordenacao = "SEFAZ/COOCPP"
-    observacoes_processo = "TESTADO"
-
-
-    
-    registrar_medicao(login, senha, secretaria, especificacao_processo, coordenacao, observacoes_processo)
     return render_template('medicao.html')
 
 @app.route('/paineis/sei')
