@@ -430,12 +430,58 @@ def medicao2_detalhes(id):
 
     if request.method == 'POST':
         acao = request.form.get('acao')
-
+    
         # Ação para executar automação
         if acao == "executar_automacao":
             try:
                 from enviar_medicao import registrar_medicao
-                registrar_medicao(medicao, medicao_resumida, medicao_inicial, medicao_atualizada, obra)
+                coordenacao = 0
+                observacoes_processo = 0
+                caminho_arquivo = 0
+                data_inicial = 0
+                data_final = 0
+                valor_total_previsto = 0
+                valor_atual_previsto = 0
+                valor_total_inicial = 0
+                valor_atual_inicial = 0
+                valor_atual_medido = 0
+                aditivo = 0
+                inicial = 0
+                numero_contrato = 0
+                numero_medicao = 0
+                cronograma_atualizado = 0
+                reajustamento = 0
+                reajustamento_total = 0
+                valor_medicao = 0
+                medicoes = 0
+                rerratificacao = 0
+                processo_mae = 0
+                objeto = 0
+                documento_gestor_contrato = 0
+                publicacao_comissao_fiscalização = 0
+                lei_contrato = 0
+                contrato = 0
+                seguro_garantia = 0
+                carta_solicitacao_prorrogacao_contratual = 0
+                processo_rerratificacao = 0
+                termo_aditivo = 0
+                contratada = 0
+                obra = 0
+                fiscal_tecnico_1 = 0
+                id_fiscal_tecnico_1 = 0
+                fiscal_tecnico_2 = 0
+                id_fiscal_tecnico_2 = 0
+                gestor1 = 0
+                id_gestor = 0
+                cnpj_empresa = 0
+                registrar_medicao(
+    coordenacao, observacoes_processo, caminho_arquivo, data_inicial, data_final, valor_total_previsto, valor_atual_previsto, 
+    valor_total_inicial, valor_atual_inicial, valor_atual_medido, aditivo, inicial, numero_contrato, numero_medicao, 
+    cronograma_atualizado, reajustamento, reajustamento_total, valor_medicao, medicoes, rerratificacao, processo_mae, 
+    objeto, documento_gestor_contrato, publicacao_comissao_fiscalizacao, lei_contrato, contrato, seguro_garantia, 
+    carta_solicitacao_prorrogacao_contratual, processo_rerratificacao, termo_aditivo, contratada, obra, fiscal_tecnico_1, 
+    id_fiscal_tecnico_1, fiscal_tecnico_2, id_fiscal_tecnico_2, gestor1, id_gestor, cnpj_empresa
+)
                 flash("Automação executada com sucesso!", "success")
             except Exception as e:
                 flash(f"Erro ao executar a automação: {str(e)}", "error")
