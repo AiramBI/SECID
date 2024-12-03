@@ -104,7 +104,7 @@
                     <td>{{ obra.empresa }}</td>
                     <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
                     <td>{{ obra.prazo_atual }}</td>
-                    <td>R$ {{ "%.2f"|format(obra.valor_atual)|replace('.', ',') }}</td>
+                    <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
                     <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
                     <td>{{ obra.fonte }}</td>
                     <td>{{ obra.coordenacao }}</td>      
@@ -123,7 +123,7 @@
                         <td>{{ obra.empresa }}</td>
                         <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
                         <td>{{ obra.prazo_atual }}</td>
-                        <td>R$ {{ "%.2f"|format(obra.valor_atual)|replace('.', ',') }}</td>
+                        <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
                         <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
                         <td>{{ obra.fonte }}</td>
                         <td>{{ obra.coordenacao }}</td>      
