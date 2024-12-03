@@ -54,10 +54,10 @@ def registrar_medicao1(
     id_gestor,
     cnpj_empresa
 ):
-    login = os.getenv("LOGIN", "asantos2") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
-    senha = os.getenv("SENHA", "Ivinhema1994#*#*#*") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
-    secretaria = os.getenv("SECRETARIA","SEFAZ")  #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
-    coordenacao = "SEFAZ/COOCPP" 
+    login = os.getenv("LOGIN", "anaclara.coutinho") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    senha = os.getenv("SENHA", "secid@123") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    secretaria = os.getenv("SECRETARIA","SECID")  #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    # coordenacao = "SEFAZ/COOCPP" 
     observacoes_processo = os.getenv("OBSERVACOES_PROCESSO","") #ATÉ O MOMENTO NÃO TEM ATRIBUIÇÃO
     nomes_documentos = [
         "01.Carta assinada pela empresa","02.Publicação da Comissão de Fiscalização","03.Planilha de Medição (PDF)","03.1.Planilha de Medição - Arquivo em Excel",
@@ -149,7 +149,7 @@ def registrar_medicao1(
         procurar_processo = WebDriverWait(navegador, 10).until(
             EC.presence_of_element_located((By.XPATH, '//*[@id="txtPesquisaRapida"]'))
         )
-        procurar_processo.send_keys('SEI-040009/000654/2024' + Keys.ENTER)
+        procurar_processo.send_keys(processo_mae + Keys.ENTER)
     
     
         #INICIO DO BLOCO DE PROCESSO RELACIONADO
@@ -416,32 +416,6 @@ def registrar_medicao1(
         #Movimenta o cursor até o início do texto localizado Referencia numero da medição
         corpoTexto.send_keys(Keys.ARROW_RIGHT * 760)
         corpoTexto.send_keys(Keys.ENTER)# alterar essa parte
-        medicoes= [
-        "1ª Medição período 01/09/2022 a 30/09/2022 no valor de R$ 668.194,70;",
-        "2ª Medição período 01/10/2022 a 31/10/2022 no valor de R$ 0,00;",
-        "3ª Medição período 01/11/2022 a 30/11/2022 no valor de R$ 0,00;",
-        "4ª Medição período 01/12/2022 a 31/12/2022 no valor de R$ 0,00;",
-        "5ª Medição período 01/01/2023 a 31/01/2023 no valor de R$ 1.448.169,70;",
-        "6ª Medição período 01/02/2023 a 28/02/2023 no valor de R$ 600.039,67;",
-        "7ª Medição período 01/03/2023 a 31/03/2023 no valor de R$ 1.010.519,04;",
-        "8ª Medição período 01/04/2023 a 30/04/2023 no valor de R$ 1.168.928,91;",
-        "9º Medição período 01/05/2023 a 31/05/2023 no valor de R$ 802.372,34;",
-        "10º Medição período 01/06/2023 a 30/06/2023 no valor de R$ 479.811,71;",
-        "11º Medição período 01/07/2023 a 31/07/2023 no valor de R$ 128.692,36;",
-        "12º Medição período 01/08/2023 a 31/08/2023 no valor de R$ 0,00;",
-        "13º Medição período 01/09/2023 a 30/09/2023 no valor de R$ 0,00;",
-        "14º Medição período 01/10/2023 a 31/10/2023 no valor de R$ 0,00;",
-        "15º Medição período 01/11/2023 a 30/11/2023 no valor de R$ 0,00;",
-        "16º Medição período 01/12/2023 a 31/12/2023 no valor de R$ 0,00;",
-        "17º Medição período 01/01/2024 a 31/01/2024 no valor de R$ 15.694,77;",
-        "18º Medição período 01/02/2024 a 29/02/2024 no valor de R$ 15.271,67;",
-        "19º Medição período 01/03/2024 a 31/03/2024 no valor de R$ 27.149,67;",
-        "20º Medição período 01/04/2024 a 30/04/2024 no valor de R$ 140.839,20;",
-        "21º Medição período 01/05/2024 a 31/05/2024 no valor de R$ 54.299,40;",
-        "22º Medição período 01/06/2024 a 30/06/2024 no valor de R$ 74.661,72;",
-        "23º Medição período 01/07/2024 a 31/07/2024 no valor de R$ 81.449,13;",
-        "24º Medição período 01/08/2024 a 31/08/2024 no valor de R$ 149.323,51;"
-    ]
         for medicao in medicoes:
             corpoTexto.send_keys(medicao)
             corpoTexto.send_keys(Keys.SHIFT,Keys.ENTER)
