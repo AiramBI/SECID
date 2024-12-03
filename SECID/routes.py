@@ -470,7 +470,10 @@ def medicao2_detalhes(id):
                 valor_atual_inicial = None
                 
                 # Busca na tabela Medicao_atualizada pelo número da medição e obra selecionada
-                medicao_atualizada = Medicao_atualizada.query.filter_by(obra=obra_selecionada, medicao=numero_medicao).first()
+                medicao_atualizada = Medicao_atualizada.query.filter_by(
+                    obra=obra_selecionada.obra,  # ou obra_selecionada.nome, dependendo do campo
+                    medicao=numero_medicao
+                ).first()
                 
                 if medicao_atualizada:
                     # Se encontrar a medição, pega os valores correspondentes
@@ -484,7 +487,7 @@ def medicao2_detalhes(id):
                         valor_atual_previsto = medicao_maior.valor
                 
                 # Busca na tabela Medicao_inicial pelo número da medição e obra selecionada
-                medicao_inicial = Medicao_inicial.query.filter_by(obra=obra_selecionada, medicao=numero_medicao).first()
+                medicao_inicial = Medicao_inicial.query.filter_by(obra=obra_selecionada.obra, medicao=numero_medicao).first()
                 
                 if medicao_inicial:
                     # Se encontrar a medição inicial, pega os valores correspondentes
