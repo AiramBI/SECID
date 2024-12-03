@@ -18,6 +18,13 @@ app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # Limita o tamanho do upload para 20MB, por exemplo
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Cache control for file uploads
 
+# Configuração do diretório de uploads
+UPLOAD_FOLDER = '/var/lib/postgresql/data/uploads'  # Diretório persistente
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Garante que o diretório exista
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 # Inicializar Dropzone
 dropzone = Dropzone(app)
 
