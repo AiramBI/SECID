@@ -300,10 +300,10 @@ def save_file(file):
 @login_required
 def medicao():
     form_medicao = FormMedicao()
-    
+
     if request.method == 'POST' and form_medicao.validate_on_submit():
         try:
-            # Salva os arquivos e cria uma nova instância de Medicao
+            # Salva os arquivos enviados e cria uma nova instância da classe Medicao
             medicao1 = Medicao(
                 sei=form_medicao.sei.data,
                 projeto_nome=form_medicao.projeto_nome.data,
@@ -342,7 +342,7 @@ def medicao():
                 documento_19=save_file(form_medicao.documento_19.data)
             )
 
-            # Cria uma nova instância de Medicao_resumida
+            # Cria uma nova instância da classe Medicao_resumida
             medicao_resumida = Medicao_resumida(
                 obra=form_medicao.projeto_nome.data,
                 data_inicio_medicao=form_medicao.data_inicial.data,
@@ -352,8 +352,8 @@ def medicao():
                 letra_medicao=form_medicao.letra_medicao.data,
                 reajustamento=form_medicao.reajustamento.data
             )
-            
-            # Adiciona a medição ao banco de dados
+
+            # Adiciona as novas instâncias ao banco de dados
             database.session.add(medicao1)
             database.session.add(medicao_resumida)
             database.session.commit()
@@ -362,12 +362,12 @@ def medicao():
             return redirect(url_for('administrador'))
 
         except Exception as e:
-            flash(f'Ocorreu um erro ao enviar a tarefa para o Celery: {str(e)}', 'danger')
+            # Reverte qualquer alteração no banco em caso de erro
             database.session.rollback()
+            flash(f'Erro ao salvar a medição: {str(e)}', 'danger')
 
-    else:
-        if request.method == 'POST':
-            flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
+    elif request.method == 'POST':
+        flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
 
     return render_template('medicao.html', form_medicao=form_medicao)
     
