@@ -120,20 +120,6 @@ def logout():
     flash('Logout Feito com Sucesso', 'alert-success')
     return redirect(url_for('home'))
 
-@app.route('/status/<task_id>')
-def status_task(task_id):
-    task = celery.AsyncResult(task_id)
-    if task.state == 'PENDING':
-        response = {'state': task.state, 'status': 'Aguardando...'}
-    elif task.state == 'SUCCESS':
-        response = {'state': task.state, 'status': 'Tarefa concluída com sucesso!'}
-    elif task.state == 'FAILURE':
-        response = {'state': task.state, 'status': str(task.info)}
-    else:
-        response = {'state': task.state, 'status': task.info}
-
-    return jsonify(response)
-
 @app.route('/paineis/gestor')
 @login_required
 def paines():
@@ -148,8 +134,6 @@ def administrativo():
 @login_required
 def financeiro():
     return render_template('financeiro.html')
-
-
 
 @app.route('/usuario')
 @login_required
@@ -540,10 +524,6 @@ def download_file(filename):
 def medicao3():
     return render_template('medicao.html')
 
-@app.route('/paineis/sei')
-@login_required
-def sei():
-    return render_template('sei.html')
 
 @app.route('/sobre')
 @login_required
