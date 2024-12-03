@@ -553,7 +553,7 @@ def medicao2_detalhes(id):
                 gestor1 = obra_selecionada.gestor
                 id_gestor =obra_selecionada.gestor_id
                 cnpj_empresa = obra_selecionada.cnpj
-                registrar_medicao(
+                registrar_medicao1(
     coordenacao, observacoes_processo, caminho_arquivo, data_inicial, data_final, valor_total_previsto, valor_atual_previsto, 
     valor_total_inicial, valor_atual_inicial, valor_atual_medido, aditivo, inicial, numero_contrato, numero_medicao, 
     cronograma_atualizado, reajustamento, reajustamento_total, valor_medicao, medicoes, rerratificacao, processo_mae, 
