@@ -3,14 +3,9 @@ from SECID import app, database,bcrypt
 from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormMedicao2, FormMedicao_inicial, FormMedicao_atualizada, FormMedicao_resumida
 from SECID.models import Usuario, Obras, Medicao, Medicao2, Medicao_inicial, Medicao_atualizada, Medicao_resumida
 from flask_login import current_user, login_required, login_user, logout_user
-import traceback
 from werkzeug.utils import secure_filename
-import os
-import logging
-from SECID.uploadarquivos import executarautomacao
+import os, logging
 from SECID.enviar_medicao import registrar_medicao
-from SECID.teste import registrar_medicao
-import uuid
 from num2words import num2words
 
 logging.basicConfig(level=logging.INFO)
