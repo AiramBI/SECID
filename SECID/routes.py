@@ -349,7 +349,7 @@ def medicao():
                 data_fim_medicao=form_medicao.data_final.data,
                 numero_medicao=form_medicao.numero_medicao.data,
                 valor_medicao=form_medicao.valor.data,
-                letra_medicao=form_medicao.numero_medicao.data,
+                letra_medicao=form_medicao.letra_medicao.data,
                 reajustamento=form_medicao.reajustamento.data
             )
             
