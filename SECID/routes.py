@@ -516,7 +516,7 @@ def medicao2_detalhes(id):
 
 
 @app.route('/uploads/<path:filename>', methods=['GET'])
-def download_file(filename):
+def view_file(filename):
     try:
         # Verifica se o arquivo está no diretório configurado de uploads
         safe_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -525,7 +525,7 @@ def download_file(filename):
         if not os.path.isfile(safe_path):
             return jsonify({'error': 'Arquivo não encontrado'}), 404
 
-        # Envia o arquivo para o navegador
+        # Envia o arquivo para o navegador para visualização
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=False)
     except Exception as e:
         return jsonify({'error': f'Erro ao tentar acessar o arquivo: {str(e)}'}), 500
