@@ -278,11 +278,24 @@ def upload():
     if file.filename == '':
         return jsonify({'error': 'Nenhum arquivo selecionado'}), 400
 
-    # Salvar o arquivo usando save_file
-    saved_filename = save_file(file)
-    if saved_filename:
-        return jsonify({'success': 'Arquivo salvo com sucesso', 'filename': saved_filename}), 200
-    else:
+    # Sanitiza o nome do arquivo
+    filename = secure_filename(file.filename)
+    
+    # Gera um timestamp único baseado na data e hora para evitar conflitos de nome
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    name, ext = os.path.splitext(filename)
+    filename = f"{name}_{timestamp}{ext}"
+
+    # Define o caminho completo para salvar o arquivo
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+
+    try:
+        # Salva o arquivo no caminho configurado
+        file.save(file_path)
+        return jsonify({'success': 'Arquivo salvo com sucesso', 'filename': filename}), 200
+    except Exception as e:
+        # Log do erro para diagnóstico
+        print(f"Erro ao salvar o arquivo: {str(e)}")
         return jsonify({'error': 'Erro ao salvar o arquivo'}), 500
 
 
