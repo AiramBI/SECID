@@ -501,14 +501,22 @@ def medicao2_detalhes(id):
         medicao_resumida=medicao_resumida
     )
 
-@app.route('/download/<filename>')
+@app.route('/download/<path:filename>')
 def download_file(filename):
     try:
-        # Tenta enviar o arquivo especificado para o navegador
-        return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
-    except FileNotFoundError:
-        # Retorna uma mensagem de erro se o arquivo não for encontrado
-        abort(404, "Arquivo não encontrado")
+        # Verifica se o arquivo está dentro do diretório configurado
+        safe_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        # Confirma se o arquivo existe
+        if not os.path.isfile(safe_path):
+            abort(404, description="Arquivo não encontrado")
+
+        # Envia o arquivo para o navegador como download
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+    except Exception as e:
+        # Retorna um erro genérico em caso de falha
+        abort(500, description=f"Erro ao tentar baixar o arquivo: {str(e)}")
+
 
 # Rota no Flask para acionar a automação
 @app.route('/usuario/medicao3', methods=['GET', 'POST'])
