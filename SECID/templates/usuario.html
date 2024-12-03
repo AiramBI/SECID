@@ -1,145 +1,127 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
-{% block body%}
-          <div class="container-fluid">
+{% block body %}
+<div class="container-fluid">
     <div class="main-body">
         <style>
             .maiusculo {
                 text-transform: uppercase;
             }
         </style>
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <h4 class="maiusculo">{{current_user.username}}</h4>
-                      <p class="text-secondary mb-1">{{current_user.cargo}}</p>
-                      <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-                      <button type="button" class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao')}}">Cadastrar Medição</a></button>
-                      <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2')}}">Verificar Medição</a></button>
-                      {% if current_user.cargo in ['Administrador', 'Superintendente', 'Secretário', 'Subsecretário'] %}
-                        <button class="btn btn-primary">
-                            <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
-                            <button class="btn btn-primary"><a href="{{ url_for('selecionar_obra') }}" class="dropdown-item text-white">Editar Obra</a>
-                        </button>
-                      {% endif %}
-                      </div>
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3" style="max-width: 300px;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=" alt="Admin" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4 class="maiusculo">{{current_user.username}}</h4>
+                                <p class="text-secondary mb-1">{{current_user.cargo}}</p>
+                                <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+                                    <button type="button" class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao') }}">Cadastrar Medição</a></button>
+                                    <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2') }}">Verificar Medição</a></button>
+                                    {% if current_user.cargo in ['Administrador', 'Superintendente', 'Secretário', 'Subsecretário'] %}
+                                    <button class="btn btn-primary">
+                                        <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
+                                        <button class="btn btn-primary"><a href="{{ url_for('selecionar_obra') }}" class="dropdown-item text-white">Editar Obra</a>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div class="card mt-3">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><a class="text-secondary" target="_blank"href="https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI&infra_url=L3NlaS8=">SEI</a></h6>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><a class="text-secondary" target="_blank"href="https://siafe2.fazenda.rj.gov.br/Siafe/faces/login.jsp">SIAFE</a></h6>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><a class="text-secondary" target="_blank"href="https://siafe2-flexvision.fazenda.rj.gov.br/Flexvision/">Flexvision</a></h6>
-                  </li>
-                </ul>
-              </div>
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"></path></svg><a class="text-secondary" target="_blank" href="https://sei.rj.gov.br/sip/login.php?sigla_orgao_sistema=ERJ&sigla_sistema=SEI&infra_url=L3NlaS8=">SEI</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"></path></svg><a class="text-secondary" target="_blank" href="https://siafe2.fazenda.rj.gov.br/Siafe/faces/login.jsp">SIAFE</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z"></path></svg><a class="text-secondary" target="_blank" href="https://siafe2-flexvision.fazenda.rj.gov.br/Flexvision/">Flexvision</a></h6>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Nome</h6>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h1>Lista de Obras</h1>
+                        <div class="table-responsive">
+                            <table id="obrasTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Obra</th>
+                                        <th>Contrato</th>
+                                        <th>Empresa</th>
+                                        <th>Inicio</th>
+                                        <th>Prazo</th>
+                                        <th>Valor</th>
+                                        <th>Aniversário</th>
+                                        <th>Fonte</th>
+                                        <th>Coordenação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if current_user.cargo == 'Administrador' %}
+                                    {% for obra in obras %}
+                                    <tr>
+                                        <td>{{ obra.id }}</td>
+                                        <td>{{ obra.obra }}</td>
+                                        <td>{{ obra.contrato }}</td>
+                                        <td>{{ obra.empresa }}</td>
+                                        <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
+                                        <td>{{ obra.prazo_atual }}</td>
+                                        <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
+                                        <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
+                                        <td>{{ obra.fonte }}</td>
+                                        <td>{{ obra.coordenacao }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    {% for obra in obras %}
+                                    {% if obra.fiscal1 == current_user.username or obra.fiscal2 == current_user.username or obra.gestor == current_user.username %}
+                                    <tr>
+                                        <td>{{ obra.id }}</td>
+                                        <td>{{ obra.obra }}</td>
+                                        <td>{{ obra.contrato }}</td>
+                                        <td>{{ obra.empresa }}</td>
+                                        <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
+                                        <td>{{ obra.prazo_atual }}</td>
+                                        <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
+                                        <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
+                                        <td>{{ obra.fonte }}</td>
+                                        <td>{{ obra.coordenacao }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{current_user.username}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{current_user.email}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Cargo</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{current_user.cargo}}
-                    </div>
-                  </div>
-                  <hr>
-
-                  <h1>Lista de Obras</h1>
-              <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Obra</th>
-                <th>Contrato</th>
-                <th>Empresa</th>
-                <th>Inicio</th>      
-                <th>Prazo</th>
-                <th>Valor</th>
-                <th>Aniversário</th>
-                <th>Fonte</th>
-                <th>Coordenação</th>      
-            </tr>
-        </thead>
-        <tbody>
-            {% if current_user.cargo == 'Administrador' %}
-                <!-- Exibe todas as obras para o administrador -->
-                {% for obra in obras %}
-                <tr>
-                    <td>{{ obra.id }}</td>
-                    <td>{{ obra.obra }}</td>
-                    <td>{{ obra.contrato }}</td>
-                    <td>{{ obra.empresa }}</td>
-                    <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
-                    <td>{{ obra.prazo_atual }}</td>
-                    <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
-                    <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
-                    <td>{{ obra.fonte }}</td>
-                    <td>{{ obra.coordenacao }}</td>      
-                </tr>
-                {% endfor %}
-            {% else %}
-                <!-- Exibe apenas as obras relacionadas ao usuário -->
-                {% for obra in obras %}
-                    {% if obra.fiscal1 == current_user.username or 
-                          obra.fiscal2 == current_user.username or 
-                          obra.gestor == current_user.username %}
-                    <tr>
-                        <td>{{ obra.id }}</td>
-                        <td>{{ obra.obra }}</td>
-                        <td>{{ obra.contrato }}</td>
-                        <td>{{ obra.empresa }}</td>
-                        <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
-                        <td>{{ obra.prazo_atual }}</td>
-                        <td>R$ {{ "{:,.2f}".format(obra.valor_atual).replace(',', 'X').replace('.', ',').replace('X', '.') }}</td>
-                        <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
-                        <td>{{ obra.fonte }}</td>
-                        <td>{{ obra.coordenacao }}</td>      
-                    </tr>
-                    {% endif %}
-                {% endfor %}
-             {% endif %}
-        </tbody>
-    </table>
-</div>
-
-</div>
+                </div>
             </div>
-          </div>
-
         </div>
     </div>
+</div>
+
+<!-- Adicionando os arquivos do DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#obrasTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>
 
 {% endblock %}
