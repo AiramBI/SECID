@@ -557,7 +557,7 @@ def medicao2_detalhes(id):
     coordenacao, observacoes_processo, caminho_arquivo, data_inicial, data_final, valor_total_previsto, valor_atual_previsto, 
     valor_total_inicial, valor_atual_inicial, valor_atual_medido, aditivo, inicial, numero_contrato, numero_medicao, 
     cronograma_atualizado, reajustamento, reajustamento_total, valor_medicao, medicoes, rerratificacao, processo_mae, 
-    objeto, documento_gestor_contrato, publicacao_comissao_fiscalizacao, lei_contrato, contrato, seguro_garantia, 
+    objeto, documento_gestor_contrato, publicacao_comissao_fiscalização, lei_contrato, contrato, seguro_garantia, 
     carta_solicitacao_prorrogacao_contratual, processo_rerratificacao, termo_aditivo, contratada, obra, fiscal_tecnico_1, 
     id_fiscal_tecnico_1, fiscal_tecnico_2, id_fiscal_tecnico_2, gestor1, id_gestor, cnpj_empresa
 )
