@@ -96,7 +96,7 @@ class FormMedicao(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired(),Length(22,22)])  # Número SEI
     projeto_nome = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
-    letra_medicao = StringField('Número da Medição', validators=[Optional()])  # Letra da Medição
+    letra_medicao = StringField('Letra da Medição', validators=[Optional()])  # Letra da Medição
     descricao = StringField('Descrição da Medição', validators=[DataRequired()])  # Descrição da Medição
     valor = FloatField('Valor da Medição', validators=[DataRequired(), NumberRange(min=0, message="O valor não pode ser negativo.")])
     reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
