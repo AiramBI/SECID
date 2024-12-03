@@ -13,7 +13,7 @@ from num2words import num2words
 
 
 
-def registrar_medicao(
+def registrar_medicao1(
     coordenacao,
     observacoes_processo,
     caminho_arquivo,
