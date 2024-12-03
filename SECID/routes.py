@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 import os, logging
 from SECID.enviar_medicao import registrar_medicao
 from num2words import num2words
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 
