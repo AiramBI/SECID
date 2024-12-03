@@ -5,7 +5,7 @@ from SECID.models import Usuario, Obras, Medicao, Medicao2, Medicao_inicial, Med
 from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.utils import secure_filename
 import os, logging
-from SECID.enviar_medicao import registrar_medicao
+from SECID.enviar_medicao import registrar_medicao1
 from num2words import num2words
 from datetime import datetime
 
@@ -434,7 +434,7 @@ def medicao2_detalhes(id):
         # Ação para executar automação
         if acao == "executar_automacao":
             try:
-                from enviar_medicao import registrar_medicao
+                from SECID.enviar_medicao import registrar_medicao1
                 # Busca a obra associada à medição
                 obra_selecionada = Obras.query.filter_by(obra=medicao.projeto_nome).first()
                 coordenacao = obra_selecionada.coordenacao
