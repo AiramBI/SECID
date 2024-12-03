@@ -258,8 +258,12 @@ def administrador():
         return redirect(url_for('administrador'))
     return render_template('administrador.html', form_obras=form_obras)
 
-# Configuração da pasta para upload
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static')
+# Novo caminho absoluto para o diretório de uploads
+UPLOAD_FOLDER = os.path.join('/var/lib/postgresql/data', 'uploads')
+
+# Garante que o diretório de uploads exista
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# Configuração do Flask
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
@@ -447,7 +451,7 @@ def medicao2_detalhes(id):
         return redirect(url_for('medicao2_detalhes', id=id))
 
     # Ajusta os caminhos para download dos arquivos
-    base_url = '/static'
+    base_url = '/uploads'
     documentos = [
         "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
         "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
@@ -462,7 +466,7 @@ def medicao2_detalhes(id):
     # Função para download de arquivos
     if request.args.get('download'):
         documento_para_baixar = request.args.get('download')
-        caminho_documento = os.path.join('static', getattr(medicao, documento_para_baixar))
+        caminho_documento = os.path.join(app.config['UPLOAD_FOLDER'], documento_para_baixar)
         if os.path.exists(caminho_documento):
             return send_file(caminho_documento, as_attachment=True)
         else:
