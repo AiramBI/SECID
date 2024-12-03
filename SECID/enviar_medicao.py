@@ -14,10 +14,10 @@ from num2words import num2words
 
 
 def registrar_medicao():
-    login = os.getenv("LOGIN", "asantos2")
-    senha = os.getenv("SENHA", "Ivinhema1994#*#*#*")
-    secretaria = os.getenv("SECRETARIA","SECID")
-    coordenacao = "SEFAZ/COOCPP"
+    login = os.getenv("LOGIN", "asantos2") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    senha = os.getenv("SENHA", "Ivinhema1994#*#*#*") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    secretaria = os.getenv("SECRETARIA","SECID")  #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
+    coordenacao = "SEFAZ/COOCPP" 
     observacoes_processo = os.getenv("OBSERVACOES_PROCESSO","") #ATÉ O MOMENTO NÃO TEM ATRIBUIÇÃO
     nomes_documentos = [
         "01.Carta assinada pela empresa",
