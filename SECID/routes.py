@@ -439,7 +439,7 @@ def medicao2_detalhes(id):
                 obra_selecionada = Obras.query.filter_by(obra=medicao.projeto_nome).first()
                 coordenacao = obra_selecionada.coordenacao
                 observacoes_processo = 0
-                caminhos_arquivo = []
+                caminho_arquivo = []
 
                 # Lista de campos de documentos na tabela Medicao
                 documentos = [
@@ -456,7 +456,7 @@ def medicao2_detalhes(id):
                     arquivo = getattr(medicao, documento, None)
                     if arquivo:  # Verifica se o arquivo não está vazio ou nulo
                         caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
-                        caminhos_arquivo.append(caminho)
+                        caminho_arquivo.append(caminho)
                 
                 # `caminhos_arquivos` agora contém a lista completa dos caminhos dos arquivos
                 data_inicial = medicao.data_inicial#.strftime('%d/%m/%Y') if medicao.data_inicial else None
