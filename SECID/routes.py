@@ -268,37 +268,51 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    # Verifica se o arquivo está presente no request
     if 'file' not in request.files:
         return jsonify({'error': 'Nenhum arquivo encontrado'}), 400
 
     file = request.files['file']
+
+    # Verifica se o arquivo tem um nome válido
     if file.filename == '':
         return jsonify({'error': 'Nenhum arquivo selecionado'}), 400
 
-    # Salvar o arquivo
-    if file:
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
-        return jsonify({'success': 'Arquivo salvo com sucesso'}), 200
+    # Salvar o arquivo usando save_file
+    saved_filename = save_file(file)
+    if saved_filename:
+        return jsonify({'success': 'Arquivo salvo com sucesso', 'filename': saved_filename}), 200
+    else:
+        return jsonify({'error': 'Erro ao salvar o arquivo'}), 500
 
-# Função save_file para salvar o arquivo no diretório configurado
+
+# Função para salvar o arquivo no diretório configurado
 def save_file(file):
     if file:
-        # Gera um timestamp único baseado na data e hora
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # Sanitiza o nome do arquivo
-        filename = secure_filename(file.filename)
-        name, ext = os.path.splitext(filename)
-        filename = f"{name}_{timestamp}{ext}"  # Adiciona o timestamp ao nome
+        try:
+            # Gera um timestamp único baseado na data e hora
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # Define o caminho completo
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            # Sanitiza o nome do arquivo
+            filename = secure_filename(file.filename)
+            name, ext = os.path.splitext(filename)
+            filename = f"{name}_{timestamp}{ext}"  # Adiciona o timestamp ao nome
 
-        # Salva o arquivo
-        file.save(file_path)
-        return filename
+            # Define o caminho completo para salvar o arquivo
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+            # Garante que o diretório existe
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            # Salva o arquivo no caminho configurado
+            file.save(file_path)
+
+            # Retorna o nome do arquivo salvo
+            return filename
+        except Exception as e:
+            # Log do erro para diagnóstico
+            print(f"Erro ao salvar o arquivo: {str(e)}")
+            return None
     return None
 
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
