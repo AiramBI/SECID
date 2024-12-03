@@ -4,7 +4,7 @@
 <div class="container mt-5" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
     <h1 class="text-center">Detalhes da Medição: {{ medicao.projeto_nome }} - {{ medicao.numero_medicao }}ª Medição</h1>
     <hr>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <ul class="list-group">
             <li class="list-group-item"><strong>Identificador Medição:</strong> {{ medicao.id }}</li>
             <li class="list-group-item"><strong>SEI:</strong> <input type="text" name="sei" value="{{ medicao.sei }}" class="form-control"></li>
