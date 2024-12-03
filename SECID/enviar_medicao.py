@@ -53,7 +53,7 @@ def registrar_medicao(
     gestor1,
     id_gestor,
     cnpj_empresa
-)
+):
     login = os.getenv("LOGIN", "asantos2") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
     senha = os.getenv("SENHA", "Ivinhema1994#*#*#*") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
     secretaria = os.getenv("SECRETARIA","SEFAZ")  #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
