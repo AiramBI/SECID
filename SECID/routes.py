@@ -390,37 +390,26 @@ def medicao2():
     return render_template('medicao2.html', projetos=projetos)
 
 
-@app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET','POST'])
+@app.route('/usuario/medicao2/detalhes/<int:id>', methods=['GET', 'POST'])
 @login_required
 def medicao2_detalhes(id):
     # Busca detalhes da medição específica
     medicao = Medicao.query.get_or_404(id)
 
-    
     if request.method == 'POST':
         acao = request.form.get('acao')
 
+        # Ação para executar automação
         if acao == "executar_automacao":
             try:
-                # Executa a função registrar_medicao
-                registrar_medicao()
+                from enviar_medicao import registrar_medicao
+                registrar_medicao(medicao, medicao_resumida, medicao_inicial, medicao_atualizada, obra)
                 flash("Automação executada com sucesso!", "success")
             except Exception as e:
                 flash(f"Erro ao executar a automação: {str(e)}", "error")
             return redirect(url_for('medicao2_detalhes', id=id))
-        
-        # Atualizando os dados da medição
-        medicao.valor = request.form.get('valor', medicao.valor)
-        medicao.sei = request.form.get('status', medicao.sei)
-        medicao.numero_medicao = request.form.get('status', medicao.numero_medicao)
-        medicao.letra_medicao = request.form.get('status', medicao.letra_medicao)
-        medicao.projeto_nome = request.form.get('projeto_nome', medicao.projeto_nome)
-        medicao.descricao = request.form.get('descricao', medicao.descricao)
-        medicao.reajustamento = request.form.get('reajustamento', medicao.reajustamento)
-        medicao.data_inicial = request.form.get('data_inicial', medicao.data_inicial)
-        medicao.data_final = request.form.get('data_final', medicao.data_final)
-        
-        # Atualizando os documentos
+
+        # Ação para upload de novos arquivos
         documentos = [
             "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
             "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
@@ -430,79 +419,68 @@ def medicao2_detalhes(id):
             "documento_19"
         ]
 
-        # Atualizando os documentos com novos arquivos, se enviados
         for documento in documentos:
             if documento in request.files and request.files[documento].filename:
-                # Salva o novo arquivo e atualiza o atributo
                 novo_arquivo = save_file(request.files[documento])
                 if novo_arquivo:
                     setattr(medicao, documento, novo_arquivo)
-            else:
-                # Mantém o valor antigo explicitamente
-                valor_antigo = getattr(medicao, documento)  # Obtém o valor atual da instância
-                setattr(medicao, documento, valor_antigo)  # Reaplica o valor antigo
-        
+
+        # Atualizando outros dados da medição
+        medicao.valor = request.form.get('valor', medicao.valor)
+        medicao.sei = request.form.get('sei', medicao.sei)
+        medicao.numero_medicao = request.form.get('numero_medicao', medicao.numero_medicao)
+        medicao.letra_medicao = request.form.get('letra_medicao', medicao.letra_medicao)
+        medicao.projeto_nome = request.form.get('projeto_nome', medicao.projeto_nome)
+        medicao.descricao = request.form.get('descricao', medicao.descricao)
+        medicao.reajustamento = request.form.get('reajustamento', medicao.reajustamento)
+        medicao.data_inicial = request.form.get('data_inicial', medicao.data_inicial)
+        medicao.data_final = request.form.get('data_final', medicao.data_final)
+
         try:
-            database.session.commit()  # Salva as alterações no banco de dados
+            database.session.commit()
             flash("Medição atualizada com sucesso!", "success")
         except Exception as e:
             database.session.rollback()
             flash(f"Erro ao atualizar a medição: {str(e)}", "error")
 
-        # Redireciona para a página da medição após a atualização
         return redirect(url_for('medicao2_detalhes', id=id))
-    
-    
-    # Ajusta o caminho dos documentos para servir via a pasta `static`
-    base_url = '/static'  # Caminho usado para servir arquivos na web
-    medicao.documento_1 = f"{base_url}/{medicao.documento_1}"  # 1 - Carta assinada pela empresa
-    medicao.documento_2 = f"{base_url}/{medicao.documento_2}"  # 2 - Publicação da Comissão de Fiscalização
-    medicao.documento_3 = f"{base_url}/{medicao.documento_3}"  # 3 - Planilha de Medição (PDF)
-    medicao.documento_3_1 = f"{base_url}/{medicao.documento_3_1}"  # 3.1 - Planilha de Medição - Arquivo em Excel
-    medicao.documento_4 = f"{base_url}/{medicao.documento_4}"  # 4 - Memória de Cálculo
-    medicao.documento_5 = f"{base_url}/{medicao.documento_5}"  # 5 - Cronograma Físico - Financeiro
-    medicao.documento_6 = f"{base_url}/{medicao.documento_6}"  # 6 - Diário de Obras
-    medicao.documento_7 = f"{base_url}/{medicao.documento_7}"  # 7 - Relatório Fotográfico
-    medicao.documento_8 = f"{base_url}/{medicao.documento_8}"  # 8 - Relação de Funcionários
-    medicao.documento_9 = f"{base_url}/{medicao.documento_9}"  # 9 - Folha de ponto dos funcionários
-    medicao.documento_10 = f"{base_url}/{medicao.documento_10}"  # 10 - GFD FGTS DIGITAL
-    medicao.documento_10_1 = f"{base_url}/{medicao.documento_10_1}"  # 10.1 - DCTF WEB
-    medicao.documento_11 = f"{base_url}/{medicao.documento_11}"  # 11 - Guias e Comprovantes de Pagamentos de FGTS
-    medicao.documento_12 = f"{base_url}/{medicao.documento_12}"  # 12 - Folha de Pagamento
-    medicao.documento_13 = f"{base_url}/{medicao.documento_13}"  # 13 - Comprovante de Pagamento de salários
-    medicao.documento_14 = f"{base_url}/{medicao.documento_14}"  # 14 - Plano de segurança do Trabalho
-    medicao.documento_15 = f"{base_url}/{medicao.documento_15}"  # 15 - Certidões atualizadas
-    medicao.documento_15_1 = f"{base_url}/{medicao.documento_15_1}"  # 15.1 - Certidão de regularidade junto ao FGTS
-    medicao.documento_15_2 = f"{base_url}/{medicao.documento_15_2}"  # 15.2 - Certidão negativa de débito trabalhista
-    medicao.documento_15_3 = f"{base_url}/{medicao.documento_15_3}"  # 15.3 - Certidão negativa de débitos federais
-    medicao.documento_15_4 = f"{base_url}/{medicao.documento_15_4}"  # 15.4 - Certidão de regularidade fiscal junto ao ICMS
-    medicao.documento_15_5 = f"{base_url}/{medicao.documento_15_5}"  # 15.5 - Certidão de regularidade fiscal junto ao ISS
-    medicao.documento_16 = f"{base_url}/{medicao.documento_16}"  # 16 - Contrato
-    medicao.documento_17 = f"{base_url}/{medicao.documento_17}"  # 17 - ART emitida pelo CREA
-    medicao.documento_18 = f"{base_url}/{medicao.documento_18}"  # 18 - Nota de empenho
-    medicao.documento_19 = f"{base_url}/{medicao.documento_19}"  # 19 - Nota fiscal e ISS
 
+    # Ajusta os caminhos para download dos arquivos
+    base_url = '/static'
+    documentos = [
+        "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
+        "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
+        "documento_10", "documento_10_1", "documento_11", "documento_12", "documento_13", 
+        "documento_14", "documento_15", "documento_15_1", "documento_15_2", "documento_15_3", 
+        "documento_15_4", "documento_15_5", "documento_16", "documento_17", "documento_18", 
+        "documento_19"
+    ]
+    for documento in documentos:
+        setattr(medicao, documento, f"{base_url}/{getattr(medicao, documento)}")
 
-    print(medicao.documento_1)
+    # Função para download de arquivos
+    if request.args.get('download'):
+        documento_para_baixar = request.args.get('download')
+        caminho_documento = os.path.join('static', getattr(medicao, documento_para_baixar))
+        if os.path.exists(caminho_documento):
+            return send_file(caminho_documento, as_attachment=True)
+        else:
+            flash("Arquivo não encontrado!", "error")
 
-    logging.basicConfig(level=logging.DEBUG)
-    logging.debug(f"Coordenacao: {medicao.documento_1}")
-
-    # Busca a obra associada com base no projeto_nome da medição
+    # Dados relacionados à obra
     obra = Obras.query.filter_by(obra=medicao.projeto_nome).first()
-
-    # Busca informações das tabelas relacionadas com base na obra
     medicao_inicial = Medicao_inicial.query.filter_by(obra=medicao.projeto_nome).all()
     medicao_atualizada = Medicao_atualizada.query.filter_by(obra=medicao.projeto_nome).all()
     medicao_resumida = Medicao_resumida.query.filter_by(obra=medicao.projeto_nome).all()
-      
+
     return render_template(
         'medicao2_detalhes.html',
         medicao=medicao,
         obra=obra,
         medicao_inicial=medicao_inicial,
         medicao_atualizada=medicao_atualizada,
-        medicao_resumida=medicao_resumida)
+        medicao_resumida=medicao_resumida
+    )
 
 @app.route('/download/<filename>')
 def download_file(filename):
