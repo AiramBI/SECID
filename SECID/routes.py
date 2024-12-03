@@ -459,8 +459,8 @@ def medicao2_detalhes(id):
                         caminhos_arquivos.append(caminho)
                 
                 # `caminhos_arquivos` agora contém a lista completa dos caminhos dos arquivos
-                data_inicial = medicao.data_inicial.strftime('%d/%m/%Y') if medicao.data_inicial else None
-                data_final = medicao.data_final.strftime('%d/%m/%Y') if medicao.data_final else None
+                data_inicial = medicao.data_inicial#.strftime('%d/%m/%Y') if medicao.data_inicial else None
+                data_final = medicao.data_final#.strftime('%d/%m/%Y') if medicao.data_final else None
                 numero_medicao = medicao.numero_medicao
                 
                 # Inicializa as variáveis
@@ -522,8 +522,8 @@ def medicao2_detalhes(id):
                 # Itera sobre as medições e cria as strings no formato desejado
                 for medicao_resumida in medicoes_resumidas:
                     numero = medicao_resumida.numero_medicao
-                    data_inicio = medicao_resumida.data_inicio_medicao.strftime('%d/%m/%Y') if medicao_resumida.data_inicio_medicao else "N/A"
-                    data_fim = medicao_resumida.data_fim_medicao.strftime('%d/%m/%Y') if medicao_resumida.data_fim_medicao else "N/A"
+                    data_inicio = medicao_resumida.data_inicio_medicao#.strftime('%d/%m/%Y') if medicao_resumida.data_inicio_medicao else "N/A"
+                    data_fim = medicao_resumida.data_fim_medicao#.strftime('%d/%m/%Y') if medicao_resumida.data_fim_medicao else "N/A"
                     valor = f"R$ {medicao_resumida.valor_medicao:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
                 
                     # Adiciona a string formatada à lista
