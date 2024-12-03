@@ -435,45 +435,121 @@ def medicao2_detalhes(id):
         if acao == "executar_automacao":
             try:
                 from enviar_medicao import registrar_medicao
-                coordenacao = 0
+                # Busca a obra associada à medição
+                obra_selecionada = Obras.query.filter_by(obra=medicao.projeto_nome).first()
+                coordenacao = obra_selecionada.coordenacao
                 observacoes_processo = 0
-                caminho_arquivo = 0
-                data_inicial = 0
-                data_final = 0
-                valor_total_previsto = 0
-                valor_atual_previsto = 0
-                valor_total_inicial = 0
-                valor_atual_inicial = 0
+                caminhos_arquivos = []
+
+                # Lista de campos de documentos na tabela Medicao
+                documentos = [
+                    "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
+                    "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
+                    "documento_10", "documento_10_1", "documento_11", "documento_12", "documento_13", 
+                    "documento_14", "documento_15", "documento_15_1", "documento_15_2", "documento_15_3", 
+                    "documento_15_4", "documento_15_5", "documento_16", "documento_17", "documento_18", 
+                    "documento_19"
+                ]
+                
+                # Itera sobre os documentos e cria o caminho completo para cada arquivo existente
+                for documento in documentos:
+                    arquivo = getattr(medicao, documento, None)
+                    if arquivo:  # Verifica se o arquivo não está vazio ou nulo
+                        caminho = os.path.join(app.config['UPLOAD_FOLDER'], arquivo)
+                        caminhos_arquivos.append(caminho)
+                
+                # `caminhos_arquivos` agora contém a lista completa dos caminhos dos arquivos
+                data_inicial = medicao.data_inicial.strftime('%d/%m/%Y') if medicao.data_inicial else None
+                data_final = medicao.data_final.strftime('%d/%m/%Y') if medicao.data_final else None
+                numero_medicao = medicao.numero_medicao
+                
+                # Inicializa as variáveis
+                valor_total_previsto = None
+                valor_atual_previsto = None
+                valor_total_inicial = None
+                valor_atual_inicial = None
+                
+                # Busca na tabela Medicao_atualizada pelo número da medição e obra selecionada
+                medicao_atualizada = Medicao_atualizada.query.filter_by(obra=obra_selecionada, medicao=numero_medicao).first()
+                
+                if medicao_atualizada:
+                    # Se encontrar a medição, pega os valores correspondentes
+                    valor_total_previsto = medicao_atualizada.acumulado
+                    valor_atual_previsto = medicao_atualizada.valor
+                else:
+                    # Se não encontrar, traz o maior valor para a obra selecionada
+                    medicao_maior = Medicao_atualizada.query.filter_by(obra=obra_selecionada).order_by(Medicao_atualizada.medicao.desc()).first()
+                    if medicao_maior:
+                        valor_total_previsto = medicao_maior.acumulado
+                        valor_atual_previsto = medicao_maior.valor
+                
+                # Busca na tabela Medicao_inicial pelo número da medição e obra selecionada
+                medicao_inicial = Medicao_inicial.query.filter_by(obra=obra_selecionada, medicao=numero_medicao).first()
+                
+                if medicao_inicial:
+                    # Se encontrar a medição inicial, pega os valores correspondentes
+                    valor_total_inicial = medicao_inicial.acumulado
+                    valor_atual_inicial = medicao_inicial.valor
+                else:
+                    # Se não encontrar, traz o maior valor para a obra selecionada
+                    medicao_maior_inicial = Medicao_inicial.query.filter_by(obra=obra_selecionada).order_by(Medicao_inicial.medicao.desc()).first()
+                    if medicao_maior_inicial:
+                        valor_total_inicial = medicao_maior_inicial.acumulado
+                        valor_atual_inicial = medicao_maior_inicial.valor
+                valor_medicao = medicao.valor
+                # Inicializa a variável
                 valor_atual_medido = 0
-                aditivo = 0
-                inicial = 0
-                numero_contrato = 0
-                numero_medicao = 0
+                
+                # Soma os valores da tabela Medicao_resumida associados à obra
+                valor_resumido = database.session.query(
+                    database.func.sum(Medicao_resumida.valor_medicao)
+                ).filter_by(obra=medicao.projeto_nome).scalar()
+                
+                # Adiciona o valor da tabela Medicao ao total
+                valor_atual_medido = (valor_resumido or 0) + medicao.valor
+                aditivo = obra_selecionada.aditivos_prazo
+                inicial = obra_selecionada.prazo_inicial
+                numero_contrato = obra_selecionada.cod_contrato_sei
                 cronograma_atualizado = 0
-                reajustamento = 0
-                reajustamento_total = 0
-                valor_medicao = 0
-                medicoes = 0
-                rerratificacao = 0
-                processo_mae = 0
-                objeto = 0
-                documento_gestor_contrato = 0
-                publicacao_comissao_fiscalização = 0
-                lei_contrato = 0
-                contrato = 0
-                seguro_garantia = 0
-                carta_solicitacao_prorrogacao_contratual = 0
-                processo_rerratificacao = 0
-                termo_aditivo = 0
-                contratada = 0
-                obra = 0
-                fiscal_tecnico_1 = 0
-                id_fiscal_tecnico_1 = 0
-                fiscal_tecnico_2 = 0
-                id_fiscal_tecnico_2 = 0
-                gestor1 = 0
-                id_gestor = 0
-                cnpj_empresa = 0
+                reajustamento = medicao.reajustamento
+                reajustamento_total = obra_selecionada.reajustamento
+                # Inicializa a lista de medições
+                medicoes = []
+                
+                # Busca todas as medições resumidas associadas à obra
+                medicoes_resumidas = Medicao_resumida.query.filter_by(obra=medicao.projeto_nome).order_by(Medicao_resumida.numero_medicao).all()
+                
+                # Itera sobre as medições e cria as strings no formato desejado
+                for medicao_resumida in medicoes_resumidas:
+                    numero = medicao_resumida.numero_medicao
+                    data_inicio = medicao_resumida.data_inicio_medicao.strftime('%d/%m/%Y') if medicao_resumida.data_inicio_medicao else "N/A"
+                    data_fim = medicao_resumida.data_fim_medicao.strftime('%d/%m/%Y') if medicao_resumida.data_fim_medicao else "N/A"
+                    valor = f"R$ {medicao_resumida.valor_medicao:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+                
+                    # Adiciona a string formatada à lista
+                    medicoes.append(
+                        f"{numero}ª Medição período {data_inicio} a {data_fim} no valor de {valor};"
+                    )
+                rerratificacao = obra_selecionada.rerratificacao
+                processo_mae = obra_selecionada.sei
+                objeto = obra_selecionada.objeto
+                documento_gestor_contrato = obra_selecionada.documento_gestor_contrato
+                publicacao_comissao_fiscalização = obra_selecionada.publicacao_comissao_fiscalizacao
+                lei_contrato = obra_selecionada.lei_contrato
+                contrato = obra_selecionada.cod_contrato_sei
+                seguro_garantia = obra_selecionada.cod_seguro_garantia
+                carta_solicitacao_prorrogacao_contratual = obra_selecionada.cod_carta_solicitacao_prorrogacao_contratual
+                processo_rerratificacao = obra_selecionada.cod_processo_rerratificacao
+                termo_aditivo = obra_selecionada.cod_termo_aditivo
+                contratada = obra_selecionada.empresa
+                obra = obra_selecionada.obra
+                fiscal_tecnico_1 = obra_selecionada.fiscal1
+                id_fiscal_tecnico_1 = obra_selecionada.id_fiscal1
+                fiscal_tecnico_2 = obra_selecionada.fiscal2
+                id_fiscal_tecnico_2 = obra_selecionada.id_fiscal1
+                gestor1 = obra_selecionada.gestor
+                id_gestor =obra_selecionada.gestor_id
+                cnpj_empresa = obra_selecionada.cnpj
                 registrar_medicao(
     coordenacao, observacoes_processo, caminho_arquivo, data_inicial, data_final, valor_total_previsto, valor_atual_previsto, 
     valor_total_inicial, valor_atual_inicial, valor_atual_medido, aditivo, inicial, numero_contrato, numero_medicao, 
