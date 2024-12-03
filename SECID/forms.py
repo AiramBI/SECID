@@ -34,7 +34,7 @@ class FormMedicao_resumida(FlaskForm):
     data_fim_medicao = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
     numero_medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
     valor_medicao = FloatField('Valor da Medição', validators=[DataRequired()])  # Valor da Medição
-    letra_medicao = StringField('Número da Medição', validators=[Optional()])  # Letra da Medição
+    letra_medicao = StringField('Letra da Medição', validators=[Optional()])  # Letra da Medição
     reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
 
 class FormMedicao_inicial(FlaskForm):
