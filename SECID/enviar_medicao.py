@@ -13,9 +13,47 @@ from num2words import num2words
 
 
 
-def registrar_medicao(coordenacao,observacoes_processo,caminho_arquivo,data_inicial, data_final, valor_total_prervisto, valor_atual_previsto, valor_total_inicial, valor_atual_inicial, valor_atual_medido, aditivo,inicial, numero_contrato, numero_medicao, cronograma_atualizado, reajustamento, reajustamento_total,valor_medicao
-medicoes, rerratificacao,processo_mae, objeto, documento_gestor_contrato, publicacao_comissao_fiscalização, lei_contrato,contrato,seguro_garantia,carta_solicitacao_prorrogacao_contratual,processo_rerratificacao,termo_aditivo,contratada,obra, fiscal_tecnico_1,id_fiscal_tecnico_1,fiscal_tecnico_2,id_fiscal_tecnico_2, gestor1,
-id_gestor,cnpj_empresa):
+def registrar_medicao(
+    coordenacao,
+    observacoes_processo,
+    caminho_arquivo,
+    data_inicial,
+    data_final,
+    valor_total_previsto,
+    valor_atual_previsto,
+    valor_total_inicial,
+    valor_atual_inicial,
+    valor_atual_medido,
+    aditivo,
+    inicial,
+    numero_contrato,
+    numero_medicao,
+    cronograma_atualizado,
+    reajustamento,
+    reajustamento_total,
+    valor_medicao,
+    medicoes,
+    rerratificacao,
+    processo_mae,
+    objeto,
+    documento_gestor_contrato,
+    publicacao_comissao_fiscalização,  # Mantido como você pediu
+    lei_contrato,
+    contrato,
+    seguro_garantia,
+    carta_solicitacao_prorrogacao_contratual,
+    processo_rerratificacao,
+    termo_aditivo,
+    contratada,
+    obra,
+    fiscal_tecnico_1,
+    id_fiscal_tecnico_1,
+    fiscal_tecnico_2,
+    id_fiscal_tecnico_2,
+    gestor1,
+    id_gestor,
+    cnpj_empresa
+)
     login = os.getenv("LOGIN", "asantos2") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
     senha = os.getenv("SENHA", "Ivinhema1994#*#*#*") #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
     secretaria = os.getenv("SECRETARIA","SEFAZ")  #PRECISO MEXER NISSO ANTES DE IMPLEMENTAR VALORES FIXOS
