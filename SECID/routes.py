@@ -307,7 +307,7 @@ def medicao():
             # Salva os arquivos enviados e cria uma nova instância da classe Medicao
             medicao1 = Medicao(
                 sei=form_medicao.sei.data,
-                projeto_nome=form_medicao.projeto_nome.data,
+                projeto_nome=form_medicao.projeto_nome.data.obra,
                 numero_medicao=form_medicao.numero_medicao.data,
                 letra_medicao=form_medicao.letra_medicao.data,
                 descricao=form_medicao.descricao.data,
@@ -345,7 +345,7 @@ def medicao():
 
             # Cria uma nova instância da classe Medicao_resumida
             medicao_resumida = Medicao_resumida(
-                obra=form_medicao.projeto_nome.data,
+                obra=form_medicao.projeto_nome.data.obra,
                 data_inicio_medicao=form_medicao.data_inicial.data,
                 data_fim_medicao=form_medicao.data_final.data,
                 numero_medicao=form_medicao.numero_medicao.data,
