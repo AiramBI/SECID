@@ -102,10 +102,10 @@
                     <td>{{ obra.obra }}</td>
                     <td>{{ obra.contrato }}</td>
                     <td>{{ obra.empresa }}</td>
-                    <td>{{ obra.inicio_obra }}</td>
+                    <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
                     <td>{{ obra.prazo_atual }}</td>
-                    <td>{{ obra.valor_atual }}</td>
-                    <td>{{ obra.aniversario }}</td>
+                    <td>R$ {{ "%.2f"|format(obra.valor_atual).replace('.', ',') }}</td>
+                    <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
                     <td>{{ obra.fonte }}</td>
                     <td>{{ obra.coordenacao }}</td>      
                 </tr>
@@ -121,10 +121,10 @@
                         <td>{{ obra.obra }}</td>
                         <td>{{ obra.contrato }}</td>
                         <td>{{ obra.empresa }}</td>
-                        <td>{{ obra.inicio_obra }}</td>
+                        <td>{{ obra.inicio_obra.strftime('%d/%m/%Y') }}</td>
                         <td>{{ obra.prazo_atual }}</td>
-                        <td>{{ obra.valor_atual }}</td>
-                        <td>{{ obra.aniversario }}</td>
+                        <td>R$ {{ "%.2f"|format(obra.valor_atual).replace('.', ',') }}</td>
+                        <td>{{ obra.aniversario.strftime('%d/%m/%Y') }}</td>
                         <td>{{ obra.fonte }}</td>
                         <td>{{ obra.coordenacao }}</td>      
                     </tr>
