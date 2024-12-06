@@ -104,36 +104,47 @@ class FormMedicao(FlaskForm):
     data_final = StringField('Data Final', validators=[DataRequired()])  # Data Final da Medição
 
     # Documentos
-    documento_1 = FileField('01.Carta assinada pela empresa', validators=[DataRequired()])
-    documento_2 = FileField('02.Publicação da Comissão de Fiscalização', validators=[DataRequired()])
-    documento_3 = FileField('03.Planilha de Medição (PDF)', validators=[DataRequired()])
-    documento_3_1 = FileField('03.1.Planilha de Medição - Arquivo em Excel', validators=[DataRequired()])
-    documento_4 = FileField('04.Memória de Cálculo', validators=[DataRequired()])
-    documento_5 = FileField('05.Cronograma Físico - Financeiro', validators=[DataRequired()])
-    documento_6 = FileField('06.Diário de Obras', validators=[DataRequired()])
-    documento_7 = FileField('07.Relatório Fotográfico', validators=[DataRequired()])
-    documento_8 = FileField('08.Relação de Funcionários', validators=[DataRequired()])
-    documento_9 = FileField('09.Folha de ponto dos funcionários', validators=[DataRequired()])
-    documento_10 = FileField('10.GFD FGTS DIGITAL', validators=[DataRequired()])
-    documento_10_1 = FileField('10.1.DCTF WEB', validators=[DataRequired()])
-    documento_11 = FileField('11.Guias e Comprovantes de Pagamentos de FGTS', validators=[DataRequired()])
-    documento_12 = FileField('12.Folha de Pagamento', validators=[DataRequired()])
-    documento_13 = FileField('13.Comprovante de Pagamento de salários', validators=[DataRequired()])
-    documento_14 = FileField('14.Plano de segurança do Trabalho', validators=[DataRequired()])
-    documento_15 = FileField('15.Certidões atualizadas', validators=[DataRequired()])
-    documento_15_1 = FileField('15.1.Certidão de regularidade junto ao FGTS', validators=[DataRequired()])
-    documento_15_2 = FileField('15.2.Certidão negativa de débito trabalhista', validators=[DataRequired()])
-    documento_15_3 = FileField('15.3.Certidão negativa de débitos federais', validators=[DataRequired()])
-    documento_15_4 = FileField('15.4.Certidão de regularidade fiscal junto ao ICMS', validators=[DataRequired()])
-    documento_15_5 = FileField('15.5.Certidão de regularidade fiscal junto ao ISS', validators=[DataRequired()])
-    documento_16 = FileField('16.Contrato', validators=[DataRequired()])
-    documento_17 = FileField('17.ART emitida pelo CREA', validators=[DataRequired()])
-    documento_18 = FileField('18.Nota de empenho', validators=[DataRequired()])
-    documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired()])
+    documento_1 = FileField('01.Carta assinada pela empresa', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_2 = FileField('02.Publicação da Comissão de Fiscalização', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_3 = FileField('03.Planilha de Medição (PDF)', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_3_1 = FileField('03.1.Planilha de Medição - Arquivo em Excel', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_4 = FileField('04.Memória de Cálculo', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_5 = FileField('05.Cronograma Físico - Financeiro', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_6 = FileField('06.Diário de Obras', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_7 = FileField('07.Relatório Fotográfico', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_8 = FileField('08.Relação de Funcionários', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_9 = FileField('09.Folha de ponto dos funcionários', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_10 = FileField('10.GFD FGTS DIGITAL', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_10_1 = FileField('10.1.DCTF WEB', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_11 = FileField('11.Guias e Comprovantes de Pagamentos de FGTS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_12 = FileField('12.Folha de Pagamento', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_13 = FileField('13.Comprovante de Pagamento de salários', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_14 = FileField('14.Plano de segurança do Trabalho', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15 = FileField('15.Certidões atualizadas', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_1 = FileField('15.1.Certidão de regularidade junto ao FGTS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_2 = FileField('15.2.Certidão negativa de débito trabalhista', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_3 = FileField('15.3.Certidão negativa de débitos federais', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_4 = FileField('15.4.Certidão de regularidade fiscal junto ao ICMS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_5 = FileField('15.5.Certidão de regularidade fiscal junto ao ISS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_16 = FileField('16.Contrato', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_17 = FileField('17.ART emitida pelo CREA', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_18 = FileField('18.Nota de empenho', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
 
-    
+def file_size_limit(max_size):
+    """Validador para limitar o tamanho do arquivo."""
+    def _file_size_limit(form, field):
+        if field.data:
+            file = field.data
+            file.seek(0, 2)  # Move o cursor para o final do arquivo
+            file_length = file.tell()  # Obtém o tamanho do arquivo em bytes
+            file.seek(0)  # Retorna o cursor para o início do arquivo
+            if file_length > max_size:
+                raise ValidationError(f'O tamanho do arquivo não pode exceder {max_size / (1024 * 1024):.1f} MB.')
+    return _file_size_limit
+
 class FormMedicao2(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
     projeto_nome = StringField('Obra', validators=[DataRequired()])  # Nome do Projeto
