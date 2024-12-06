@@ -7,7 +7,17 @@ from wtforms_sqlalchemy.fields import QuerySelectField
 from SECID.models import Usuario, Obras
 
 
-
+def file_size_limit(max_size):
+    """Validador para limitar o tamanho do arquivo."""
+    def _file_size_limit(form, field):
+        if field.data:
+            file = field.data
+            file.seek(0, 2)  # Move o cursor para o final do arquivo
+            file_length = file.tell()  # Obtém o tamanho do arquivo em bytes
+            file.seek(0)  # Retorna o cursor para o início do arquivo
+            if file_length > max_size:
+                raise ValidationError(f'O tamanho do arquivo não pode exceder {max_size / (1024 * 1024):.1f} MB.')
+    return _file_size_limit
 
 class FormCriarConta(FlaskForm):
     username = StringField('Nome Completo',validators=[DataRequired()])
@@ -132,18 +142,6 @@ class FormMedicao(FlaskForm):
     documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
-
-    def file_size_limit(max_size):
-        """Validador para limitar o tamanho do arquivo."""
-        def _file_size_limit(form, field):
-            if field.data:
-                file = field.data
-                file.seek(0, 2)  # Move o cursor para o final do arquivo
-                file_length = file.tell()  # Obtém o tamanho do arquivo em bytes
-                file.seek(0)  # Retorna o cursor para o início do arquivo
-                if file_length > max_size:
-                    raise ValidationError(f'O tamanho do arquivo não pode exceder {max_size / (1024 * 1024):.1f} MB.')
-        return _file_size_limit
 
 class FormMedicao2(FlaskForm):
     sei = StringField('SEI', validators=[DataRequired()])  # Número SEI
