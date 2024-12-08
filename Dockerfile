@@ -18,6 +18,3 @@ EXPOSE 8000
 
 # Comando para iniciar a aplicação com gunicorn
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "--timeout", "600", "--graceful-timeout", "600", "--limit-request-line", "8190", "--limit-request-field_size", "0", "--worker-connections", "100", "--log-level", "debug", "--keep-alive", "10", "main:app"]
-
-RUN apt-get update && apt-get install -y redis-server
-CMD redis-server &
