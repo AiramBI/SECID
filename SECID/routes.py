@@ -8,6 +8,7 @@ import os, logging
 from SECID.enviar_medicao import registrar_medicao1
 from num2words import num2words
 from datetime import datetime
+from SECID.tasks import process_form_data
 
 logging.basicConfig(level=logging.INFO)
 
@@ -327,6 +328,20 @@ def save_file(file):
             print(f"Erro ao salvar o arquivo: {str(e)}")
             return None
     return None
+
+
+@app.route('/process', methods=['POST'])
+def process_form():
+    data = request.form.to_dict()
+    files = request.files.to_dict(flat=False)
+    task = process_form_data.apply_async(args=[data, files])
+    return jsonify({'task_id': task.id}), 202
+
+@app.route('/task-status/<task_id>')
+def task_status(task_id):
+    task = process_form_data.AsyncResult(task_id)
+    return jsonify({'status': task.status, 'result': task.result})
+
 
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
