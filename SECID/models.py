@@ -131,18 +131,16 @@ class Medicao(database.Model):
     documento_13 = database.Column(database.String, nullable=False)  # 13 - Comprovante de Pagamento de salários
     documento_14 = database.Column(database.String, nullable=False)  # 14 - Plano de segurança do Trabalho
     documento_15 = database.Column(database.String, nullable=False)  # 15 - Certidões atualizadas
-    documento_15_1 = database.Column(database.String, nullable=False)  # 15.1 - Certidão de regularidade junto ao FGTS
-    documento_15_2 = database.Column(database.String, nullable=False)  # 15.2 - Certidão negativa de débito trabalhista
-    documento_15_3 = database.Column(database.String, nullable=False)  # 15.3 - Certidão negativa de débitos federais
-    documento_15_4 = database.Column(database.String,
-                                     nullable=False)  # 15.4 - Certidão de regularidade fiscal junto ao ICMS
-    documento_15_5 = database.Column(database.String,
-                                     nullable=False)  # 15.5 - Certidão de regularidade fiscal junto ao ISS
     documento_16 = database.Column(database.String, nullable=False)  # 16 - Contrato
     documento_17 = database.Column(database.String, nullable=False)  # 17 - ART emitida pelo CREA
     documento_18 = database.Column(database.String, nullable=False)  # 18 - Nota de empenho
     documento_19 = database.Column(database.String, nullable=False)  # 19 - Nota fiscal e ISS
-
+    documento_15_1 = database.Column(database.String, nullable=True)  # 20 - Documentos Auxiliares 1
+    documento_15_2 = database.Column(database.String, nullable=True)  # 21 - Documentos Auxiliares 2
+    documento_15_3 = database.Column(database.String, nullable=True)  # 22 - Documentos Auxiliares 3
+    documento_15_4 = database.Column(database.String, nullable=True)  # 23 - Documentos Auxiliares 4
+    documento_15_5 = database.Column(database.String, nullable=True)  # 24 - Documentos Auxiliares 5
+    
     data_criacao = database.Column(database.DateTime, nullable=False,
                                    default=datetime.utcnow)  # Data de criação do registro
 
