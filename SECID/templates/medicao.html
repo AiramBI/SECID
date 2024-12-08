@@ -544,5 +544,41 @@
         <!-- Botão para submeter os dados do formulário -->
         {{ form_medicao.botao_submit_medicao(class="btn btn-primary mt-3") }}
     </form>
+    <div id="loading" style="display: none;">
+    <p>Processando... Por favor, aguarde.</p>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Carregando...</span>
+    </div>
 </div>
+</div>
+<script>
+document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("loading").style.display = "block";
+    const formData = new FormData(this);
+
+    fetch('/process', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        const taskId = data.task_id;
+        checkStatus(taskId);
+    });
+});
+
+function checkStatus(taskId) {
+    fetch(`/task-status/${taskId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'SUCCESS') {
+                document.getElementById("loading").style.display = "none";
+                alert("Processamento concluído!");
+            } else {
+                setTimeout(() => checkStatus(taskId), 1000);
+            }
+        });
+}
+</script>
 {% endblock %}
