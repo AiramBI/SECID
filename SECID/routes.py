@@ -363,15 +363,15 @@ def medicao():
                 documento_13=save_file(form_medicao.documento_13.data),
                 documento_14=save_file(form_medicao.documento_14.data),
                 documento_15=save_file(form_medicao.documento_15.data),
+                documento_16=save_file(form_medicao.documento_16.data),
+                documento_17=save_file(form_medicao.documento_17.data),
+                documento_18=save_file(form_medicao.documento_18.data),
+                documento_19=save_file(form_medicao.documento_19.data),
                 documento_15_1=save_file(form_medicao.documento_15_1.data),
                 documento_15_2=save_file(form_medicao.documento_15_2.data),
                 documento_15_3=save_file(form_medicao.documento_15_3.data),
                 documento_15_4=save_file(form_medicao.documento_15_4.data),
-                documento_15_5=save_file(form_medicao.documento_15_5.data),
-                documento_16=save_file(form_medicao.documento_16.data),
-                documento_17=save_file(form_medicao.documento_17.data),
-                documento_18=save_file(form_medicao.documento_18.data),
-                documento_19=save_file(form_medicao.documento_19.data)
+                documento_15_5=save_file(form_medicao.documento_15_5.data)
             )
 
             # Cria uma nova instância da classe Medicao_resumida
@@ -446,9 +446,9 @@ def medicao2_detalhes(id):
                     "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
                     "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
                     "documento_10", "documento_10_1", "documento_11", "documento_12", "documento_13", 
-                    "documento_14", "documento_15", "documento_15_1", "documento_15_2", "documento_15_3", 
-                    "documento_15_4", "documento_15_5", "documento_16", "documento_17", "documento_18", 
-                    "documento_19"
+                    "documento_14", "documento_15", "documento_16", "documento_17", "documento_18", 
+                    "documento_19", "documento_15_1", "documento_15_2", "documento_15_3", 
+                    "documento_15_4", "documento_15_5"
                 ]
                 
                 # Itera sobre os documentos e cria o caminho completo para cada arquivo existente
@@ -571,9 +571,9 @@ def medicao2_detalhes(id):
             "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
             "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
             "documento_10", "documento_10_1", "documento_11", "documento_12", "documento_13", 
-            "documento_14", "documento_15", "documento_15_1", "documento_15_2", "documento_15_3", 
-            "documento_15_4", "documento_15_5", "documento_16", "documento_17", "documento_18", 
-            "documento_19"
+            "documento_14", "documento_15", "documento_16", "documento_17", "documento_18", 
+            "documento_19", "documento_15_1", "documento_15_2", "documento_15_3", 
+            "documento_15_4", "documento_15_5"
         ]
 
         for documento in documentos:
@@ -608,9 +608,9 @@ def medicao2_detalhes(id):
         "documento_1", "documento_2", "documento_3", "documento_3_1", "documento_4", 
         "documento_5", "documento_6", "documento_7", "documento_8", "documento_9", 
         "documento_10", "documento_10_1", "documento_11", "documento_12", "documento_13", 
-        "documento_14", "documento_15", "documento_15_1", "documento_15_2", "documento_15_3", 
-        "documento_15_4", "documento_15_5", "documento_16", "documento_17", "documento_18", 
-        "documento_19"
+        "documento_14", "documento_15", "documento_16", "documento_17", "documento_18", 
+        "documento_19", "documento_15_1", "documento_15_2", "documento_15_3", 
+        "documento_15_4", "documento_15_5"
     ]
     for documento in documentos:
         setattr(medicao, documento, f"{base_url}/{getattr(medicao, documento)}")
