@@ -131,15 +131,16 @@ class FormMedicao(FlaskForm):
     documento_13 = FileField('13.Comprovante de Pagamento de salários', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_14 = FileField('14.Plano de segurança do Trabalho', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_15 = FileField('15.Certidões atualizadas', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
-    documento_15_1 = FileField('15.1.Certidão de regularidade junto ao FGTS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
-    documento_15_2 = FileField('15.2.Certidão negativa de débito trabalhista', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
-    documento_15_3 = FileField('15.3.Certidão negativa de débitos federais', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
-    documento_15_4 = FileField('15.4.Certidão de regularidade fiscal junto ao ICMS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
-    documento_15_5 = FileField('15.5.Certidão de regularidade fiscal junto ao ISS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_16 = FileField('16.Contrato', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_17 = FileField('17.ART emitida pelo CREA', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_18 = FileField('18.Nota de empenho', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
     documento_19 = FileField('19.Nota fiscal e ISS', validators=[DataRequired(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_1 = FileField('Documentos Auxiliares 1', validators=[Optional(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_2 = FileField('Documentos Auxiliares 2', validators=[Optional(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_3 = FileField('Documentos Auxiliares 3', validators=[Optional(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_4 = FileField('Documentos Auxiliares 4', validators=[Optional(), file_size_limit(10 * 1024 * 1024)])
+    documento_15_5 = FileField('Documentos Auxiliares 5', validators=[Optional(), file_size_limit(10 * 1024 * 1024)])
+    
 
     botao_submit_medicao = SubmitField('Cadastrar Medicao Documentos')  # Botão de envio do formulário
 
