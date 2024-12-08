@@ -406,6 +406,65 @@
                 {% endif %}
             </div>
             
+            <!-- Documento 16 -->
+            <div class="form-group">
+                {{ form_medicao.documento_16.label(class="form-control-label") }}
+                {% if form_medicao.documento_16.errors %}
+                    {{ form_medicao.documento_16(class="form-control-file is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.documento_16.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.documento_16(class="form-control-file") }}
+                {% endif %}
+            </div>
+            
+            <!-- Documento 17 -->
+            <div class="form-group">
+                {{ form_medicao.documento_17.label(class="form-control-label") }}
+                {% if form_medicao.documento_17.errors %}
+                    {{ form_medicao.documento_17(class="form-control-file is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.documento_17.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.documento_17(class="form-control-file") }}
+                {% endif %}
+            </div>
+            
+            <!-- Documento 18 -->
+            <div class="form-group">
+                {{ form_medicao.documento_18.label(class="form-control-label") }}
+                {% if form_medicao.documento_18.errors %}
+                    {{ form_medicao.documento_18(class="form-control-file is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.documento_18.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.documento_18(class="form-control-file") }}
+                {% endif %}
+            </div>
+            
+            <!-- Documento 19 -->
+            <div class="form-group">
+                {{ form_medicao.documento_19.label(class="form-control-label") }}
+                {% if form_medicao.documento_19.errors %}
+                    {{ form_medicao.documento_19(class="form-control-file is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao.documento_19.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao.documento_19(class="form-control-file") }}
+                {% endif %}
+            </div>
             <!-- Documento 15.1 -->
             <div class="form-group">
                 {{ form_medicao.documento_15_1.label(class="form-control-label") }}
@@ -478,66 +537,6 @@
                     </div>
                 {% else %}
                     {{ form_medicao.documento_15_5(class="form-control-file") }}
-                {% endif %}
-            </div>
-            
-            <!-- Documento 16 -->
-            <div class="form-group">
-                {{ form_medicao.documento_16.label(class="form-control-label") }}
-                {% if form_medicao.documento_16.errors %}
-                    {{ form_medicao.documento_16(class="form-control-file is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for erro in form_medicao.documento_16.errors %}
-                            {{ erro }}
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form_medicao.documento_16(class="form-control-file") }}
-                {% endif %}
-            </div>
-            
-            <!-- Documento 17 -->
-            <div class="form-group">
-                {{ form_medicao.documento_17.label(class="form-control-label") }}
-                {% if form_medicao.documento_17.errors %}
-                    {{ form_medicao.documento_17(class="form-control-file is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for erro in form_medicao.documento_17.errors %}
-                            {{ erro }}
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form_medicao.documento_17(class="form-control-file") }}
-                {% endif %}
-            </div>
-            
-            <!-- Documento 18 -->
-            <div class="form-group">
-                {{ form_medicao.documento_18.label(class="form-control-label") }}
-                {% if form_medicao.documento_18.errors %}
-                    {{ form_medicao.documento_18(class="form-control-file is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for erro in form_medicao.documento_18.errors %}
-                            {{ erro }}
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form_medicao.documento_18(class="form-control-file") }}
-                {% endif %}
-            </div>
-            
-            <!-- Documento 19 -->
-            <div class="form-group">
-                {{ form_medicao.documento_19.label(class="form-control-label") }}
-                {% if form_medicao.documento_19.errors %}
-                    {{ form_medicao.documento_19(class="form-control-file is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for erro in form_medicao.documento_19.errors %}
-                            {{ erro }}
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form_medicao.documento_19(class="form-control-file") }}
                 {% endif %}
             </div>
         </fieldset>
