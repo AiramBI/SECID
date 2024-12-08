@@ -30,3 +30,5 @@ Flask-Migrate>=3.1.0
 flask_dropzone
 wtforms-sqlalchemy==0.3
 num2words
+celery==5.3.1
+redis==5.0.0
