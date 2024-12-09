@@ -8,8 +8,6 @@ import os, logging
 from SECID.enviar_medicao import registrar_medicao1
 from num2words import num2words
 from datetime import datetime
-from SECID.tasks import process_form_data
-from SECID.utils import save_file
 
 logging.basicConfig(level=logging.INFO)
 
@@ -301,19 +299,34 @@ def upload():
         return jsonify({'error': 'Erro ao salvar o arquivo'}), 500
 
 
+# Função para salvar o arquivo no diretório configurado
+def save_file(file):
+    if file:
+        try:
+            # Gera um timestamp único baseado na data e hora
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-@app.route('/process', methods=['POST'])
-def process_form():
-    data = request.form.to_dict()
-    files = request.files.to_dict(flat=False)
-    task = process_form_data.apply_async(args=[data, files])
-    return jsonify({'task_id': task.id}), 202
+            # Sanitiza o nome do arquivo
+            filename = secure_filename(file.filename)
+            name, ext = os.path.splitext(filename)
+            filename = f"{name}_{timestamp}{ext}"  # Adiciona o timestamp ao nome
 
-@app.route('/task-status/<task_id>')
-def task_status(task_id):
-    task = process_form_data.AsyncResult(task_id)
-    return jsonify({'status': task.status, 'result': task.result})
+            # Define o caminho completo para salvar o arquivo
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
+            # Garante que o diretório existe
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            # Salva o arquivo no caminho configurado
+            file.save(file_path)
+
+            # Retorna o nome do arquivo salvo
+            return filename
+        except Exception as e:
+            # Log do erro para diagnóstico
+            print(f"Erro ao salvar o arquivo: {str(e)}")
+            return None
+    return None
 
 @app.route('/usuario/medicao', methods=['GET', 'POST'])
 @login_required
@@ -322,75 +335,74 @@ def medicao():
 
     if request.method == 'POST' and form_medicao.validate_on_submit():
         try:
-            # Coleta os dados do formulário
-            data = {
-                "sei": form_medicao.sei.data,
-                "projeto_nome": form_medicao.projeto_nome.data.obra,
-                "numero_medicao": form_medicao.numero_medicao.data,
-                "letra_medicao": form_medicao.letra_medicao.data,
-                "descricao": form_medicao.descricao.data,
-                "valor": form_medicao.valor.data,
-                "reajustamento": form_medicao.reajustamento.data,
-                "data_inicial": form_medicao.data_inicial.data,
-                "data_final": form_medicao.data_final.data,
-            }
+            # Salva os arquivos enviados e cria uma nova instância da classe Medicao
+            medicao1 = Medicao(
+                sei=form_medicao.sei.data,
+                projeto_nome=form_medicao.projeto_nome.data.obra,
+                numero_medicao=form_medicao.numero_medicao.data,
+                letra_medicao=form_medicao.letra_medicao.data,
+                descricao=form_medicao.descricao.data,
+                valor=form_medicao.valor.data,
+                reajustamento=form_medicao.reajustamento.data,
+                data_inicial=form_medicao.data_inicial.data,
+                data_final=form_medicao.data_final.data,
+                documento_1=save_file(form_medicao.documento_1.data),
+                documento_2=save_file(form_medicao.documento_2.data),
+                documento_3=save_file(form_medicao.documento_3.data),
+                documento_3_1=save_file(form_medicao.documento_3_1.data),
+                documento_4=save_file(form_medicao.documento_4.data),
+                documento_5=save_file(form_medicao.documento_5.data),
+                documento_6=save_file(form_medicao.documento_6.data),
+                documento_7=save_file(form_medicao.documento_7.data),
+                documento_8=save_file(form_medicao.documento_8.data),
+                documento_9=save_file(form_medicao.documento_9.data),
+                documento_10=save_file(form_medicao.documento_10.data),
+                documento_10_1=save_file(form_medicao.documento_10_1.data),
+                documento_11=save_file(form_medicao.documento_11.data),
+                documento_12=save_file(form_medicao.documento_12.data),
+                documento_13=save_file(form_medicao.documento_13.data),
+                documento_14=save_file(form_medicao.documento_14.data),
+                documento_15=save_file(form_medicao.documento_15.data),
+                documento_16=save_file(form_medicao.documento_16.data),
+                documento_17=save_file(form_medicao.documento_17.data),
+                documento_18=save_file(form_medicao.documento_18.data),
+                documento_19=save_file(form_medicao.documento_19.data),
+                documento_15_1=save_file(form_medicao.documento_15_1.data),
+                documento_15_2=save_file(form_medicao.documento_15_2.data),
+                documento_15_3=save_file(form_medicao.documento_15_3.data),
+                documento_15_4=save_file(form_medicao.documento_15_4.data),
+                documento_15_5=save_file(form_medicao.documento_15_5.data)
+            )
 
-            # Coleta os arquivos individualmente
-            files = {
-                "documento_1": form_medicao.documento_1.data,
-                "documento_2": form_medicao.documento_2.data,
-                "documento_3": form_medicao.documento_3.data,
-                "documento_3_1": form_medicao.documento_3_1.data,
-                "documento_4": form_medicao.documento_4.data,
-                "documento_5": form_medicao.documento_5.data,
-                "documento_6": form_medicao.documento_6.data,
-                "documento_7": form_medicao.documento_7.data,
-                "documento_8": form_medicao.documento_8.data,
-                "documento_9": form_medicao.documento_9.data,
-                "documento_10": form_medicao.documento_10.data,
-                "documento_10_1": form_medicao.documento_10_1.data,
-                "documento_11": form_medicao.documento_11.data,
-                "documento_12": form_medicao.documento_12.data,
-                "documento_13": form_medicao.documento_13.data,
-                "documento_14": form_medicao.documento_14.data,
-                "documento_15": form_medicao.documento_15.data,
-                "documento_16": form_medicao.documento_16.data,
-                "documento_17": form_medicao.documento_17.data,
-                "documento_18": form_medicao.documento_18.data,
-                "documento_19": form_medicao.documento_19.data,
-                "documento_15_1": form_medicao.documento_15_1.data,
-                "documento_15_2": form_medicao.documento_15_2.data,
-                "documento_15_3": form_medicao.documento_15_3.data,
-                "documento_15_4": form_medicao.documento_15_4.data,
-                "documento_15_5": form_medicao.documento_15_5.data,
-            }
+            # Cria uma nova instância da classe Medicao_resumida
+            medicao_resumida = Medicao_resumida(
+                obra=form_medicao.projeto_nome.data.obra,
+                data_inicio_medicao=form_medicao.data_inicial.data,
+                data_fim_medicao=form_medicao.data_final.data,
+                numero_medicao=form_medicao.numero_medicao.data,
+                valor_medicao=form_medicao.valor.data,
+                letra_medicao=form_medicao.letra_medicao.data,
+                reajustamento=form_medicao.reajustamento.data
+            )
 
-            # Envia a tarefa para processamento no Celery
-            from SECID.tasks import process_form_data
-            task = process_form_data.apply_async(args=[data, files])
+            # Adiciona as novas instâncias ao banco de dados
+            database.session.add(medicao1)
+            database.session.add(medicao_resumida)
+            database.session.commit()
 
-            # Notifica o usuário sobre o início do processamento
-            flash('Processamento da medição iniciado. Você será notificado ao término.', 'alert-info')
-            return redirect(url_for('medicao_status', task_id=task.id))
+            flash('Medição cadastrada com sucesso!', 'alert-success')
+            return redirect(url_for('administrador'))
 
         except Exception as e:
-            # Notifica em caso de erro
-            flash(f'Erro ao iniciar o processamento: {str(e)}', 'danger')
+            # Reverte qualquer alteração no banco em caso de erro
+            database.session.rollback()
+            flash(f'Erro ao salvar a medição: {str(e)}', 'danger')
 
     elif request.method == 'POST':
         flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
 
     return render_template('medicao.html', form_medicao=form_medicao)
-
-
-
-@app.route('/usuario/medicao/status/<task_id>')
-@login_required
-def medicao_status(task_id):
-    from SECID.tasks import process_form_data
-    task = process_form_data.AsyncResult(task_id)
-    return render_template('medicao_status.html', task=task)
-
+    
 @app.route('/usuario/medicao2', methods=['GET', 'POST'])
 @login_required
 def medicao2():
@@ -690,4 +702,3 @@ def noticias():
     ]
 
     return render_template('noticias.html', noticias=noticias)
-
