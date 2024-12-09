@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -31,7 +31,8 @@ app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
 app.config['DROPZONE_ALLOWED_FILE_CUSTOM'] = True
 app.config['DROPZONE_ALLOWED_FILE_TYPE'] = '.pdf'  # Permitir apenas arquivos PDF
 app.config['DROPZONE_MAX_FILE_SIZE'] = 10  # Tamanho máximo de cada arquivo em MB
-app.config['DROPZONE_TIMEOUT'] = 300000  # 5 minutos em milissegundos
+app.config['DROPZONE_TIMEOUT'] = 600000  # 5 minutos em milissegundos
+app.config['PERMANENT_SESSION_LIFETIME'] = 600  # 10 minutos
 app.config['SECRET_KEY'] = '70898ff6cf8c6fc9a940820e7c211072'
 #app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # Limita o tamanho do upload para 20MB, por exemplo
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0  # Cache control for file uploads
