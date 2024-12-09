@@ -4,12 +4,40 @@ from SECID.forms import FormLogin, FormCriarConta, FormObras, FormMedicao, FormM
 from SECID.models import Usuario, Obras, Medicao, Medicao2, Medicao_inicial, Medicao_atualizada, Medicao_resumida
 from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.utils import secure_filename
-import os, logging
+import os, logging , concurrent.futures
 from SECID.enviar_medicao import registrar_medicao1
 from num2words import num2words
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
+
+
+executor = concurrent.futures.ThreadPoolExecutor()
+
+
+
+@app.route('/process-upload', methods=['POST'])
+def process_upload():
+    form_medicao = FormMedicao()
+
+    if form_medicao.validate_on_submit():
+        files = request.files.getlist('documentos')
+        future = executor.submit(process_files, files)
+        return jsonify({"status": "Processing started"}), 202
+    return jsonify({"status": "Invalid form submission"}), 400
+
+def process_files(files):
+    for file in files:
+        filename = save_file(file)
+        # Adicione validações ou processamento extra aqui
+        print(f"Processed file: {filename}")
+    return "Processing complete"
+
+@app.route('/upload-status', methods=['GET'])
+def upload_status():
+    # Retorne o progresso ou status do processamento
+    return jsonify({"status": "Processing", "progress": "50%"}), 200
+
 
 @app.route('/')
 def home():
@@ -335,73 +363,78 @@ def medicao():
 
     if request.method == 'POST' and form_medicao.validate_on_submit():
         try:
-            # Salva os arquivos enviados e cria uma nova instância da classe Medicao
-            medicao1 = Medicao(
-                sei=form_medicao.sei.data,
-                projeto_nome=form_medicao.projeto_nome.data.obra,
-                numero_medicao=form_medicao.numero_medicao.data,
-                letra_medicao=form_medicao.letra_medicao.data,
-                descricao=form_medicao.descricao.data,
-                valor=form_medicao.valor.data,
-                reajustamento=form_medicao.reajustamento.data,
-                data_inicial=form_medicao.data_inicial.data,
-                data_final=form_medicao.data_final.data,
-                documento_1=save_file(form_medicao.documento_1.data),
-                documento_2=save_file(form_medicao.documento_2.data),
-                documento_3=save_file(form_medicao.documento_3.data),
-                documento_3_1=save_file(form_medicao.documento_3_1.data),
-                documento_4=save_file(form_medicao.documento_4.data),
-                documento_5=save_file(form_medicao.documento_5.data),
-                documento_6=save_file(form_medicao.documento_6.data),
-                documento_7=save_file(form_medicao.documento_7.data),
-                documento_8=save_file(form_medicao.documento_8.data),
-                documento_9=save_file(form_medicao.documento_9.data),
-                documento_10=save_file(form_medicao.documento_10.data),
-                documento_10_1=save_file(form_medicao.documento_10_1.data),
-                documento_11=save_file(form_medicao.documento_11.data),
-                documento_12=save_file(form_medicao.documento_12.data),
-                documento_13=save_file(form_medicao.documento_13.data),
-                documento_14=save_file(form_medicao.documento_14.data),
-                documento_15=save_file(form_medicao.documento_15.data),
-                documento_16=save_file(form_medicao.documento_16.data),
-                documento_17=save_file(form_medicao.documento_17.data),
-                documento_18=save_file(form_medicao.documento_18.data),
-                documento_19=save_file(form_medicao.documento_19.data),
-                documento_15_1=save_file(form_medicao.documento_15_1.data),
-                documento_15_2=save_file(form_medicao.documento_15_2.data),
-                documento_15_3=save_file(form_medicao.documento_15_3.data),
-                documento_15_4=save_file(form_medicao.documento_15_4.data),
-                documento_15_5=save_file(form_medicao.documento_15_5.data)
-            )
-
-            # Cria uma nova instância da classe Medicao_resumida
-            medicao_resumida = Medicao_resumida(
-                obra=form_medicao.projeto_nome.data.obra,
-                data_inicio_medicao=form_medicao.data_inicial.data,
-                data_fim_medicao=form_medicao.data_final.data,
-                numero_medicao=form_medicao.numero_medicao.data,
-                valor_medicao=form_medicao.valor.data,
-                letra_medicao=form_medicao.letra_medicao.data,
-                reajustamento=form_medicao.reajustamento.data
-            )
-
-            # Adiciona as novas instâncias ao banco de dados
-            database.session.add(medicao1)
-            database.session.add(medicao_resumida)
-            database.session.commit()
-
-            flash('Medição cadastrada com sucesso!', 'alert-success')
+            # Processamento em segundo plano para evitar timeout
+            executor.submit(process_medicao, form_medicao)
+            flash('O processamento foi iniciado. Você será notificado ao término.', 'info')
             return redirect(url_for('administrador'))
 
         except Exception as e:
-            # Reverte qualquer alteração no banco em caso de erro
-            database.session.rollback()
-            flash(f'Erro ao salvar a medição: {str(e)}', 'danger')
-
-    elif request.method == 'POST':
-        flash('Erro ao enviar o formulário. Verifique todos os campos obrigatórios.', 'danger')
+            flash(f'Erro ao iniciar o processamento: {str(e)}', 'danger')
 
     return render_template('medicao.html', form_medicao=form_medicao)
+
+def process_medicao(form_medicao):
+    try:
+        # Salva os arquivos enviados e cria uma nova instância da classe Medicao
+        medicao1 = Medicao(
+            sei=form_medicao.sei.data,
+            projeto_nome=form_medicao.projeto_nome.data.obra,
+            numero_medicao=form_medicao.numero_medicao.data,
+            letra_medicao=form_medicao.letra_medicao.data,
+            descricao=form_medicao.descricao.data,
+            valor=form_medicao.valor.data,
+            reajustamento=form_medicao.reajustamento.data,
+            data_inicial=form_medicao.data_inicial.data,
+            data_final=form_medicao.data_final.data,
+            documento_1=save_file(form_medicao.documento_1.data),
+            documento_2=save_file(form_medicao.documento_2.data),
+            documento_3=save_file(form_medicao.documento_3.data),
+            documento_3_1=save_file(form_medicao.documento_3_1.data),
+            documento_4=save_file(form_medicao.documento_4.data),
+            documento_5=save_file(form_medicao.documento_5.data),
+            documento_6=save_file(form_medicao.documento_6.data),
+            documento_7=save_file(form_medicao.documento_7.data),
+            documento_8=save_file(form_medicao.documento_8.data),
+            documento_9=save_file(form_medicao.documento_9.data),
+            documento_10=save_file(form_medicao.documento_10.data),
+            documento_10_1=save_file(form_medicao.documento_10_1.data),
+            documento_11=save_file(form_medicao.documento_11.data),
+            documento_12=save_file(form_medicao.documento_12.data),
+            documento_13=save_file(form_medicao.documento_13.data),
+            documento_14=save_file(form_medicao.documento_14.data),
+            documento_15=save_file(form_medicao.documento_15.data),
+            documento_16=save_file(form_medicao.documento_16.data),
+            documento_17=save_file(form_medicao.documento_17.data),
+            documento_18=save_file(form_medicao.documento_18.data),
+            documento_19=save_file(form_medicao.documento_19.data),
+            documento_15_1=save_file(form_medicao.documento_15_1.data),
+            documento_15_2=save_file(form_medicao.documento_15_2.data),
+            documento_15_3=save_file(form_medicao.documento_15_3.data),
+            documento_15_4=save_file(form_medicao.documento_15_4.data),
+            documento_15_5=save_file(form_medicao.documento_15_5.data)
+        )
+
+        # Cria uma nova instância da classe Medicao_resumida
+        medicao_resumida = Medicao_resumida(
+            obra=form_medicao.projeto_nome.data.obra,
+            data_inicio_medicao=form_medicao.data_inicial.data,
+            data_fim_medicao=form_medicao.data_final.data,
+            numero_medicao=form_medicao.numero_medicao.data,
+            valor_medicao=form_medicao.valor.data,
+            letra_medicao=form_medicao.letra_medicao.data,
+            reajustamento=form_medicao.reajustamento.data
+        )
+
+        # Adiciona as novas instâncias ao banco de dados
+        database.session.add(medicao1)
+        database.session.add(medicao_resumida)
+        database.session.commit()
+
+        print('Medição processada com sucesso.')
+
+    except Exception as e:
+        database.session.rollback()
+        print(f'Erro ao processar a medição: {str(e)}')
     
 @app.route('/usuario/medicao2', methods=['GET', 'POST'])
 @login_required
