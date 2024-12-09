@@ -1,6 +1,6 @@
 from SECID import celery
 from SECID.models import Medicao, Medicao_resumida
-from SECID.routes import save_file
+from SECID.utils import save_file
 
 @celery.task
 def process_form_data(data, files):
