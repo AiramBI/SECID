@@ -9,6 +9,7 @@ from SECID.enviar_medicao import registrar_medicao1
 from num2words import num2words
 from datetime import datetime
 from SECID.tasks import process_form_data
+from SECID.utils import save_file
 
 logging.basicConfig(level=logging.INFO)
 
