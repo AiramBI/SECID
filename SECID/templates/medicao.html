@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 </style>
 {% block body %}
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5 id="loadingModalLabel">Processando...</h5>
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Carregando...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
     <h1>Criar Medição</h1>
     <hr>
@@ -544,5 +556,37 @@
         <!-- Botão para submeter os dados do formulário -->
         {{ form_medicao.botao_submit_medicao(class="btn btn-primary mt-3") }}
     </form>
+<script>
+    const form = document.querySelector('form');
+    const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        modal.show();
+
+        fetch('/usuario/medicao', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro no processamento');
+            }
+        })
+        .then(data => {
+            modal.hide();
+            alert('Processamento concluído!');
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            modal.hide();
+            alert('Erro ao processar arquivos.');
+        });
+    });
+</script>
 </div>
 {% endblock %}
