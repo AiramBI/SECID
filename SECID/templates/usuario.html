@@ -20,6 +20,7 @@
                                 <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
                                     <button type="button" class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao') }}">Cadastrar Medição</a></button>
                                     <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('medicao2') }}">Verificar Medição</a></button>
+                                     <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for ('recap') }}">Cadastrar Recap</a></button>
                                     {% if current_user.cargo in ['Administrador', 'Superintendente', 'Secretário', 'Subsecretário', 'Subsecretario'] %}
                                     <button class="btn btn-primary">
                                         <button class="btn btn-primary"><a class="dropdown-item text-white" href="{{ url_for('administrador') }}">Cadastrar Obra</a>
