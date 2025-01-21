@@ -717,6 +717,11 @@ def medicao3():
 def sobre():
     return render_template('sobre.html')
 
+@app.route('/paineis/recap')
+@login_required
+def recap():
+    return render_template('recap.html')
+
 
 @app.route('/noticias')
 @login_required
