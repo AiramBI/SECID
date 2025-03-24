@@ -757,8 +757,9 @@ def selecionar_obra_medicao_resumida():
 def medicao_resumida_detalhes(id):
     # Busca todas as obras no banco de dados
      obra = Obra.query.get_or_404(id)
-     medicoes = Medicao.query.filter_by(obra_id=id).all()
-     return render_template('medicao_resumida_2_detalhes.html', obra=obra, medicoes=medicoes)
+     medicao_resumida = Medicao_Resumida.query.filter_by(obra_id=obra.id).all()
+     return render_template('medicao_resumida_2_detalhes.html', obra=obra, medicao_resumida=medicao_resumida)
+
 
 @app.route('/noticias')
 @login_required
