@@ -720,7 +720,7 @@ def sobre():
 @app.route('/recap')
 @login_required
 def recap():
-    return render_template('recap.html')
+    return render_template('medicao_resumida.html')
 
 @app.route('/medicao_resumida', methods=['GET', 'POST'])
 @login_required
