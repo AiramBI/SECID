@@ -1,55 +1,28 @@
-{% extends 'base.html' %}
-
-{% block body %}
-<div class="container mt-5" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
-    <h1 class="text-center">Detalhes da Medição: {{ medicao.projeto_nome }} - {{ medicao.numero_medicao }}ª Medição</h1>
-    <hr>
-    <form method="POST" enctype="multipart/form-data">
-        <ul class="list-group">
-            <!-- Tabela: Medição Resumida -->
-            <h3 class="mt-4">Medição Resumida</h3>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Data Inicial</th>
-                        <th>Data Final</th>
-                        <th>Número</th>
-                        <th>Valor</th>
-                        <th>Letra</th>
-                        <th>Reajustamento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in medicao_resumida %}
-                    <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.data_inicio_medicao }}</td>
-                        <td>{{ item.data_fim_medicao }}</td>
-                        <td>{{ item.numero_medicao }}</td>
-                        <td>R$ {{ item.valor_medicao | round(2) }}</td>
-                        <td>{{ item.letra_medicao }}</td>
-                        <td>R$ {{ item.reajustamento | round(2) }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-
-            
-        </ul>
-
-        <div class="d-flex justify-content-between align-items-center mt-3">
-    <!-- Botão Voltar (esquerda) -->
-    <a href="/usuario/medicao2" class="btn btn-secondary">Voltar</a>
-    
-    <!-- Botões Salvar Alterações e Enviar Medição (direita) -->
-    <div>
-        <button type="submit" class="btn btn-primary">Salvar Alterações</button>   
-    </div>
-</div>
-</form>
-</form>
-    </form>
-</div>        
-{% endblock %}
+ {% extends "base.html" %}
+ {% block body %}
+ <div class="container">
+     <h1>Medições da Obra: {{ obra.nome }}</h1>
+     <table class="table">
+         <thead>
+             <tr>
+                 <th>ID</th>
+                 <th>Data</th>
+                 <th>Valor</th>
+                 <th>Ações</th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for medicao in medicoes %}
+             <tr>
+                 <td>{{ medicao.id }}</td>
+                 <td>{{ medicao.data }}</td>
+                 <td>{{ medicao.valor }}</td>
+                 <td>
+                     <a href="{{ url_for('editar_medicao', id=medicao.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                 </td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+ </div>
+ {% endblock %}
