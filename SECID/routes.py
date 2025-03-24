@@ -752,6 +752,13 @@ def selecionar_obra_medicao_resumida():
     obras = Obras.query.all()
     return render_template('selecionar_obra_medicao_resumida.html', obras=obras)
 
+@app.route('/usuario/medicao_resumida/detalhes/<int:id>', methods=['GET', 'POST'])
+# @login_required
+def medicao_resumida_detalhes():
+    # Busca todas as obras no banco de dados
+    obras = Obras.query.all()
+    return render_template('medicao_resumida_2_detalhes.html', obras=obras)
+
 
 @app.route('/noticias')
 @login_required
