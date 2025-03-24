@@ -757,8 +757,23 @@ def selecionar_obra_medicao_resumida():
 def medicao_resumida_detalhes(id):
     # Busca todas as obras no banco de dados
     obra = Obras.query.get_or_404(id)
+    if request.method == 'POST':
+        # Iterar sobre os itens de medicao_resumida e atualizar os valores
+        for item in obra.medicoes_resumidas:
+            item.data_inicio_medicao = request.form.get(f'data_inicio_medicao_{item.id}')
+            item.data_fim_medicao = request.form.get(f'data_fim_medicao_{item.id}')
+            item.numero_medicao = request.form.get(f'numero_medicao_{item.id}')
+            item.valor_medicao = request.form.get(f'valor_medicao_{item.id}')
+            item.letra_medicao = request.form.get(f'letra_medicao_{item.id}')
+            item.reajustamento = request.form.get(f'reajustamento_{item.id}')
+        # Commit para salvar as alterações no banco de dados
+        database.session.commit()
+        flash('Alterações salvas com sucesso!', 'success')
+        return redirect(url_for('medicao_resumida_detalhes', id=id))
+    
     medicao_resumida = Medicao_resumida.query.filter_by(obra=obra.obra).all()
     return render_template('medicao_resumida_2_detalhes.html', obra=obra, medicao_resumida=medicao_resumida)
+
 
 
 
