@@ -754,7 +754,7 @@ def selecionar_obra_medicao_resumida():
 
 @app.route('/usuario/medicao_resumida/detalhes/<int:id>', methods=['GET', 'POST'])
 # @login_required
-def medicao_resumida_detalhes():
+def medicao_resumida_detalhes(id):
     # Busca todas as obras no banco de dados
      obra = Obra.query.get_or_404(id)
      medicoes = Medicao.query.filter_by(obra_id=id).all()
