@@ -18,40 +18,32 @@
     }
 </style>
 {% block body %}
-<div class="container" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
-    <h1>Detalhes da Medição: {{ obra.nome }}</h1>
-    <form method="POST" action="{{ url_for('salvar_alteracoes') }}">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Data Inicial</th>
-                    <th>Data Final</th>
-                    <th>Número</th>
-                    <th>Valor</th>
-                    <th>Letra</th>
-                    <th>Reajustamento</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in medicoes %}
-                <tr>
-                    <td>{{ item.id }}</td>
-                    <td><input type="date" name="data_inicio_{{ item.id }}" value="{{ item.data_inicio_medicao }}"></td>
-                    <td><input type="date" name="data_fim_{{ item.id }}" value="{{ item.data_fim_medicao }}"></td>
-                    <td><input type="number" name="numero_{{ item.id }}" value="{{ item.numero_medicao }}"></td>
-                    <td><input type="text" name="valor_{{ item.id }}" value="{{ item.valor_medicao | round(2) }}"></td>
-                    <td><input type="text" name="letra_{{ item.id }}" value="{{ item.letra_medicao }}"></td>
-                    <td><input type="text" name="reajustamento_{{ item.id }}" value="{{ item.reajustamento | round(2) }}"></td>
-                    <td>
-                        <button type="submit" class="btn btn-success btn-sm">Salvar Alterações</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </form>
-</div>
+Detalhes da Medição: {{ obra.nome }}
+<form method="POST" action="{{ url_for('medicao_resumida_detalhes', id=obra.id) }}">
+    <input type="hidden" name="obra_id" value="{{ obra.id }}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Data Inicial</th>
+            <th>Data Final</th>
+            <th>Número</th>
+            <th>Valor</th>
+            <th>Letra</th>
+            <th>Reajustamento</th>
+            <th>Ações</th>
+        </tr>
+        {% for item in medicao_resumida %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td><input type="text" name="data_inicio_medicao_{{ item.id }}" value="{{ item.data_inicio_medicao }}"></td>
+            <td><input type="text" name="data_fim_medicao_{{ item.id }}" value="{{ item.data_fim_medicao }}"></td>
+            <td><input type="text" name="numero_medicao_{{ item.id }}" value="{{ item.numero_medicao }}"></td>
+            <td><input type="text" name="valor_medicao_{{ item.id }}" value="{{ item.valor_medicao }}"></td>
+            <td><input type="text" name="letra_medicao_{{ item.id }}" value="{{ item.letra_medicao }}"></td>
+            <td><input type="text" name="reajustamento_{{ item.id }}" value="{{ item.reajustamento }}"></td>
+            <td><button type="submit">Salvar Alterações</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
 {% endblock %}
-
