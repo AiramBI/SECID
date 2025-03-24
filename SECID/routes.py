@@ -727,10 +727,24 @@ def recap():
 def medicao_resumida():
     form_medicao_resumida = FormMedicao_resumida()
     if form_medicao_resumida.validate_on_submit():
-        # Processar os dados do formulário aqui
+        # Criar uma nova instância do modelo Medicao_resumida
+        nova_medicao_resumida = Medicao_resumida(
+            obra=form_medicao_resumida.obra.data,
+            data_inicio_medicao=form_medicao_resumida.data_inicio_medicao.data,
+            data_fim_medicao=form_medicao_resumida.data_fim_medicao.data,
+            numero_medicao=form_medicao_resumida.numero_medicao.data,
+            valor_medicao=form_medicao_resumida.valor_medicao.data,
+            letra_medicao=form_medicao_resumida.letra_medicao.data,
+            reajustamento=form_medicao_resumida.reajustamento.data
+        )
+        # Adicionar a nova instância à sessão do banco de dados
+        database.session.add(nova_medicao_resumida)
+        # Commit para salvar as alterações no banco de dados
+        database.session.commit()
         flash('Medição resumida criada com sucesso!', 'success')
         return redirect(url_for('home'))
     return render_template('medicao_resumida.html', form_medicao_resumida=form_medicao_resumida)
+
 
 
 
