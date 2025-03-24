@@ -68,7 +68,7 @@
                 {% if form_medicao_resumida.numero_medicao.errors %}
                     {{ form_medicao_resumida.numero_medicao(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for erro in form_medicao_resumida.numero_medicao.errors %}
+                        {% for erro em form_medicao_resumida.numero_medicao.errors %}
                             {{ erro }}
                         {% endfor %}
                     </div>
@@ -82,7 +82,7 @@
                 {% if form_medicao_resumida.valor_medicao.errors %}
                     {{ form_medicao_resumida.valor_medicao(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for erro in form_medicao_resumida.valor_medicao.errors %}
+                        {% for erro em form_medicao_resumida.valor_medicao.errors %}
                             {{ erro }}
                         {% endfor %}
                     </div>
@@ -96,7 +96,7 @@
                 {% if form_medicao_resumida.letra_medicao.errors %}
                     {{ form_medicao_resumida.letra_medicao(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for erro in form_medicao_resumida.letra_medicao.errors %}
+                        {% for erro em form_medicao_resumida.letra_medicao.errors %}
                             {{ erro }}
                         {% endfor %}
                     </div>
@@ -110,7 +110,7 @@
                 {% if form_medicao_resumida.reajustamento.errors %}
                     {{ form_medicao_resumida.reajustamento(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for erro in form_medicao_resumida.reajustamento.errors %}
+                        {% for erro em form_medicao_resumida.reajustamento.errors %}
                             {{ erro }}
                         {% endfor %}
                     </div>
@@ -124,3 +124,4 @@
     </form>
 </div>
 {% endblock %}
+
