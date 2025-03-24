@@ -715,7 +715,7 @@ def medicao3():
 @app.route('/sobre')
 @login_required
 def sobre():
-    return render_template('medicao_resumida.html')
+    return render_template('sobre.html')
 
 @app.route('/recap')
 @login_required
