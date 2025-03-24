@@ -47,6 +47,8 @@ class FormMedicao_resumida(FlaskForm):
     letra_medicao = StringField('Letra da Medição', validators=[Optional()])  # Letra da Medição
     reajustamento = FloatField('Reajustamento', validators=[Optional()])  # Valor do Reajustamento
 
+    botao_submit_medicao = SubmitField('Cadastrar Medicao Resumida')  # Botão de envio do formulário
+
 class FormMedicao_inicial(FlaskForm):
     obra = QuerySelectField('Projeto Nome',query_factory=lambda:Obras.query.all(),get_label='obra',allow_blank=False,validators=[DataRequired()],render_kw={"class": "form-control"})
     medicao = IntegerField('Número da Medição', validators=[DataRequired()])  # Número da Medição
