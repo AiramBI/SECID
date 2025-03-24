@@ -730,7 +730,7 @@ def medicao_resumida():
         # Processar os dados do formulário aqui
         flash('Medição resumida criada com sucesso!', 'success')
         return redirect(url_for('home'))
-    return render_template('sobre.html', form_medicao_resumida=form_medicao_resumida)
+    return render_template('medicao_resumida.html', form_medicao_resumida=form_medicao_resumida)
 
 
 
