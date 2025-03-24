@@ -745,7 +745,12 @@ def medicao_resumida():
         return redirect(url_for('home'))
     return render_template('medicao_resumida.html', form_medicao_resumida=form_medicao_resumida)
 
-
+@app.route('/selecionar_obra_medicao_resumida', methods=['GET'])
+# @login_required
+def selecionar_obra_medicao_resumida():
+    # Busca todas as obras no banco de dados
+    obras = Obras.query.all()
+    return render_template('medicao_resumida_2_detalhes.html', obras=obras)
 
 
 @app.route('/noticias')
