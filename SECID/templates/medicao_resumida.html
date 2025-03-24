@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h5 id="loadingModalLabel">Processando...</h5>
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Carregando...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px;">
+    <h1>Criar Medição Resumida</h1>
+    <hr>
+    <!-- Formulário para os campos de entrada de dados -->
+    <form method="POST" action="" class="border p-5 mt-5" enctype="multipart/form-data">
+        {{ form_medicao_resumida.csrf_token }}
+        
+        <fieldset>
+            <!-- Campo Projeto Nome -->
+            <div class="form-group">
+                {{ form_medicao_resumida.obra.label(class="form-control-label") }}
+                {% if form_medicao_resumida.obra.errors %}
+                    {{ form_medicao_resumida.obra(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.obra.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.obra(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Data Inicial -->
+            <div class="form-group">
+                {{ form_medicao_resumida.data_inicio_medicao.label(class="form-control-label") }}
+                {% if form_medicao_resumida.data_inicio_medicao.errors %}
+                    {{ form_medicao_resumida.data_inicio_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.data_inicio_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.data_inicio_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Data Final -->
+            <div class="form-group">
+                {{ form_medicao_resumida.data_fim_medicao.label(class="form-control-label") }}
+                {% if form_medicao_resumida.data_fim_medicao.errors %}
+                    {{ form_medicao_resumida.data_fim_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.data_fim_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.data_fim_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Número da Medição -->
+            <div class="form-group">
+                {{ form_medicao_resumida.numero_medicao.label(class="form-control-label") }}
+                {% if form_medicao_resumida.numero_medicao.errors %}
+                    {{ form_medicao_resumida.numero_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.numero_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.numero_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Valor da Medição -->
+            <div class="form-group">
+                {{ form_medicao_resumida.valor_medicao.label(class="form-control-label") }}
+                {% if form_medicao_resumida.valor_medicao.errors %}
+                    {{ form_medicao_resumida.valor_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.valor_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.valor_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Letra da Medição -->
+            <div class="form-group">
+                {{ form_medicao_resumida.letra_medicao.label(class="form-control-label") }}
+                {% if form_medicao_resumida.letra_medicao.errors %}
+                    {{ form_medicao_resumida.letra_medicao(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.letra_medicao.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.letra_medicao(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Campo Reajustamento -->
+            <div class="form-group">
+                {{ form_medicao_resumida.reajustamento.label(class="form-control-label") }}
+                {% if form_medicao_resumida.reajustamento.errors %}
+                    {{ form_medicao_resumida.reajustamento(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_medicao_resumida.reajustamento.errors %}
+                            {{ erro }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form_medicao_resumida.reajustamento(class="form-control") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <!-- Botão para submeter os dados do formulário -->
+        {{ form_medicao_resumida.botao_submit_medicao(class="btn btn-primary mt-3") }}
+    </form>
+</div>
+{% endblock %}
