@@ -722,6 +722,17 @@ def sobre():
 def recap():
     return render_template('recap.html')
 
+@app.route('/medicao_resumida', methods=['GET', 'POST'])
+@login_required
+def medicao_resumida():
+    form_medicao_resumida = FormMedicao_resumida()
+    if form_medicao_resumida.validate_on_submit():
+        # Processar os dados do formulário aqui
+        flash('Medição resumida criada com sucesso!', 'success')
+        return redirect(url_for('home'))
+    return render_template('medicao_resumida.html', form_medicao_resumida=form_medicao_resumida)
+
+
 
 @app.route('/noticias')
 @login_required
